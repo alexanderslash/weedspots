@@ -33,9 +33,7 @@ The `exports/db-export/` folder contains a MongoDB dump with five collections. O
 
 The other three collections (`scrapequeues`, `scraperuns`, `placeblocklists`) are scraper-side state and are not read by this project.
 
-**Photos:** the `photos[]` array on each business only contains photo references (e.g. `places/ChIJ.../photos/AelYt5...`), not image bytes. To display a real photo we must call the Google Places Photo API v1 with the reference and a Google API key.
-
-**Stale references warning:** photo refs are stable for approximately 12 months. The current dump is from 2026-04-06, so photo fetches may have some failure rate. Failures fall back to gradient placeholders.
+**Photos:** the `photos[]` array on each business only contains Google Place photo references, which require a paid Google Places Photo API call to resolve into image bytes. **We do not use them.** Instead, for businesses with a `website` field, we scrape the Open Graph image (`og:image` or `twitter:image`) from the business's own website. Everything else (or anything that fails to scrape) falls back to a deterministic gradient placeholder (section 6.4). No paid APIs, no API keys.
 
 ---
 
@@ -48,7 +46,7 @@ exports/db-export/*.bson
          │  - parses BSON via `bson`
          │  - merges businesses + placeraws
          │  - applies effectiveCategory()
-         │  - fetches cover photos from Google Places API
+         │  - scrapes og:image from each business's website (no API keys)
          │  - writes data JSON + search index
          ▼
 web/src/data/*.json         web/public/images/*.webp     web/public/search-index.json
@@ -71,6 +69,7 @@ web/dist/   (fully static HTML, CSS, images, XML sitemaps)
 - **Tailwind CSS v4** via `@tailwindcss/vite` (no `tailwind.config.js`, no PostCSS, single CSS file with `@theme` directive)
 - **TypeScript** throughout
 - **`bson` npm package** — parses BSON files directly without a MongoDB instance
+- **`cheerio`** — HTML parser for `og:image` extraction in the import script
 - **`sharp`** — image resize / WebP encoding in the import script
 - **`p-limit`** — concurrency cap for photo downloads
 - **`@fontsource-variable/inter`** — self-hosted Inter typeface
@@ -158,14 +157,12 @@ weedspots/
 ```
 # web/.env (gitignored; .env.example committed)
 BSON_DUMP_DIR=../exports/db-export         # optional, default shown
-GOOGLE_API_KEY=AIza...                     # required for photo prefetch
-GOOGLE_API_KEYS=key1,key2,key3             # optional, rotates on rate-limit
 SITE_URL=https://weedspots.io              # used for canonical URLs + sitemaps
 GA_MEASUREMENT_ID=G-XXXXXXXXXX             # optional, enables GA4
 GSC_VERIFICATION=XXXXXXXXXXXXXXXXXX        # optional, enables Google Search Console meta tag
 ```
 
-Import script requires `GOOGLE_API_KEY` (or `GOOGLE_API_KEYS`). Build requires only `SITE_URL`. Dev server requires nothing.
+No API keys are required at any stage. Import, build, and dev server all run without secrets. Build requires only `SITE_URL` (for canonical URLs and sitemaps).
 
 ### 3.4 Git policy
 
@@ -173,7 +170,7 @@ Import script requires `GOOGLE_API_KEY` (or `GOOGLE_API_KEYS`). Build requires o
 
 Rationale:
 - Fresh clones work instantly without any external setup.
-- CI/CD does not need Google API key secrets — only the one-off import needs them.
+- CI/CD has no secrets to manage — neither import nor build requires API keys.
 - The dataset changes infrequently (only when new scrapes happen), so commit churn is low.
 - The BSON dump is the source of truth; images and JSON are derived artifacts but committed to keep the pipeline self-contained.
 
@@ -187,7 +184,7 @@ File: `web/scripts/import.mjs` (ES module, no TypeScript).
 
 ### 4.1 Pipeline stages, in order
 
-1. **Parse env** — read `BSON_DUMP_DIR` (default `../exports/db-export`), `GOOGLE_API_KEY` / `GOOGLE_API_KEYS`. Exit with a clear error if no API key present.
+1. **Parse env** — read `BSON_DUMP_DIR` (default `../exports/db-export`). No API keys required.
 2. **Parse BSON files** — use the `bson` npm package to read `businesses.bson` and `placeraws.bson` into arrays of JS objects. No MongoDB connection.
 3. **Filter businesses** — keep only `businessStatus === 'OPERATIONAL'`. Log the drop count.
 4. **Merge placeraws** — index `placeraws` by `placeId`, then for each business attach:
@@ -200,16 +197,29 @@ File: `web/scripts/import.mjs` (ES module, no TypeScript).
    - `stateCitySlug` ← `${state.toLowerCase()}-${citySlug(city)}` with reserved-word guard. Businesses with no state OR no city are kept but get `stateCitySlug: null` and do not appear in city/city+category pages.
 
    The gradient-fallback color is **not** precomputed at import time. It is derived at render time by hashing `placeId` inside `BusinessCard.astro` (section 6.4). Nothing needs to live in `businesses.json` for this.
-6. **Photo prefetch** — for each business with at least one photo reference:
+6. **Photo scrape (og:image)** — for each business with a non-empty `website` field:
    - Target file: `web/public/images/${placeId}.webp`
-   - If file exists on disk → skip (idempotent, resumable)
-   - Otherwise: `GET https://places.googleapis.com/v1/${photos[0].name}/media?maxHeightPx=600&maxWidthPx=800&key=${apiKey}`
-   - Pipe response bytes through `sharp`: resize max 800×600 preserving aspect, encode WebP q=80, write to target file
-   - Set `coverPhoto: "/images/${placeId}.webp"` on the business record
-   - **On failure** (HTTP error, rate limit, network, sharp error): log `[warn] photo ${placeId}: ${err.message}`, set `coverPhoto: null`, continue. **Never abort the whole import.**
-   - Concurrency: `p-limit(8)` — 8 parallel downloads max
-   - Progress: log every 100 completions
-   - If `GOOGLE_API_KEYS` is a comma-separated list, rotate on rate-limit failures (HTTP 429) and retry once per key before giving up on a photo
+   - Skipped-marker file: `web/public/images/${placeId}.skip` (empty file, records previous failure so we don't retry every run)
+   - If target or skip marker exists on disk → skip (idempotent, resumable)
+   - Otherwise:
+     1. `fetch(website)` with a 10s timeout, redirect follow (max 5), `User-Agent: "weedspots-bot/1.0 (+https://weedspots.io)"`, `Accept: text/html`
+     2. If HTTP status ≥ 400, or `content-type` does not include `text/html`, or body > 2 MB: treat as failure
+     3. Parse body with `cheerio`, extract image URL in order of preference:
+        - `<meta property="og:image">`
+        - `<meta name="og:image">`
+        - `<meta property="og:image:secure_url">`
+        - `<meta name="twitter:image">`
+        - `<meta name="twitter:image:src">`
+     4. Resolve the extracted URL against the final (post-redirect) page URL with `new URL(raw, baseUrl)`. Reject non-`http(s):` schemes.
+     5. `fetch(imageUrl)` with the same timeout + UA, 5 MB body cap, `Accept: image/*`
+     6. Pipe bytes through `sharp`: `rotate()` (strip EXIF), `resize({ width: 800, height: 600, fit: 'cover', withoutEnlargement: false })`, `webp({ quality: 80 })`, write to target file
+     7. If sharp rejects the input (not a valid image): failure
+   - On success: set `coverPhoto: "/images/${placeId}.webp"` on the business record
+   - **On failure** at any step: log `[warn] photo ${placeId} (${website}): ${err.message}`, write an empty `${placeId}.skip` marker, set `coverPhoto: null`, continue. **Never abort the whole import.**
+   - Concurrency: `p-limit(4)` — we are hitting arbitrary third-party sites; be polite
+   - Progress: log every 100 completions with running success/fail counts
+   - Businesses without a `website` field are skipped entirely (no marker file, `coverPhoto: null`)
+   - To force a full re-scrape (e.g., after a new dump): delete `web/public/images/` before running import
 7. **Sort businesses** once via `rankSort` (rating tier → review count → newest review date). This becomes the canonical order for all downstream consumers.
 8. **Build aggregates:**
    - `cities`: `Array<{ stateCitySlug, cityName, state, count, categoryCounts: Record<string, number> }>` — one entry per distinct `stateCitySlug`
@@ -222,9 +232,10 @@ File: `web/scripts/import.mjs` (ES module, no TypeScript).
 10. **Print summary:**
     ```
     ✓ Imported 4,812 businesses (47 dropped — not OPERATIONAL)
-    ✓ Downloaded 3,921 cover photos (891 with no source photo; 0 failed)
+    ✓ Scraped 2,104 cover photos from website og:image
+      (1,847 no website, 861 failed/no og:image — fell back to gradient)
     ✓ Aggregated 84 cities, 14 cannabis categories
-    ✓ Total build data: 28.4 MB JSON, 47.2 MB images
+    ✓ Total build data: 28.4 MB JSON, ~26 MB images
     ```
 
 ### 4.2 Refresh workflow (future scrapes)
@@ -235,7 +246,7 @@ File: `web/scripts/import.mjs` (ES module, no TypeScript).
 4. `npm run build`
 5. Commit and deploy.
 
-The import script is idempotent on photos: already-downloaded files are skipped. If you want to force re-download photos, delete `web/public/images/` first.
+The import script is idempotent on photos: already-downloaded files and previously-failed `.skip` markers are both honored. If you want to force a full re-scrape, delete `web/public/images/` first.
 
 ---
 
@@ -604,7 +615,7 @@ Calling out deliberately-deferred work so scope doesn't creep:
 
 ## 10. Open risks
 
-1. **Stale photo references.** Current dump is from 2026-04-06. Photo refs last ~12 months. First import may have noticeable photo-fetch failure rate. Mitigation: gradient fallback is visually equivalent.
+1. **og:image hit rate is uncertain.** Not all businesses have a `website` field, not all websites expose `og:image`, and some will return HTTP errors, timeouts, or non-image responses. Realistic expectation: ~30–50% of businesses end up with a real cover photo. The rest fall back to gradient, which is visually equivalent.
 2. **`placeId` can change.** Rare, but Google occasionally merges/splits places. A new scrape giving a different `placeId` for the "same" business breaks the old URL. No automatic slug-alias redirect in v1.
 3. **Category data is messy.** `category`, `primaryGoogleCategory`, and `additionalGoogleCategories` disagree often. Expect 5-10% of listings to land in a category that feels off.
 4. **Pagination drift.** When the dataset changes, pagination URLs shift and Google re-crawls everything. Unavoidable with sorted-paginated static lists; low practical impact.
@@ -625,9 +636,10 @@ Calling out deliberately-deferred work so scope doesn't creep:
 | Data source | BSON → JSON at import time, no database |
 | Import script | `web/scripts/import.mjs`, reads BSON via `bson` package |
 | BSON source | `BSON_DUMP_DIR=../exports/db-export` (env var) |
-| Photos | Pre-fetched via Google Places Photo API v1 |
-| Photo format | 800×600 max, WebP q=80, `sharp` + `p-limit(8)` |
+| Photos | Scraped from each business's website `og:image` / `twitter:image` (no paid APIs) |
+| Photo format | 800×600 cover, WebP q=80, `sharp` + `cheerio` + `p-limit(4)` |
 | Photo fallback | Deterministic green-hue gradient from `placeId` hash |
+| Skip markers | Failed scrapes leave `${placeId}.skip` in `public/images/` so reruns don't retry them |
 | Git policy | Commit everything (BSON + images + JSON + sitemaps) |
 | URL structure | Flat root: `/ny-albany/`, `/ny-albany/dispensary/`, `/ny-albany/top-rated/` |
 | Listing URLs | `/listing/[slug]/` |
