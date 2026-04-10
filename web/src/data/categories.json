@@ -1,0 +1,72 @@
+[
+  {
+    "display": "Cannabis store",
+    "slug": "cannabis-store",
+    "count": 1060
+  },
+  {
+    "display": "Tobacco shop",
+    "slug": "tobacco-shop",
+    "count": 232
+  },
+  {
+    "display": "Smoke shop",
+    "slug": "smoke-shop",
+    "count": 112
+  },
+  {
+    "display": "Vaporizer store",
+    "slug": "vaporizer-store",
+    "count": 95
+  },
+  {
+    "display": "Store",
+    "slug": "store",
+    "count": 39
+  },
+  {
+    "display": "Cigar shop",
+    "slug": "cigar-shop",
+    "count": 26
+  },
+  {
+    "display": "Herbal medicine store",
+    "slug": "herbal-medicine-store",
+    "count": 26
+  },
+  {
+    "display": "Cannabis club",
+    "slug": "cannabis-club",
+    "count": 26
+  },
+  {
+    "display": "Delivery service",
+    "slug": "delivery-service",
+    "count": 22
+  },
+  {
+    "display": "Herb shop",
+    "slug": "herb-shop",
+    "count": 18
+  },
+  {
+    "display": "Hookah store",
+    "slug": "hookah-store",
+    "count": 3
+  },
+  {
+    "display": "Hookah bar",
+    "slug": "hookah-bar",
+    "count": 1
+  },
+  {
+    "display": "Smart shop",
+    "slug": "smart-shop",
+    "count": 1
+  },
+  {
+    "display": "Grow shop",
+    "slug": "grow-shop",
+    "count": 1
+  }
+]
