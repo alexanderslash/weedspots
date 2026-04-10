@@ -5,7 +5,8 @@
     "paths": {
       "~/*": ["./src/*"]
     },
-    "types": ["node"]
+    "types": ["node"],
+    "resolveJsonModule": true
   },
   "include": [".astro/types.d.ts", "**/*.ts", "**/*.astro", "scripts/**/*.ts"],
   "exclude": ["dist", "node_modules"]
