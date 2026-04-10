@@ -1,0 +1,10 @@
+---
+import type { CategoryAggregate } from '../lib/types';
+interface Props { category: CategoryAggregate }
+const { category } = Astro.props;
+---
+<a href={`/category/${category.slug}/`}
+   class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-ink-200 hover:border-brand-400 hover:bg-brand-50 transition">
+  <span class="font-medium text-ink-800">{category.display}</span>
+  <span class="text-xs text-ink-500">({category.count})</span>
+</a>

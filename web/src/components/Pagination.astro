@@ -1,0 +1,18 @@
+---
+import type { PaginationData } from '../lib/pagination';
+interface Props { data: PaginationData }
+const { data } = Astro.props;
+---
+{data.hasPagination && (
+  <nav class="flex items-center justify-center gap-2 mt-10" aria-label="Pagination">
+    {data.prevPage && <a href={data.prevPage} class="px-3 py-2 rounded-md border border-ink-200 hover:bg-ink-100">← Prev</a>}
+    {data.pages.map(p => (
+      p.isCurrent ? (
+        <span class="px-3 py-2 rounded-md bg-brand-500 text-white font-semibold">{p.num}</span>
+      ) : (
+        <a href={p.url} class="px-3 py-2 rounded-md border border-ink-200 hover:bg-ink-100">{p.num}</a>
+      )
+    ))}
+    {data.nextPage && <a href={data.nextPage} class="px-3 py-2 rounded-md border border-ink-200 hover:bg-ink-100">Next →</a>}
+  </nav>
+)}
