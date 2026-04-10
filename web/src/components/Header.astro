@@ -1,0 +1,20 @@
+---
+interface Props { compact?: boolean }
+const { compact = false } = Astro.props;
+---
+<header class="bg-white border-b border-ink-100">
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
+    <a href="/" class="flex items-center gap-2">
+      <img src="/logo.svg" alt="weedspots" width="140" height="32" />
+    </a>
+    {!compact && (
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-ink-700">
+        <a href="/category/" class="hover:text-brand-600">Categories</a>
+        <a href="/ny-new-york/" class="hover:text-brand-600">New York</a>
+        <a href="/ny-albany/" class="hover:text-brand-600">Albany</a>
+        <a href="/ny-buffalo/" class="hover:text-brand-600">Buffalo</a>
+        <a href="/search/" class="text-ink-900 bg-ink-100 hover:bg-ink-200 rounded-full px-4 py-2">Search</a>
+      </nav>
+    )}
+  </div>
+</header>

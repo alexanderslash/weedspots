@@ -1,0 +1,42 @@
+---
+import { getAllData } from '../lib/data';
+const { cities, categories } = getAllData();
+const topCities = cities.slice(0, 8);
+const topCategories = categories.slice(0, 8);
+const year = new Date().getFullYear();
+---
+<footer class="bg-white border-t border-ink-100 mt-16">
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+      <div>
+        <img src="/logo.svg" alt="weedspots" width="140" height="32" class="mb-3" />
+        <p class="text-ink-600">Cannabis businesses across the United States.</p>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-3">Popular cities</div>
+        <ul class="space-y-2">
+          {topCities.map(c => (
+            <li><a class="text-ink-700 hover:text-brand-600" href={`/${c.stateCitySlug}/`}>{c.cityName}, {c.state}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-3">Categories</div>
+        <ul class="space-y-2">
+          {topCategories.map(c => (
+            <li><a class="text-ink-700 hover:text-brand-600" href={`/category/${c.slug}/`}>{c.display}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-3">Resources</div>
+        <ul class="space-y-2">
+          <li><a class="text-ink-700 hover:text-brand-600" href="/search/">Search</a></li>
+          <li><a class="text-ink-700 hover:text-brand-600" href="/category/">All categories</a></li>
+          <li><a class="text-ink-700 hover:text-brand-600" href="/sitemap-index.xml">Sitemap</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-10 pt-6 border-t border-ink-100 text-xs text-ink-500">© {year} weedspots.io</div>
+  </div>
+</footer>
