@@ -1,0 +1,108 @@
+---
+import Layout from '../../components/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Rating from '../../components/Rating.astro';
+import SchemaJsonLd from '../../components/SchemaJsonLd.astro';
+import { getAllData } from '../../lib/data';
+import { localBusinessSchema, breadcrumbSchema, faqSchema } from '../../lib/schema-org';
+import type { Business } from '../../lib/types';
+
+export async function getStaticPaths() {
+  const { businesses } = getAllData();
+  return businesses.map(b => ({ params: { slug: b.slug }, props: { business: b } }));
+}
+
+interface Props { business: Business }
+const { business: b } = Astro.props;
+
+function gradientFor(placeId: string): string {
+  const hash = [...placeId].reduce((a, c) => a + c.charCodeAt(0), 0);
+  const h = 80 + (hash % 80);
+  return `linear-gradient(135deg, hsl(${h}, 60%, 88%), hsl(${h}, 50%, 72%))`;
+}
+const coverStyle = b.coverPhoto ? '' : `background-image: ${gradientFor(b.placeId)}`;
+
+const siteUrl = import.meta.env.SITE_URL || 'https://weedspots.io';
+const canonical = `${siteUrl}/listing/${b.slug}/`;
+const title = `${b.name} — ${b.category} in ${b.city}, ${b.state} | weedspots`;
+const description = (b.seoDescription || b.editorialSummary || `${b.name} is a ${b.category.toLowerCase()} located at ${b.formattedAddress}. ${b.rating ? `Rated ${b.rating} stars from ${b.reviewCount} reviews.` : ''}`).slice(0, 300);
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  ...(b.stateCitySlug ? [{ name: `${b.city}, ${b.state}`, url: `/${b.stateCitySlug}/` }] : []),
+  { name: b.name },
+];
+
+const schemas = [
+  localBusinessSchema(b),
+  breadcrumbSchema(crumbs),
+  ...(b.faqs && b.faqs.length > 0 ? [faqSchema(b.faqs)] : []),
+];
+---
+<Layout title={title} description={description} canonical={canonical} ogType="business.business" ogImage={b.coverPhoto ?? '/og-default.jpg'}>
+  <SchemaJsonLd slot="head" json={schemas} />
+
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-6">
+    <Breadcrumbs crumbs={crumbs} />
+  </div>
+
+  <section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="aspect-[21/9] w-full rounded-xl overflow-hidden bg-ink-100 relative" style={coverStyle}>
+      {b.coverPhoto && <img src={b.coverPhoto} alt={b.name} class="w-full h-full object-cover" />}
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-3 gap-10">
+    <div class="lg:col-span-2">
+      <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-900">{b.name}</h1>
+      <div class="mt-2 text-ink-600">{b.category} · {b.city}, {b.state}</div>
+      <div class="mt-3"><Rating value={b.rating || 0} count={b.reviewCount || 0} /></div>
+
+      {b.editorialSummary && (
+        <p class="mt-6 text-base leading-relaxed text-ink-700">{b.editorialSummary}</p>
+      )}
+
+      {b.reviewHighlights && b.reviewHighlights.length > 0 && (
+        <div class="mt-8">
+          <h2 class="text-xl font-semibold mb-3">Review highlights</h2>
+          <ul class="list-disc list-inside text-ink-700 space-y-1">
+            {b.reviewHighlights.map(r => <li>{r}</li>)}
+          </ul>
+        </div>
+      )}
+
+      {b.faqs && b.faqs.length > 0 && (
+        <div class="mt-8">
+          <h2 class="text-xl font-semibold mb-3">FAQ</h2>
+          <dl class="space-y-4">
+            {b.faqs.map(f => (
+              <div>
+                <dt class="font-semibold text-ink-900">{f.q}</dt>
+                <dd class="text-ink-700 mt-1">{f.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      )}
+    </div>
+
+    <aside class="space-y-4">
+      <div class="bg-white rounded-lg border border-ink-100 p-5">
+        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Contact</div>
+        <div class="text-ink-800">{b.formattedAddress}</div>
+        {b.phone && <div class="mt-2"><a href={`tel:${b.phone}`} class="text-brand-600">{b.phone}</a></div>}
+        {b.website && <div class="mt-2"><a href={b.website} rel="nofollow noopener" class="text-brand-600 break-all">{b.website}</a></div>}
+        {b.googleMapsUri && <div class="mt-4"><a href={b.googleMapsUri} rel="nofollow noopener" class="inline-block bg-brand-500 text-white rounded-md px-4 py-2 font-medium">Open in Google Maps</a></div>}
+      </div>
+
+      {b.openingHours && b.openingHours.weekdayDescriptions.length > 0 && (
+        <div class="bg-white rounded-lg border border-ink-100 p-5">
+          <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Hours</div>
+          <ul class="text-sm text-ink-700 space-y-1">
+            {b.openingHours.weekdayDescriptions.map(d => <li>{d}</li>)}
+          </ul>
+        </div>
+      )}
+    </aside>
+  </section>
+</Layout>
