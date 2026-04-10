@@ -1,5 +1,6 @@
 ---
 import { getAllData } from '../lib/data';
+import Logo from './Logo.astro';
 const { cities, categories } = getAllData();
 const topCities = cities.slice(0, 8);
 const topCategories = categories.slice(0, 8);
@@ -9,7 +10,7 @@ const year = new Date().getFullYear();
   <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-12">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
       <div>
-        <img src="/logo.svg" alt="weedspots" width="140" height="32" class="mb-3" />
+        <Logo class="mb-3" />
         <p class="text-ink-600">Cannabis businesses across the United States.</p>
       </div>
       <div>

@@ -75,8 +75,9 @@ body { -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 a:hover { color: var(--color-brand-600); }
 
-/* ─── Theme toggle: show the icon matching the current mode ────────────────── */
-[data-theme-mode] .theme-icon { display: none; }
-[data-theme-mode="light"]  .theme-icon-light,
-[data-theme-mode="dark"]   .theme-icon-dark,
-[data-theme-mode="system"] .theme-icon-system { display: inline-block; }
+/* ─── Theme toggle: show the icon matching the currently-rendered theme ───── */
+/* Keyed on .light/.dark (not data-theme-mode) so that the initial "system"
+   mode still shows the correct icon based on the resolved OS preference. */
+.theme-icon { display: none; }
+html.light .theme-icon-light,
+html.dark  .theme-icon-dark { display: inline-block; }

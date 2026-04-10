@@ -47,16 +47,13 @@ const fullOg = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
         root.setAttribute('data-theme-mode', mode);
         window.__weedspotsTheme = {
           cycle: function () {
-            var cur = root.getAttribute('data-theme-mode') || 'system';
-            var next = cur === 'system' ? 'light' : cur === 'light' ? 'dark' : 'system';
-            try {
-              if (next === 'system') localStorage.removeItem('theme');
-              else localStorage.setItem('theme', next);
-            } catch (e) {}
-            var sd = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            var d = next === 'dark' || (next === 'system' && sd);
-            root.classList.toggle('dark', d);
-            root.classList.toggle('light', !d);
+            // Flip to the opposite of the currently-rendered theme. The
+            // initial "system" mode becomes an explicit light/dark choice
+            // after the first click and is persisted to localStorage.
+            var next = root.classList.contains('dark') ? 'light' : 'dark';
+            try { localStorage.setItem('theme', next); } catch (e) {}
+            root.classList.toggle('dark', next === 'dark');
+            root.classList.toggle('light', next === 'light');
             root.setAttribute('data-theme-mode', next);
           },
         };
