@@ -1,0 +1,47 @@
+---
+import Layout from '../components/Layout.astro';
+import SearchBox from '../components/SearchBox.astro';
+import CityTile from '../components/CityTile.astro';
+import CategoryPill from '../components/CategoryPill.astro';
+import BusinessGrid from '../components/BusinessGrid.astro';
+import { getAllData } from '../lib/data';
+
+const { businesses, cities, categories } = getAllData();
+const topCities = cities.slice(0, 12);
+const topCategories = categories.slice(0, 12);
+const featured = businesses.slice(0, 12);
+
+const siteUrl = import.meta.env.SITE_URL || 'https://weedspots.io';
+---
+<Layout
+  title="weedspots.io — Cannabis businesses across the United States"
+  description="Browse dispensaries, smoke shops, delivery services, and cannabis stores in cities across the US."
+  canonical={`${siteUrl}/`}
+>
+  <section class="bg-gradient-to-b from-brand-50 to-ink-50">
+    <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
+      <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-ink-900">Find cannabis near you</h1>
+      <p class="mt-4 text-lg text-ink-600 max-w-2xl mx-auto">Dispensaries, smoke shops, delivery services, and more across the United States.</p>
+      <div class="mt-8 flex justify-center"><SearchBox /></div>
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
+    <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-8">Browse by city</h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      {topCities.map(c => <CityTile city={c} />)}
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-16">
+    <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-8">Browse by category</h2>
+    <div class="flex flex-wrap gap-3">
+      {topCategories.map(c => <CategoryPill category={c} />)}
+    </div>
+  </section>
+
+  <section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-20">
+    <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-8">Featured</h2>
+    <BusinessGrid businesses={featured} />
+  </section>
+</Layout>
