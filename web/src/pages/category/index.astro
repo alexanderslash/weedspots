@@ -1,0 +1,27 @@
+---
+import Layout from '../../components/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import CategoryPill from '../../components/CategoryPill.astro';
+import SchemaJsonLd from '../../components/SchemaJsonLd.astro';
+import { getAllData } from '../../lib/data';
+import { breadcrumbSchema } from '../../lib/schema-org';
+
+const { categories } = getAllData();
+const siteUrl = import.meta.env.SITE_URL || 'https://weedspots.io';
+const canonical = `${siteUrl}/category/`;
+const crumbs = [{ name: 'Home', url: '/' }, { name: 'Categories' }];
+---
+<Layout
+  title="All categories | weedspots"
+  description="Browse cannabis business categories: dispensaries, smoke shops, delivery services, and more."
+  canonical={canonical}
+>
+  <SchemaJsonLd slot="head" json={breadcrumbSchema(crumbs)} />
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-10">
+    <Breadcrumbs crumbs={crumbs} />
+    <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight">Categories</h1>
+    <div class="mt-8 flex flex-wrap gap-3">
+      {categories.map(c => <CategoryPill category={c} />)}
+    </div>
+  </div>
+</Layout>

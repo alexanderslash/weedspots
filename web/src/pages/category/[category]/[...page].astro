@@ -1,0 +1,81 @@
+---
+import Layout from '../../../components/Layout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import BusinessGrid from '../../../components/BusinessGrid.astro';
+import Pagination from '../../../components/Pagination.astro';
+import SchemaJsonLd from '../../../components/SchemaJsonLd.astro';
+import { getAllData } from '../../../lib/data';
+import { getSponsored, getNonSponsored } from '../../../lib/ranking';
+import { paginate, paginationData } from '../../../lib/pagination';
+import { breadcrumbSchema } from '../../../lib/schema-org';
+import { LISTINGS_PER_PAGE } from '../../../lib/constants';
+import type { Business, CategoryAggregate } from '../../../lib/types';
+
+export async function getStaticPaths() {
+  const { businesses, categories } = getAllData();
+  const paths: Array<{
+    params: { category: string; page: string | undefined };
+    props: { category: CategoryAggregate; pageItems: Business[]; currentPage: number; totalPages: number };
+  }> = [];
+
+  for (const cat of categories) {
+    const list = businesses.filter(b => b.category === cat.display);
+    const sponsored = getSponsored(list);
+    const nonSponsored = getNonSponsored(list);
+    const ordered = [...sponsored, ...nonSponsored];
+    const pages = paginate(ordered, LISTINGS_PER_PAGE);
+
+    pages.forEach((pageItems, i) => {
+      paths.push({
+        params: {
+          category: cat.slug,
+          page: i === 0 ? undefined : `page/${i + 1}`,
+        },
+        props: {
+          category: cat,
+          pageItems,
+          currentPage: i + 1,
+          totalPages: pages.length,
+        },
+      });
+    });
+  }
+  return paths;
+}
+
+interface Props {
+  category: CategoryAggregate;
+  pageItems: Business[];
+  currentPage: number;
+  totalPages: number;
+}
+const { category, pageItems, currentPage, totalPages } = Astro.props;
+
+const { businesses } = getAllData();
+const sponsoredIds = new Set(getSponsored(businesses.filter(b => b.category === category.display)).map(b => b.placeId));
+
+const siteUrl = import.meta.env.SITE_URL || 'https://weedspots.io';
+const baseUrl = `/category/${category.slug}/`;
+const canonical = `${siteUrl}${currentPage === 1 ? baseUrl : `${baseUrl}page/${currentPage}/`}`;
+const title = `${category.display} near you${currentPage > 1 ? ` — Page ${currentPage}` : ''} | weedspots`;
+const description = `Browse ${category.count.toLocaleString()} ${category.display.toLowerCase()} businesses across the United States.`;
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Categories', url: '/category/' },
+  { name: category.display },
+];
+const pag = paginationData(currentPage, totalPages, baseUrl);
+---
+<Layout title={title} description={description} canonical={canonical}>
+  <SchemaJsonLd slot="head" json={breadcrumbSchema(crumbs)} />
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-6">
+    <Breadcrumbs crumbs={crumbs} />
+    <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight">{category.display}</h1>
+    <p class="mt-2 text-ink-600">{category.count.toLocaleString()} businesses · Page {currentPage} of {totalPages}</p>
+  </div>
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-16">
+    <BusinessGrid businesses={pageItems} sponsoredIds={sponsoredIds} />
+    <Pagination data={pag} />
+  </div>
+</Layout>
