@@ -1,0 +1,50 @@
+---
+import Layout from '../../components/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BusinessGrid from '../../components/BusinessGrid.astro';
+import SchemaJsonLd from '../../components/SchemaJsonLd.astro';
+import { getAllData } from '../../lib/data';
+import { rankSort } from '../../lib/ranking';
+import { breadcrumbSchema, itemListSchema } from '../../lib/schema-org';
+import type { CityAggregate, Business } from '../../lib/types';
+
+export async function getStaticPaths() {
+  const { cities } = getAllData();
+  return cities.map(c => ({ params: { stateCity: c.stateCitySlug }, props: { city: c } }));
+}
+
+interface Props { city: CityAggregate }
+const { city } = Astro.props;
+
+const { byStateCity } = getAllData();
+const businesses: Business[] = (byStateCity.get(city.stateCitySlug) || [])
+  .slice()
+  .sort(rankSort)
+  .slice(0, 10);
+
+const siteUrl = import.meta.env.SITE_URL || 'https://weedspots.io';
+const canonical = `${siteUrl}/${city.stateCitySlug}/top-rated/`;
+const title = `Top 10 cannabis businesses in ${city.cityName}, ${city.state} | weedspots`;
+const description = `The 10 highest-rated cannabis businesses in ${city.cityName}, ${city.state}.`;
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: `${city.cityName}, ${city.state}`, url: `/${city.stateCitySlug}/` },
+  { name: 'Top rated' },
+];
+
+const schemas = [
+  breadcrumbSchema(crumbs),
+  itemListSchema(title, businesses.map(b => ({ name: b.name, slug: b.slug }))),
+];
+---
+<Layout title={title} description={description} canonical={canonical}>
+  <SchemaJsonLd slot="head" json={schemas} />
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-6">
+    <Breadcrumbs crumbs={crumbs} />
+    <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight">Top 10 in {city.cityName}, {city.state}</h1>
+  </div>
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-16">
+    <BusinessGrid businesses={businesses} />
+  </div>
+</Layout>

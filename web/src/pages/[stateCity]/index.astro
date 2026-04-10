@@ -1,0 +1,61 @@
+---
+import Layout from '../../components/Layout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import BusinessGrid from '../../components/BusinessGrid.astro';
+import CategoryPill from '../../components/CategoryPill.astro';
+import SchemaJsonLd from '../../components/SchemaJsonLd.astro';
+import { getAllData } from '../../lib/data';
+import { getSponsored, getNonSponsored } from '../../lib/ranking';
+import { categorySlug } from '../../lib/slugs';
+import { breadcrumbSchema } from '../../lib/schema-org';
+import type { CityAggregate, Business } from '../../lib/types';
+
+export async function getStaticPaths() {
+  const { cities } = getAllData();
+  return cities.map(c => ({ params: { stateCity: c.stateCitySlug }, props: { city: c } }));
+}
+
+interface Props { city: CityAggregate }
+const { city } = Astro.props;
+
+const { byStateCity } = getAllData();
+const businesses: Business[] = byStateCity.get(city.stateCitySlug) || [];
+const sponsored = getSponsored(businesses);
+const nonSponsored = getNonSponsored(businesses);
+const ordered = [...sponsored, ...nonSponsored];
+const sponsoredIds = new Set(sponsored.map(b => b.placeId));
+
+const siteUrl = import.meta.env.SITE_URL || 'https://weedspots.io';
+const canonical = `${siteUrl}/${city.stateCitySlug}/`;
+const title = `Cannabis businesses in ${city.cityName}, ${city.state} | weedspots`;
+const description = `Browse ${city.count} cannabis businesses including dispensaries, smoke shops, and delivery services in ${city.cityName}, ${city.state}.`;
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: `${city.cityName}, ${city.state}` },
+];
+
+const cityCategories = Object.entries(city.categoryCounts)
+  .filter(([, n]) => n >= 3)
+  .sort((a, b) => b[1] - a[1])
+  .map(([display, count]) => ({ display, slug: categorySlug(display), count }));
+---
+<Layout title={title} description={description} canonical={canonical}>
+  <SchemaJsonLd slot="head" json={breadcrumbSchema(crumbs)} />
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-6">
+    <Breadcrumbs crumbs={crumbs} />
+    <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight">{city.cityName}, {city.state}</h1>
+    <p class="mt-2 text-ink-600">{city.count.toLocaleString()} cannabis businesses</p>
+    {cityCategories.length > 0 && (
+      <div class="mt-4 flex flex-wrap gap-2">
+        {cityCategories.map(c => (
+          <a href={`/${city.stateCitySlug}/${c.slug}/`} class="text-sm bg-white border border-ink-200 rounded-full px-3 py-1 hover:border-brand-400">{c.display} ({c.count})</a>
+        ))}
+        <a href={`/${city.stateCitySlug}/top-rated/`} class="text-sm bg-brand-500 text-white rounded-full px-3 py-1">Top rated</a>
+      </div>
+    )}
+  </div>
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-16">
+    <BusinessGrid businesses={ordered} sponsoredIds={sponsoredIds} />
+  </div>
+</Layout>
