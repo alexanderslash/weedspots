@@ -3,9 +3,9 @@ import Layout from '../../components/Layout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import Rating from '../../components/Rating.astro';
 import SchemaJsonLd from '../../components/SchemaJsonLd.astro';
-import { getAllData } from '../../lib/data';
-import { localBusinessSchema, breadcrumbSchema, faqSchema } from '../../lib/schema-org';
-import type { Business } from '../../lib/types';
+import { getAllData } from '~/lib/data.ts';
+import { localBusinessSchema, breadcrumbSchema, faqSchema } from '~/lib/schema-org.ts';
+import type { Business } from '~/lib/types.ts';
 
 export async function getStaticPaths() {
   const { businesses } = getAllData();
@@ -40,11 +40,11 @@ const schemas = [
   </div>
 
   <section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-    <div class="aspect-[21/9] w-full rounded-2xl overflow-hidden bg-ink-100 ring-1 ring-black/5 dark:ring-white/10 relative">
+    <div class="aspect-21/9 w-full rounded-2xl overflow-hidden bg-ink-100 ring-1 ring-black/5 dark:ring-white/10 relative">
       {b.coverPhoto ? (
         <img src={b.coverPhoto} alt={b.name} class="w-full h-full object-cover" />
       ) : (
-        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-50 to-ink-100 dark:from-ink-100 dark:to-ink-200" aria-hidden="true">
+        <div class="absolute inset-0 flex items-center justify-center bg-linear-to-br from-brand-50 to-ink-100 dark:from-ink-100 dark:to-ink-200" aria-hidden="true">
           <svg viewBox="0 0 24 24" width="80" height="80" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="text-brand-500/60 dark:text-brand-400/50">
             <path d="M12 2c1 4 4 6 8 6-1 5-5 9-10 9-1-4-4-6-8-6 1-5 5-9 10-9Z" />
             <path d="M12 2c0 8-4 13-10 15" />
@@ -93,8 +93,8 @@ const schemas = [
         <div class="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-500 mb-2">Contact</div>
         <div class="text-ink-800">{b.formattedAddress}</div>
         {b.phone && <div class="mt-2"><a href={`tel:${b.phone}`} class="text-brand-600 hover:text-brand-700 transition-colors duration-150">{b.phone}</a></div>}
-        {b.website && <div class="mt-2"><a href={b.website} rel="nofollow noopener" class="text-brand-600 hover:text-brand-700 break-all transition-colors duration-150">{b.website}</a></div>}
-        {b.googleMapsUri && <div class="mt-4"><a href={b.googleMapsUri} rel="nofollow noopener" class="inline-flex items-center bg-brand-500 hover:bg-brand-600 text-white rounded-full px-4 py-2 font-medium active:scale-[0.97] transition-[transform,background-color] duration-150 ease-out">Open in Google Maps</a></div>}
+        {b.website && <div class="mt-2"><a href={b.website} target="_blank" rel="nofollow noopener noreferrer" class="text-brand-600 hover:text-brand-700 break-all transition-colors duration-150">{b.website}<span class="sr-only"> (opens in new tab)</span></a></div>}
+        {b.googleMapsUri && <div class="mt-4"><a href={b.googleMapsUri} target="_blank" rel="nofollow noopener noreferrer" class="inline-flex items-center gap-1.5 rounded-full px-4 py-2 font-medium shadow-sm bg-black text-white! hover:bg-[#262626] hover:text-white dark:bg-white dark:text-black dark:hover:bg-[#e5e5e5] dark:hover:text-black hover:shadow-md hover:-translate-y-0.5 active:scale-[0.97] transition-[transform,background-color,box-shadow] duration-150 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:ring-offset-ink-50">Open in Google Maps<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg><span class="sr-only"> (opens in new tab)</span></a></div>}
       </div>
 
       {b.openingHours && b.openingHours.weekdayDescriptions.length > 0 && (

@@ -34,43 +34,37 @@ const fullOg = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <script is:inline>
-      // Apply saved theme before paint to prevent FOUC. Modes: 'light' | 'dark' | 'system'.
+      // Apply theme before paint to prevent FOUC.
+      // - No saved pref → follow OS (live-updates on prefers-color-scheme change).
+      // - Saved 'light'/'dark' → explicit user choice, OS changes are ignored.
+      // The toggle button flips between light and dark and persists the choice.
       (function () {
         var root = document.documentElement;
         var mq = window.matchMedia('(prefers-color-scheme: dark)');
-        var pref = null;
-        try { pref = localStorage.getItem('theme'); } catch (e) {}
-        var mode = pref === 'light' || pref === 'dark' || pref === 'system' ? pref : 'system';
+        var saved = null;
+        try { saved = localStorage.getItem('theme'); } catch (e) {}
 
-        function apply(m) {
-          var isDark = m === 'dark' || (m === 'system' && mq.matches);
+        function applyResolved() {
+          var isDark = saved === 'dark' || (saved !== 'light' && mq.matches);
           root.classList.toggle('dark', isDark);
           root.classList.toggle('light', !isDark);
-          root.setAttribute('data-theme-mode', m);
         }
-        apply(mode);
+        applyResolved();
 
         window.__weedspotsTheme = {
           cycle: function () {
-            // Three-state cycle: system → light → dark → system.
-            var current = root.getAttribute('data-theme-mode') || 'system';
-            var next = current === 'system' ? 'light'
-                     : current === 'light'  ? 'dark'
-                                            : 'system';
-            try {
-              if (next === 'system') localStorage.removeItem('theme');
-              else localStorage.setItem('theme', next);
-            } catch (e) {}
-            apply(next);
+            // Flip to the opposite of the currently-rendered theme.
+            var next = root.classList.contains('dark') ? 'light' : 'dark';
+            saved = next;
+            try { localStorage.setItem('theme', next); } catch (e) {}
+            applyResolved();
           },
         };
 
         try {
-          mq.addEventListener('change', function (e) {
-            if ((root.getAttribute('data-theme-mode') || 'system') === 'system') {
-              root.classList.toggle('dark', e.matches);
-              root.classList.toggle('light', !e.matches);
-            }
+          mq.addEventListener('change', function () {
+            // Only track OS changes while the user has no explicit pref.
+            if (saved !== 'light' && saved !== 'dark') applyResolved();
           });
         } catch (e) {}
       })();

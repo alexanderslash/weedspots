@@ -70,14 +70,18 @@
 .light { color-scheme: light; }
 
 html {
-  font-family: var(--font-sans);
+  font-family: var(--font-sans), sans-serif;
   color: var(--color-ink-800);
   background: var(--color-ink-50);
 }
 body { -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
-a:hover { color: var(--color-brand-600); }
-.dark a:hover { color: var(--color-brand-400); }
+/* Zero-specificity fallback so any Tailwind hover utility (e.g. `hover:text-white`
+   on a button-shaped anchor) always wins. Without :where() the element+pseudo
+   selector outranks a single class and overrides `text-white` on hover,
+   producing green-on-green buttons. */
+:where(a):hover { color: var(--color-brand-600); }
+.dark :where(a):hover { color: var(--color-brand-400); }
 
 /* ─── Motion defaults ────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
@@ -89,10 +93,11 @@ a:hover { color: var(--color-brand-600); }
 }
 
 /* ─── Theme toggle ─────────────────────────────────────────────────────────
-   Three-state cycle: system → light → dark → system. Keyed on
-   data-theme-mode (not .light/.dark) so that "system" reliably shows the
-   monitor icon, independent of which theme the OS happens to resolve to.
-   A short fade+scale masks the swap. */
+   Two-state toggle: light ↔ dark. Unsaved visitors follow the OS preference
+   (resolved at load and re-resolved on prefers-color-scheme change). The
+   shown icon matches the currently-rendered theme so users see "sun" on
+   light and "moon" on dark regardless of whether the choice is explicit
+   or inherited. A short fade+scale masks the swap. */
 .theme-icon {
   display: none;
   opacity: 0;
@@ -100,9 +105,8 @@ a:hover { color: var(--color-brand-600); }
   transition: opacity 160ms var(--ease-out-strong),
               transform 160ms var(--ease-out-strong);
 }
-html[data-theme-mode="system"] .theme-icon-system,
-html[data-theme-mode="light"]  .theme-icon-light,
-html[data-theme-mode="dark"]   .theme-icon-dark {
+html.light .theme-icon-light,
+html.dark  .theme-icon-dark {
   display: inline-block;
   opacity: 1;
   transform: scale(1);
