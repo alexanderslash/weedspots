@@ -1,0 +1,16 @@
+---
+import BusinessCard from './BusinessCard.astro';
+import type { Business } from '../lib/types';
+
+interface Props { businesses: Business[]; sponsoredIds?: Set<string> }
+const { businesses, sponsoredIds = new Set() } = Astro.props;
+---
+{businesses.length === 0 ? (
+  <p class="text-ink-500">No businesses found.</p>
+) : (
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    {businesses.map(b => (
+      <BusinessCard business={b} sponsored={sponsoredIds.has(b.placeId)} />
+    ))}
+  </div>
+)}

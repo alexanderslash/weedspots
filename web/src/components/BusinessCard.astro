@@ -1,0 +1,39 @@
+---
+import Rating from './Rating.astro';
+import type { Business } from '../lib/types';
+
+interface Props { business: Business; sponsored?: boolean }
+const { business: b, sponsored = false } = Astro.props;
+
+function gradientFor(placeId: string): string {
+  const hash = [...placeId].reduce((a, c) => a + c.charCodeAt(0), 0);
+  const h = 80 + (hash % 80);
+  return `linear-gradient(135deg, hsl(${h}, 60%, 88%), hsl(${h}, 50%, 72%))`;
+}
+
+const coverStyle = b.coverPhoto ? '' : `background-image: ${gradientFor(b.placeId)}`;
+const openNow = b.openingHours?.openNow;
+---
+<a href={`/listing/${b.slug}/`}
+   class="group block bg-white border border-ink-100 rounded-lg overflow-hidden shadow-card hover:shadow-card-hover transition">
+  <div class="relative aspect-[4/3] w-full bg-ink-100" style={coverStyle}>
+    {b.coverPhoto && (
+      <img src={b.coverPhoto} alt={b.name} loading="lazy" class="w-full h-full object-cover" width="800" height="600" />
+    )}
+    {openNow !== null && openNow !== undefined && (
+      <span class={`absolute top-3 right-3 text-xs font-medium px-2 py-0.5 rounded-full ${openNow ? 'bg-brand-500 text-white' : 'bg-ink-800 text-white'}`}>
+        {openNow ? 'Open' : 'Closed'}
+      </span>
+    )}
+    {sponsored && (
+      <span class="absolute top-3 left-3 text-xs uppercase tracking-wider bg-white text-ink-700 rounded-full px-2 py-0.5 border border-ink-200">Sponsored</span>
+    )}
+  </div>
+  <div class="p-4">
+    <h3 class="text-base font-semibold text-ink-900 group-hover:text-brand-600 line-clamp-1">{b.name}</h3>
+    <div class="text-sm text-ink-600 mt-0.5 line-clamp-1">{b.category} · {b.city}, {b.state}</div>
+    <div class="mt-2">
+      <Rating value={b.rating || 0} count={b.reviewCount || 0} />
+    </div>
+  </div>
+</a>
