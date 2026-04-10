@@ -1,0 +1,12 @@
+---
+interface Props { value: number; count?: number }
+const { value, count = 0 } = Astro.props;
+const rounded = Math.round(value * 10) / 10;
+---
+<div class="inline-flex items-center gap-1 text-sm">
+  <svg viewBox="0 0 20 20" class="w-4 h-4 fill-[var(--color-gold-500)]" aria-hidden="true">
+    <path d="M10 1.5l2.7 5.5 6 .9-4.3 4.2 1 6L10 15.3l-5.4 2.8 1-6L1.3 7.9l6-.9L10 1.5z"/>
+  </svg>
+  <span class="font-semibold text-ink-900">{rounded.toFixed(1)}</span>
+  {count > 0 && <span class="text-ink-500">({count.toLocaleString()})</span>}
+</div>
