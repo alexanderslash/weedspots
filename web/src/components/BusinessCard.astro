@@ -15,18 +15,18 @@ const coverStyle = b.coverPhoto ? '' : `background-image: ${gradientFor(b.placeI
 const openNow = b.openingHours?.openNow;
 ---
 <a href={`/listing/${b.slug}/`}
-   class="group block bg-white border border-ink-100 rounded-lg overflow-hidden shadow-card hover:shadow-card-hover transition">
+   class="group block bg-ink-50 border border-ink-100 rounded-lg overflow-hidden shadow-card hover:shadow-card-hover transition">
   <div class="relative aspect-[4/3] w-full bg-ink-100" style={coverStyle}>
     {b.coverPhoto && (
       <img src={b.coverPhoto} alt={b.name} loading="lazy" class="w-full h-full object-cover" width="800" height="600" />
     )}
     {openNow !== null && openNow !== undefined && (
-      <span class={`absolute top-3 right-3 text-xs font-medium px-2 py-0.5 rounded-full ${openNow ? 'bg-brand-500 text-white' : 'bg-ink-800 text-white'}`}>
+      <span class={`absolute top-3 right-3 text-xs font-medium px-2 py-0.5 rounded-full ${openNow ? 'bg-brand-500 text-white' : 'bg-ink-800 text-ink-50'}`}>
         {openNow ? 'Open' : 'Closed'}
       </span>
     )}
     {sponsored && (
-      <span class="absolute top-3 left-3 text-xs uppercase tracking-wider bg-white text-ink-700 rounded-full px-2 py-0.5 border border-ink-200">Sponsored</span>
+      <span class="absolute top-3 left-3 text-xs uppercase tracking-wider bg-ink-50 text-ink-700 rounded-full px-2 py-0.5 border border-ink-200">Sponsored</span>
     )}
   </div>
   <div class="p-4">

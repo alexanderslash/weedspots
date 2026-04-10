@@ -2,19 +2,50 @@
 interface Props { compact?: boolean }
 const { compact = false } = Astro.props;
 ---
-<header class="bg-white border-b border-ink-100">
+<header class="bg-ink-50 border-b border-ink-100">
   <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 flex items-center justify-between py-4">
     <a href="/" class="flex items-center gap-2">
       <img src="/logo.svg" alt="weedspots" width="140" height="32" />
     </a>
-    {!compact && (
-      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-ink-700">
-        <a href="/category/" class="hover:text-brand-600">Categories</a>
-        <a href="/ny-new-york/" class="hover:text-brand-600">New York</a>
-        <a href="/ny-albany/" class="hover:text-brand-600">Albany</a>
-        <a href="/ny-buffalo/" class="hover:text-brand-600">Buffalo</a>
-        <a href="/search/" class="text-ink-900 bg-ink-100 hover:bg-ink-200 rounded-full px-4 py-2">Search</a>
-      </nav>
-    )}
+    <div class="flex items-center gap-4">
+      {!compact && (
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-ink-700">
+          <a href="/category/" class="hover:text-brand-600">Categories</a>
+          <a href="/ny-new-york/" class="hover:text-brand-600">New York</a>
+          <a href="/ny-albany/" class="hover:text-brand-600">Albany</a>
+          <a href="/ny-buffalo/" class="hover:text-brand-600">Buffalo</a>
+          <a href="/search/" class="text-ink-900 bg-ink-100 hover:bg-ink-200 rounded-full px-4 py-2">Search</a>
+        </nav>
+      )}
+      <button
+        id="theme-toggle"
+        type="button"
+        aria-label="Change color theme"
+        title="Change color theme (system / light / dark)"
+        class="inline-flex items-center justify-center h-9 w-9 rounded-full text-ink-700 hover:text-brand-600 hover:bg-ink-100 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+      >
+        <svg class="theme-icon theme-icon-system" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="3" width="20" height="14" rx="2" />
+          <line x1="8" y1="21" x2="16" y2="21" />
+          <line x1="12" y1="17" x2="12" y2="21" />
+        </svg>
+        <svg class="theme-icon theme-icon-light" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4" />
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+        </svg>
+        <svg class="theme-icon theme-icon-dark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
+    </div>
   </div>
 </header>
+<script is:inline>
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', function () {
+      if (window.__weedspotsTheme) window.__weedspotsTheme.cycle();
+    });
+  })();
+</script>

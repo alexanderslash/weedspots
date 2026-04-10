@@ -49,7 +49,7 @@ const cityCategories = Object.entries(city.categoryCounts)
     {cityCategories.length > 0 && (
       <div class="mt-4 flex flex-wrap gap-2">
         {cityCategories.map(c => (
-          <a href={`/${city.stateCitySlug}/${c.slug}/`} class="text-sm bg-white border border-ink-200 rounded-full px-3 py-1 hover:border-brand-400">{c.display} ({c.count})</a>
+          <a href={`/${city.stateCitySlug}/${c.slug}/`} class="text-sm bg-ink-50 border border-ink-200 rounded-full px-3 py-1 hover:border-brand-400">{c.display} ({c.count})</a>
         ))}
         <a href={`/${city.stateCitySlug}/top-rated/`} class="text-sm bg-brand-500 text-white rounded-full px-3 py-1">Top rated</a>
       </div>

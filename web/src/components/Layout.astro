@@ -33,6 +33,43 @@ const fullOg = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script is:inline>
+      // Apply saved theme before paint to prevent FOUC. Modes: 'light' | 'dark' | 'system'.
+      (function () {
+        var root = document.documentElement;
+        var pref = null;
+        try { pref = localStorage.getItem('theme'); } catch (e) {}
+        var mode = pref === 'light' || pref === 'dark' ? pref : 'system';
+        var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var isDark = mode === 'dark' || (mode === 'system' && systemDark);
+        root.classList.toggle('dark', isDark);
+        root.classList.toggle('light', !isDark);
+        root.setAttribute('data-theme-mode', mode);
+        window.__weedspotsTheme = {
+          cycle: function () {
+            var cur = root.getAttribute('data-theme-mode') || 'system';
+            var next = cur === 'system' ? 'light' : cur === 'light' ? 'dark' : 'system';
+            try {
+              if (next === 'system') localStorage.removeItem('theme');
+              else localStorage.setItem('theme', next);
+            } catch (e) {}
+            var sd = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var d = next === 'dark' || (next === 'system' && sd);
+            root.classList.toggle('dark', d);
+            root.classList.toggle('light', !d);
+            root.setAttribute('data-theme-mode', next);
+          },
+        };
+        try {
+          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+            if ((root.getAttribute('data-theme-mode') || 'system') === 'system') {
+              root.classList.toggle('dark', e.matches);
+              root.classList.toggle('light', !e.matches);
+            }
+          });
+        } catch (e) {}
+      })();
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />

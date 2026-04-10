@@ -87,7 +87,7 @@ const schemas = [
     </div>
 
     <aside class="space-y-4">
-      <div class="bg-white rounded-lg border border-ink-100 p-5">
+      <div class="bg-ink-50 rounded-lg border border-ink-100 p-5">
         <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Contact</div>
         <div class="text-ink-800">{b.formattedAddress}</div>
         {b.phone && <div class="mt-2"><a href={`tel:${b.phone}`} class="text-brand-600">{b.phone}</a></div>}
@@ -96,7 +96,7 @@ const schemas = [
       </div>
 
       {b.openingHours && b.openingHours.weekdayDescriptions.length > 0 && (
-        <div class="bg-white rounded-lg border border-ink-100 p-5">
+        <div class="bg-ink-50 rounded-lg border border-ink-100 p-5">
           <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Hours</div>
           <ul class="text-sm text-ink-700 space-y-1">
             {b.openingHours.weekdayDescriptions.map(d => <li>{d}</li>)}
