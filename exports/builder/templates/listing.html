@@ -1,0 +1,221 @@
+<section class="listing-hero">
+  <div class="container">
+    <div class="listing-header">
+      <div class="listing-header-main">
+        <h1>{{name}}</h1>
+        <div class="listing-meta-large">
+          <span class="rating-num rating-num-lg">{{rating}}</span>
+          <span class="stars stars-lg" aria-label="{{rating}} out of 5 stars">{{{starsHtml}}}</span>
+          <span class="review-count-lg">({{reviewCount}})</span>
+        </div>
+        <div class="listing-badges">
+          <span class="badge">{{categoryDisplay}}</span>
+          <a href="/dispensaries/{{citySlug}}/" class="badge badge-city">{{city}}</a>
+          {{#if isSponsored}}<span class="badge badge-sponsored-inline">Sponsored</span>{{/if}}
+        </div>
+      </div>
+      <div class="listing-header-actions">
+        {{#if phone}}
+        <a href="tel:{{phone}}" class="btn btn-primary btn-lg">
+          <span class="btn-icon">&#9742;</span> Call {{phone}}
+        </a>
+        {{/if}}
+        {{#if website}}
+        <a href="{{website}}" class="btn btn-outline btn-lg" target="_blank" rel="noopener noreferrer">Visit Website</a>
+        {{/if}}
+        {{#if googleMapsLinks.directionsUri}}
+        <a href="{{googleMapsLinks.directionsUri}}" class="btn btn-outline btn-lg" target="_blank" rel="noopener">Get Directions</a>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="listing-detail-grid">
+      <div class="listing-detail-main">
+        {{#if editorialSummary}}
+        <div class="detail-card">
+          <p class="editorial-summary">{{editorialSummary}}</p>
+        </div>
+        {{/if}}
+
+        <div class="detail-card">
+          <h2>Business Details</h2>
+          <dl class="detail-list">
+            <dt>Address</dt>
+            <dd>{{formattedAddress}}</dd>
+            {{#if neighborhood}}
+            <dt>Area</dt>
+            <dd>{{neighborhood}}{{#if city}}, {{city}}{{/if}}</dd>
+            {{/if}}
+            {{#if state}}
+            <dt>State</dt>
+            <dd>{{state}}</dd>
+            {{/if}}
+            {{#if phone}}
+            <dt>Phone</dt>
+            <dd><a href="tel:{{phone}}">{{phone}}</a></dd>
+            {{/if}}
+            {{#if internationalPhone}}
+            <dt>Int'l Phone</dt>
+            <dd><a href="tel:{{internationalPhone}}">{{internationalPhone}}</a></dd>
+            {{/if}}
+            {{#if website}}
+            <dt>Website</dt>
+            <dd><a href="{{website}}" target="_blank" rel="noopener noreferrer">{{websiteDisplay}}</a></dd>
+            {{/if}}
+            <dt>Category</dt>
+            <dd><a href="/category/{{categorySlug}}/">{{categoryDisplay}}</a></dd>
+            {{#if businessStatus}}
+            <dt>Status</dt>
+            <dd>{{businessStatusDisplay}}</dd>
+            {{/if}}
+            {{#if pureServiceAreaBusiness}}
+            <dt>Service Type</dt>
+            <dd>Mobile / Service Area Business</dd>
+            {{/if}}
+            {{#if googleMapsUri}}
+            <dt>Google Maps</dt>
+            <dd><a href="{{googleMapsUri}}" target="_blank" rel="noopener">View on Google Maps</a></dd>
+            {{/if}}
+          </dl>
+        </div>
+
+        {{#if openingHours}}
+        <div class="detail-card">
+          <h2>Opening Hours</h2>
+          <ul class="hours-list">
+            {{#each openingHours.weekdayDescriptions}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+
+        {{#if paymentItems.length}}
+        <div class="detail-card">
+          <h2>Payment Options</h2>
+          <ul class="info-tags">
+            {{#each paymentItems}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+
+        {{#if parkingItems.length}}
+        <div class="detail-card">
+          <h2>Parking</h2>
+          <ul class="info-tags">
+            {{#each parkingItems}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+
+        {{#if accessibilityItems.length}}
+        <div class="detail-card">
+          <h2>Accessibility</h2>
+          <ul class="info-tags">
+            {{#each accessibilityItems}}
+            <li>{{this}}</li>
+            {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+
+        {{#if reviews.length}}
+        <div class="detail-card">
+          <h2>Customer Reviews</h2>
+          <div class="reviews-list">
+            {{#each reviews}}
+            <div class="review-item">
+              <div class="review-header">
+                <strong class="review-author">{{author}}</strong>
+                <span class="stars stars-sm" aria-label="{{rating}} out of 5 stars">{{{starsHtml}}}</span>
+                {{#if relativeTime}}<time class="review-time">{{relativeTime}}</time>{{/if}}
+              </div>
+              {{#if text}}<p class="review-text">{{text}}</p>{{/if}}
+            </div>
+            {{/each}}
+          </div>
+          {{#if googleMapsLinks.reviewsUri}}
+          <p class="section-link"><a href="{{googleMapsLinks.reviewsUri}}" target="_blank" rel="noopener">Read all reviews on Google &rarr;</a></p>
+          {{/if}}
+        </div>
+        {{/if}}
+      </div>
+
+      <aside class="listing-detail-sidebar">
+        {{#if lat}}
+        <div class="detail-card">
+          <h3>Location</h3>
+          <div class="map-embed">
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox={{osmBbox}}&layer=mapnik&marker={{lat}}%2C{{lng}}"
+              width="100%" height="250" style="border:0" allowfullscreen loading="lazy"
+              title="Map showing location of {{name}}">
+            </iframe>
+            <p class="map-link"><a href="https://www.openstreetmap.org/?mlat={{lat}}&mlon={{lng}}#map=15/{{lat}}/{{lng}}" target="_blank" rel="noopener">View larger map</a></p>
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if googleMapsLinks.writeAReviewUri}}
+        <div class="detail-card">
+          <h3>Leave a Review</h3>
+          <p class="sidebar-text">Had a good experience? Leave a review on Google to help others.</p>
+          <a href="{{googleMapsLinks.writeAReviewUri}}" class="btn btn-primary" target="_blank" rel="noopener">Write a Review</a>
+        </div>
+        {{/if}}
+
+        <div class="detail-card">
+          <h3>Google Links</h3>
+          <ul class="sidebar-links">
+            {{#if googleMapsLinks.placeUri}}<li><a href="{{googleMapsLinks.placeUri}}" target="_blank" rel="noopener">View on Google Maps</a></li>{{/if}}
+            {{#if googleMapsLinks.reviewsUri}}<li><a href="{{googleMapsLinks.reviewsUri}}" target="_blank" rel="noopener">All {{reviewCount}} reviews on Google</a></li>{{/if}}
+            {{#if googleMapsLinks.photosUri}}<li><a href="{{googleMapsLinks.photosUri}}" target="_blank" rel="noopener">Photos on Google Maps</a></li>{{/if}}
+          </ul>
+        </div>
+
+        <div class="detail-card claim-card">
+          <h3>Is This Your Business?</h3>
+          <p>Claim this listing to request updates to your business information and get featured placement on Weedspots.io.</p>
+          <a href="mailto:hello@weedspots.io?subject=Claim%20Listing%3A%20{{encodeURIComponent name}}" class="btn btn-primary">Claim This Listing</a>
+        </div>
+
+        <div class="detail-card">
+          <h3>More Nearby Listings</h3>
+          <ul class="sidebar-links">
+            <li><a href="/dispensaries/{{citySlug}}/">All listings in {{city}}</a></li>
+            <li><a href="/top-rated/{{citySlug}}/">Top rated in {{city}}</a></li>
+            <li><a href="/category/{{categorySlug}}/">All {{categoryDisplay}}</a></li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+
+    {{#if relatedInCity.length}}
+    <div class="related-section">
+      <h2>Other {{categoryDisplay}} in {{city}}</h2>
+      <div class="listing-grid">
+        {{#each relatedInCity}}
+        <a href="/listing/{{slug}}/" class="listing-card">
+          <h3>{{name}}</h3>
+          <div class="listing-meta">
+            <span class="rating-num">{{rating}}</span>
+            <span class="stars" aria-label="{{rating}} out of 5 stars">{{{starsHtml}}}</span>
+            <span class="review-count">({{reviewCount}})</span>
+          </div>
+          <p class="listing-location">{{city}}{{#if county}}, {{county}}{{/if}}</p>
+        </a>
+        {{/each}}
+      </div>
+      <p class="section-link"><a href="/dispensaries/{{citySlug}}/{{categorySlug}}/">View all {{categoryDisplay}} in {{city}} &rarr;</a></p>
+    </div>
+    {{/if}}
+  </div>
+</section>

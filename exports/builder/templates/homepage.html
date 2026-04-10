@@ -1,0 +1,92 @@
+<section class="hero">
+  <div class="container">
+    <h1>Find Cannabis Stores, Smoke Shops &amp; Weed Services</h1>
+    <p class="hero-sub">Browse {{totalListings}} verified weed-related businesses across {{totalCities}} cities on Weedspots.io.</p>
+    <div class="hero-search-wrap">
+      <form class="hero-search" action="/search/" method="get">
+        <input type="search" name="q" id="hero-search-input" placeholder="Search by business name, city, or category..." aria-label="Search weed businesses" autocomplete="off">
+        <button type="submit">Search</button>
+      </form>
+      <div id="hero-search-results" class="hero-search-dropdown"></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Browse by Category</h2>
+    <div class="category-grid">
+      {{#each categories}}
+      <a href="/category/{{slug}}/" class="category-card">
+        <span class="category-icon">{{{icon}}}</span>
+        <h3>{{displayName}}</h3>
+        <span class="category-count">{{count}} listings</span>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2>Top Rated Weed Businesses</h2>
+    <div class="listing-grid">
+      {{#each topRated}}
+      <a href="/listing/{{slug}}/" class="listing-card{{#if isSponsored}} listing-card--sponsored{{/if}}">
+        {{#if isSponsored}}<span class="badge-sponsored">Sponsored</span>{{/if}}
+        <h3>{{name}}</h3>
+        <div class="listing-meta">
+          <span class="rating-num">{{rating}}</span>
+          <span class="stars" aria-label="{{rating}} out of 5 stars">{{{starsHtml}}}</span>
+          <span class="review-count">({{reviewCount}})</span>
+        </div>
+        <p class="listing-location">{{city}}{{#if state}}, {{state}}{{/if}}</p>
+        <span class="listing-category badge">{{categoryDisplay}}</span>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2>Browse by City</h2>
+    <div class="city-grid">
+      {{#each cities}}
+      <a href="/dispensaries/{{slug}}/" class="city-card">
+        <h3>{{name}}</h3>
+        <span class="city-count">{{count}} listings</span>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2>Recently Added</h2>
+    <div class="listing-grid">
+      {{#each recentlyAdded}}
+      <a href="/listing/{{slug}}/" class="listing-card">
+        <h3>{{name}}</h3>
+        <div class="listing-meta">
+          <span class="rating-num">{{rating}}</span>
+          <span class="stars" aria-label="{{rating}} out of 5 stars">{{{starsHtml}}}</span>
+          <span class="review-count">({{reviewCount}})</span>
+        </div>
+        <p class="listing-location">{{city}}{{#if state}}, {{state}}{{/if}}</p>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<section class="section intro-section">
+  <div class="container content-narrow">
+    <h2>About Weedspots.io</h2>
+    <p>Weedspots.io is a directory of cannabis stores, smoke shops, vaporizer stores, delivery services, and related weed businesses. Listings are sourced from Google Places and organized by city and category so you can quickly compare businesses near you.</p>
+    <p>Each listing includes ratings, reviews, opening hours, contact details, website links, and map data. Use search to find a specific business, or browse by city and category to discover top-rated weed businesses.</p>
+  </div>
+</section>
+
+<script defer src="/assets/search.js"></script>

@@ -1,0 +1,115 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Stars from '../../../../components/Stars.astro';
+import Pagination from '../../../../components/Pagination.astro';
+import { getAllData } from '../../../../lib/db';
+import { BASE_URL, LISTINGS_PER_PAGE, MIN_CITY_CATEGORY, categoryMeta, citySlug, rankSort, getSponsored, getNonSponsored, breadcrumbSchema } from '../../../../lib/utils';
+
+export async function getStaticPaths() {
+  const { businesses, cityMap } = await getAllData();
+  const paths = [];
+
+  for (const [cityName, cityBusinesses] of cityMap) {
+    const cSlug = citySlug(cityName);
+    const catCounts: Record<string, number> = {};
+    for (const b of cityBusinesses) {
+      const cat = b.category || 'Other';
+      catCounts[cat] = (catCounts[cat] || 0) + 1;
+    }
+
+    for (const dbCat of Object.keys(catCounts)) {
+      const filtered = cityBusinesses.filter(b => b.category === dbCat);
+      if (filtered.length < MIN_CITY_CATEGORY) continue;
+
+      const meta = categoryMeta(dbCat);
+      const totalPages = Math.ceil(filtered.length / LISTINGS_PER_PAGE);
+
+      for (let page = 1; page <= totalPages; page++) {
+        paths.push({
+          params: { city: cSlug, category: meta.slug, page: page === 1 ? undefined : `page/${page}` },
+          props: { cityName, dbCat, currentPage: page, totalPages },
+        });
+      }
+    }
+  }
+  return paths;
+}
+
+const { city: cityParam, category: catParam } = Astro.params;
+const { cityName, dbCat, currentPage, totalPages } = Astro.props;
+const { cityMap } = await getAllData();
+
+const cityBusinesses = cityMap.get(cityName) || [];
+const state = cityBusinesses[0]?.state || '';
+const meta = categoryMeta(dbCat);
+const filtered = cityBusinesses.filter(b => b.category === dbCat).sort(rankSort);
+const sponsored = currentPage === 1 ? getSponsored(filtered) : [];
+const nonSponsored = getNonSponsored(filtered);
+const start = (currentPage - 1) * LISTINGS_PER_PAGE;
+const pageListings = nonSponsored.slice(start, start + LISTINGS_PER_PAGE);
+const baseUrl = `/dispensaries/${cityParam}/${catParam}/`;
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: meta.display, url: `/category/${catParam}/` },
+  { name: cityName, url: `/dispensaries/${cityParam}/` },
+  { name: `${meta.display} in ${cityName}` },
+];
+---
+
+<Layout
+  title={`${meta.display} in ${cityName}${state ? `, ${state}` : ''}${currentPage > 1 ? ` | Page ${currentPage}` : ''} | Weedspots.io`}
+  metaDescription={`Browse ${filtered.length} ${meta.display.toLowerCase()} listings in ${cityName}${state ? `, ${state}` : ''}. Compare ratings, reviews, hours, and contact details.`}
+  canonicalUrl={`${BASE_URL}${currentPage === 1 ? baseUrl : `${baseUrl}page/${currentPage}/`}`}
+  schemaJson={breadcrumbSchema(breadcrumbs)}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="page-header">
+    <div class="container">
+      <h1>{meta.display} in {cityName}{state ? `, ${state}` : ''}</h1>
+      <p class="page-intro">Browse {filtered.length} listings in Google's {meta.display} category for {cityName}{state ? `, ${state}` : ''}. Compare ratings, reviews, hours, and contact details.</p>
+    </div>
+  </section>
+
+  {sponsored.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2>Featured {meta.display} in {cityName}</h2>
+        <div class="listing-grid">
+          {sponsored.map(b => (
+            <a href={`/listing/${b.slug}/`} class="listing-card listing-card--sponsored">
+              <span class="badge-sponsored">Sponsored</span>
+              <h3>{b.name}</h3>
+              <div class="listing-meta">
+                <span class="rating-num">{Number(b.rating).toFixed(1)}</span>
+                <span class="stars" aria-label={`${b.rating} out of 5 stars`}><Stars rating={b.rating} /></span>
+                <span class="review-count">({b.reviewCount})</span>
+              </div>
+              <p class="listing-location">{b.shortAddress}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container">
+      <h2>All {meta.display} in {cityName}</h2>
+      <div class="listing-grid">
+        {pageListings.map(b => (
+          <a href={`/listing/${b.slug}/`} class="listing-card">
+            <h3>{b.name}</h3>
+            <div class="listing-meta">
+              <span class="rating-num">{Number(b.rating).toFixed(1)}</span>
+              <span class="stars" aria-label={`${b.rating} out of 5 stars`}><Stars rating={b.rating} /></span>
+              <span class="review-count">({b.reviewCount})</span>
+            </div>
+            <p class="listing-location">{b.shortAddress}</p>
+          </a>
+        ))}
+      </div>
+      <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl={baseUrl} />
+    </div>
+  </section>
+</Layout>

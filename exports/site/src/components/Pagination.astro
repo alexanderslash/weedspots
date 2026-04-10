@@ -1,0 +1,61 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+}
+const { currentPage, totalPages, baseUrl } = Astro.props;
+if (totalPages <= 1) return;
+
+function pageUrl(n: number) {
+  return n === 1 ? baseUrl : `${baseUrl}page/${n}/`;
+}
+
+// Build visible page numbers with ellipsis (null = gap)
+function buildPages(current: number, total: number): (number | null)[] {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+
+  const delta = 2; // pages around current
+  const range: (number | null)[] = [];
+  const rangeSet = new Set<number>();
+
+  // Always include first, last, and window around current
+  [1, 2, total - 1, total].forEach(n => rangeSet.add(n));
+  for (let i = current - delta; i <= current + delta; i++) {
+    if (i >= 1 && i <= total) rangeSet.add(i);
+  }
+
+  const sorted = [...rangeSet].sort((a, b) => a - b);
+  let prev = 0;
+  for (const n of sorted) {
+    if (n - prev > 1) range.push(null); // gap
+    range.push(n);
+    prev = n;
+  }
+  return range;
+}
+
+const prevUrl = currentPage > 1 ? pageUrl(currentPage - 1) : null;
+const nextUrl = currentPage < totalPages ? pageUrl(currentPage + 1) : null;
+const pages = buildPages(currentPage, totalPages);
+---
+
+<nav class="pagination" aria-label="Pagination">
+  {prevUrl
+    ? <a href={prevUrl} class="page-link page-prev" rel="prev">&larr; Prev</a>
+    : <span class="page-link page-prev disabled">&larr; Prev</span>
+  }
+
+  {pages.map(p =>
+    p === null
+      ? <span class="page-link page-ellipsis">&hellip;</span>
+      : p === currentPage
+        ? <span class="page-link current" aria-current="page">{p}</span>
+        : <a href={pageUrl(p)} class="page-link">{p}</a>
+  )}
+
+  {nextUrl
+    ? <a href={nextUrl} class="page-link page-next" rel="next">Next &rarr;</a>
+    : <span class="page-link page-next disabled">Next &rarr;</span>
+  }
+</nav>

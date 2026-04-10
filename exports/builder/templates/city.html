@@ -1,0 +1,83 @@
+<section class="page-header">
+  <div class="container">
+    <h1>Weed Businesses in {{cityName}}{{#if stateName}}, {{stateName}}{{/if}}</h1>
+    <p class="page-intro">Browse {{totalListings}} weed-related businesses in {{cityName}}{{#if stateName}}, {{stateName}}{{/if}}. Compare ratings, reviews, hours, addresses, and contact details.</p>
+  </div>
+</section>
+
+{{#if sponsoredListings.length}}
+<section class="section">
+  <div class="container">
+    <h2>Featured Listings in {{cityName}}</h2>
+    <div class="listing-grid">
+      {{#each sponsoredListings}}
+      <a href="/listing/{{slug}}/" class="listing-card listing-card--sponsored">
+        <span class="badge-sponsored">Sponsored</span>
+        <h3>{{name}}</h3>
+        <div class="listing-meta">
+          <span class="rating-num">{{rating}}</span>
+          <span class="stars" aria-label="{{rating}} out of 5 stars">{{{starsHtml}}}</span>
+          <span class="review-count">({{reviewCount}})</span>
+        </div>
+        <p class="listing-location">{{shortAddress}}</p>
+        <span class="listing-category badge">{{categoryDisplay}}</span>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+{{/if}}
+
+<section class="section">
+  <div class="container">
+    <h2>Top Rated Weed Businesses in {{cityName}}</h2>
+    <div class="listing-grid">
+      {{#each top10}}
+      <a href="/listing/{{slug}}/" class="listing-card">
+        <span class="rank-badge">#{{rank}}</span>
+        <h3>{{name}}</h3>
+        <div class="listing-meta">
+          <span class="rating-num">{{rating}}</span>
+          <span class="stars" aria-label="{{rating}} out of 5 stars">{{{starsHtml}}}</span>
+          <span class="review-count">({{reviewCount}})</span>
+        </div>
+        <p class="listing-location">{{shortAddress}}</p>
+        <span class="listing-category badge">{{categoryDisplay}}</span>
+      </a>
+      {{/each}}
+    </div>
+    <p class="section-link"><a href="/top-rated/{{citySlug}}/">View full top-rated list for {{cityName}} &rarr;</a></p>
+  </div>
+</section>
+
+{{#each categoryGroups}}
+<section class="section{{#if @odd}} section-alt{{/if}}">
+  <div class="container">
+    <h2>{{displayName}} in {{../cityName}}</h2>
+    <div class="listing-grid">
+      {{#each listings}}
+      <a href="/listing/{{slug}}/" class="listing-card">
+        <h3>{{name}}</h3>
+        <div class="listing-meta">
+          <span class="rating-num">{{rating}}</span>
+          <span class="stars" aria-label="{{rating}} out of 5 stars">{{{starsHtml}}}</span>
+          <span class="review-count">({{reviewCount}})</span>
+        </div>
+        <p class="listing-location">{{shortAddress}}</p>
+      </a>
+      {{/each}}
+    </div>
+    {{#if hasMore}}
+    <p class="section-link"><a href="/dispensaries/{{../citySlug}}/{{categorySlug}}/">View all {{displayName}} in {{../cityName}} &rarr;</a></p>
+    {{/if}}
+  </div>
+</section>
+{{/each}}
+
+<section class="section intro-section">
+  <div class="container content-narrow">
+    <h2>About Weed Businesses in {{cityName}}</h2>
+    <p>This page lists {{totalListings}} weed-related businesses in {{cityName}}{{#if stateName}}, {{stateName}}{{/if}}, including cannabis stores, smoke shops, vaporizer stores, wellness businesses, and delivery services where available.</p>
+    <p>Each listing includes Google-sourced ratings, reviews, hours, contact details, and map links so you can compare businesses quickly and find the right option near you.</p>
+  </div>
+</section>

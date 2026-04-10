@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"ca1c129b090e44759b946ca10af7a34e","collectionName":"scraperuns","type":"collection"}

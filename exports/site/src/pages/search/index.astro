@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllData } from '../../lib/db';
+import { BASE_URL, categoryMeta, breadcrumbSchema } from '../../lib/utils';
+
+const { businesses, categoryCounts } = await getAllData();
+
+const categories = Object.entries(categoryCounts)
+  .map(([db, count]) => ({ ...categoryMeta(db), count }))
+  .sort((a, b) => b.count - a.count);
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Search' },
+];
+---
+
+<Layout
+  title="Search Weed Businesses | Weedspots.io"
+  metaDescription={`Search ${businesses.length} weed-related businesses on Weedspots.io by name, city, address, or Google category.`}
+  canonicalUrl={`${BASE_URL}/search/`}
+  schemaJson={breadcrumbSchema(breadcrumbs)}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="page-header">
+    <div class="container">
+      <h1>Search Weed Businesses</h1>
+      <p class="page-intro">Search {businesses.length} weed-related businesses by name, city, address, or category.</p>
+    </div>
+  </section>
+
+  <section class="section section-search">
+    <div class="container">
+      <form class="search-form" action="/search/" method="get" id="search-form">
+        <div class="search-input-wrap">
+          <input type="search" name="q" id="search-input" placeholder="Search by name, city, address, or category..." aria-label="Search weed businesses" autocomplete="off">
+          <button type="submit">Search</button>
+        </div>
+      </form>
+      <div id="search-results" class="search-results">
+        <noscript>
+          <div class="notice">
+            <p>JavaScript is required for search functionality. Please enable JavaScript in your browser, or <a href="/category/">browse by category</a> instead.</p>
+          </div>
+        </noscript>
+      </div>
+      <div id="search-status" class="search-status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Or Browse by Category</h2>
+      <div class="category-grid">
+        {categories.map(cat => (
+          <a href={`/category/${cat.slug}/`} class="category-card">
+            <span class="category-icon">{cat.icon}</span>
+            <h3>{cat.display}</h3>
+            <span class="category-count">{cat.count} listings</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <script defer src="/assets/search.js"></script>
+</Layout>

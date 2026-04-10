@@ -1,0 +1,329 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Stars from '../../components/Stars.astro';
+import { getAllData } from '../../lib/db';
+import { BASE_URL, categoryMeta, citySlug, websiteDisplay, businessStatusDisplay, rankSort, truncate, breadcrumbSchema, localBusinessSchema, faqSchema } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const { businesses } = await getAllData();
+  return businesses.map(b => ({
+    params: { slug: b.slug },
+    props: { placeId: b.placeId },
+  }));
+}
+
+const { slug } = Astro.params;
+const { placeId } = Astro.props;
+const { businesses } = await getAllData();
+const b = businesses.find(x => x.placeId === placeId)!;
+const meta = categoryMeta(b.category);
+const cSlug = citySlug(b.city || '');
+
+const reviews = [...(b.reviews || [])]
+  .sort((a: any, z: any) => {
+    const da = a.date ? new Date(a.date).getTime() : 0;
+    const dz = z.date ? new Date(z.date).getTime() : 0;
+    return dz - da;
+  })
+  .slice(0, 5);
+
+const parkingOptions = (b as any).parkingOptions || {};
+const parkingItems: string[] = [];
+if (parkingOptions.freeParkingLot) parkingItems.push('Free parking lot');
+if (parkingOptions.paidParkingLot) parkingItems.push('Paid parking lot');
+if (parkingOptions.freeStreetParking) parkingItems.push('Free street parking');
+if (parkingOptions.paidStreetParking) parkingItems.push('Paid street parking');
+if (parkingOptions.freeGarageParking) parkingItems.push('Free garage parking');
+if (parkingOptions.paidGarageParking) parkingItems.push('Paid garage parking');
+
+const accessibilityOptions = (b as any).accessibilityOptions || {};
+const accessibilityItems: string[] = [];
+if (accessibilityOptions.wheelchairAccessibleEntrance) accessibilityItems.push('Wheelchair accessible entrance');
+if (accessibilityOptions.wheelchairAccessibleParking) accessibilityItems.push('Wheelchair accessible parking');
+if (accessibilityOptions.wheelchairAccessibleRestroom) accessibilityItems.push('Wheelchair accessible restroom');
+if (accessibilityOptions.wheelchairAccessibleSeating) accessibilityItems.push('Wheelchair accessible seating');
+
+const paymentOptions = (b as any).paymentOptions || {};
+const paymentItems: string[] = [];
+if (paymentOptions.acceptsCreditCards) paymentItems.push('Credit cards');
+if (paymentOptions.acceptsDebitCards) paymentItems.push('Debit cards');
+if (paymentOptions.acceptsNfc) paymentItems.push('Contactless / NFC');
+if (paymentOptions.acceptsCashOnly) paymentItems.push('Cash only');
+
+const editorialSummary = (b as any).editorialSummary || '';
+const googleMapsLinks = b.googleMapsLinks || {};
+
+const relatedInCity = b.city
+  ? businesses.filter(x => x.placeId !== b.placeId && x.category === b.category && x.city === b.city).sort(rankSort).slice(0, 6)
+  : [];
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: meta.display, url: `/category/${meta.slug}/` },
+  ...(b.city ? [{ name: b.city, url: `/dispensaries/${cSlug}/` }] : []),
+  { name: b.name },
+];
+
+// Extract place hash (e.g. 0x89c25f98e5ad9125:0x25e7e3005b0506be) from stored Maps links
+function extractPlaceHash(links: any): string | null {
+  const url = links?.writeAReviewUri || links?.reviewsUri || links?.photosUri || '';
+  const m = url.match(/!1s(0x[0-9a-f]+:0x[0-9a-f]+)/i);
+  return m ? m[1] : null;
+}
+const placeHash = extractPlaceHash(googleMapsLinks);
+const googleMapsEmbedUrl = (placeHash && b.lat && b.lng)
+  ? `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d${b.lng}!3d${b.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s${encodeURIComponent(placeHash)}!2s${encodeURIComponent(b.name)}!5e0!3m2!1sen!2sus!4v${Date.now()}!5m2!1sen!2sus`
+  : null;
+const claimSubject = encodeURIComponent(`Claim Listing: ${b.name}`);
+const seoDescription   = b.seoDescription || '';
+const reviewHighlights = b.reviewHighlights || [];
+const faqs             = b.faqs || [];
+---
+
+<Layout
+  title={`${b.name} | ${meta.display}${b.city ? ` in ${b.city}` : ''} | Weedspots.io`}
+  metaDescription={`${b.name}${b.city ? ` in ${b.city}${b.state ? `, ${b.state}` : ''}` : ''}. ${b.rating ? `Rated ${Number(b.rating).toFixed(1)}/5 from ${b.reviewCount} reviews.` : ''} Address, hours, reviews, and contact details on Weedspots.io.`}
+  canonicalUrl={`${BASE_URL}/listing/${b.slug}/`}
+  schemaJson={[breadcrumbSchema(breadcrumbs), localBusinessSchema(b), ...(faqs.length > 0 ? [faqSchema(faqs)] : [])]}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="listing-hero">
+    <div class="container">
+      <div class="listing-header">
+        <div class="listing-header-main">
+          <h1>{b.name}</h1>
+          <div class="listing-meta-large">
+            <span class="rating-num rating-num-lg">{Number(b.rating).toFixed(1)}</span>
+            <span class="stars stars-lg" aria-label={`${b.rating} out of 5 stars`}><Stars rating={b.rating} /></span>
+            <span class="review-count-lg">({b.reviewCount})</span>
+          </div>
+          <div class="listing-badges">
+            <span class="badge">{meta.display}</span>
+            {b.city && <a href={`/dispensaries/${cSlug}/`} class="badge badge-city">{b.city}</a>}
+            {b.isSponsored && <span class="badge badge-sponsored-inline">Sponsored</span>}
+          </div>
+        </div>
+        <div class="listing-header-actions">
+          {b.phone && (
+            <a href={`tel:${b.phone}`} class="btn btn-primary btn-lg">
+              <span class="btn-icon">&#9742;</span> Call {b.phone}
+            </a>
+          )}
+          {b.website && (
+            <a href={b.website} class="btn btn-outline btn-lg" target="_blank" rel="noopener noreferrer">Visit Website</a>
+          )}
+          {(googleMapsLinks as any).directionsUri && (
+            <a href={(googleMapsLinks as any).directionsUri} class="btn btn-outline btn-lg" target="_blank" rel="noopener">Get Directions</a>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="listing-detail-grid">
+        <div class="listing-detail-main">
+          {seoDescription && (
+            <div class="detail-card">
+              <h2>About {b.name}</h2>
+              <p class="seo-description">{seoDescription}</p>
+              {reviewHighlights.length > 0 && (
+                <div class="review-highlights">
+                  <span class="highlights-label">Customers mention:</span>
+                  <ul class="highlights-list">
+                    {reviewHighlights.map((h: string) => <li>{h}</li>)}
+                  </ul>
+                </div>
+              )}
+            </div>
+          )}
+
+          {!seoDescription && editorialSummary && (
+            <div class="detail-card">
+              <p class="editorial-summary">{editorialSummary}</p>
+            </div>
+          )}
+
+          <div class="detail-card">
+            <h2>Business Details</h2>
+            <dl class="detail-list">
+              <dt>Address</dt>
+              <dd>{b.formattedAddress}</dd>
+              {b.neighborhood && (
+                <>
+                  <dt>Area</dt>
+                  <dd>{b.neighborhood}{b.city ? `, ${b.city}` : ''}</dd>
+                </>
+              )}
+              {b.state && <><dt>State</dt><dd>{b.state}</dd></>}
+              {b.phone && <><dt>Phone</dt><dd><a href={`tel:${b.phone}`}>{b.phone}</a></dd></>}
+              {b.internationalPhone && <><dt>Int'l Phone</dt><dd><a href={`tel:${b.internationalPhone}`}>{b.internationalPhone}</a></dd></>}
+              {b.website && <><dt>Website</dt><dd><a href={b.website} target="_blank" rel="noopener noreferrer">{websiteDisplay(b.website)}</a></dd></>}
+              <dt>Category</dt>
+              <dd><a href={`/category/${meta.slug}/`}>{meta.display}</a></dd>
+              {(b as any).additionalGoogleCategories?.length > 0 && (
+                <>
+                  <dt>Also listed as</dt>
+                  <dd>{(b as any).additionalGoogleCategories.join(', ')}</dd>
+                </>
+              )}
+              {b.businessStatus && <><dt>Status</dt><dd>{businessStatusDisplay(b.businessStatus)}</dd></>}
+              {b.pureServiceAreaBusiness && <><dt>Service Type</dt><dd>Mobile / Service Area Business</dd></>}
+              {b.googleMapsUri && <><dt>Google Maps</dt><dd><a href={b.googleMapsUri} target="_blank" rel="noopener">View on Google Maps</a></dd></>}
+            </dl>
+          </div>
+
+          {b.openingHours && b.openingHours.weekdayDescriptions?.length > 0 && (
+            <div class="detail-card">
+              <h2>Opening Hours</h2>
+              <ul class="hours-list">
+                {b.openingHours.weekdayDescriptions.map((d: string) => {
+                const colonIdx = d.indexOf(':');
+                const day = colonIdx !== -1 ? d.slice(0, colonIdx) : d;
+                const hours = colonIdx !== -1 ? d.slice(colonIdx + 1).trim() : '';
+                return <li><span class="hours-day">{day}</span><span class="hours-time">{hours}</span></li>;
+              })}
+              </ul>
+            </div>
+          )}
+
+          {(paymentItems.length > 0 || parkingItems.length > 0 || accessibilityItems.length > 0) && (
+            <div class="detail-card">
+              <h2>Amenities</h2>
+              <div class="amenities-grid">
+                {paymentItems.length > 0 && (
+                  <div class="amenity-group">
+                    <span class="amenity-label">Payment</span>
+                    <ul class="info-tags">{paymentItems.map(p => <li>{p}</li>)}</ul>
+                  </div>
+                )}
+                {parkingItems.length > 0 && (
+                  <div class="amenity-group">
+                    <span class="amenity-label">Parking</span>
+                    <ul class="info-tags">{parkingItems.map(p => <li>{p}</li>)}</ul>
+                  </div>
+                )}
+                {accessibilityItems.length > 0 && (
+                  <div class="amenity-group">
+                    <span class="amenity-label">Accessibility</span>
+                    <ul class="info-tags">{accessibilityItems.map(p => <li>{p}</li>)}</ul>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {reviews.length > 0 && (
+            <div class="detail-card">
+              <h2>Customer Reviews</h2>
+              <div class="reviews-list">
+                {reviews.map((r: any) => (
+                  <div class="review-item">
+                    <div class="review-header">
+                      <strong class="review-author">{r.author}</strong>
+                      <span class="stars stars-sm" aria-label={`${r.rating} out of 5 stars`}><Stars rating={r.rating} /></span>
+                      {r.relativeTime && <time class="review-time">{r.relativeTime}</time>}
+                    </div>
+                    {r.text && <p class="review-text">{r.text}</p>}
+                  </div>
+                ))}
+              </div>
+              {(googleMapsLinks as any).reviewsUri && (
+                <p class="section-link">
+                  <a href={(googleMapsLinks as any).reviewsUri} target="_blank" rel="noopener">Read all reviews on Google &rarr;</a>
+                </p>
+              )}
+            </div>
+          )}
+          {faqs.length > 0 && (
+            <div class="detail-card">
+              <h2>Frequently Asked Questions</h2>
+              <dl class="faq-list">
+                {faqs.map((f: { q: string; a: string }) => (
+                  <>
+                    <dt>{f.q}</dt>
+                    <dd>{f.a}</dd>
+                  </>
+                ))}
+              </dl>
+            </div>
+          )}
+        </div>
+
+        <aside class="listing-detail-sidebar">
+          {googleMapsEmbedUrl && (
+            <div class="detail-card">
+              <h3>Location</h3>
+              <div class="map-embed">
+                <iframe
+                  src={googleMapsEmbedUrl}
+                  width="100%" height="300" style="border:0;" allowfullscreen loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  title={`Map showing location of ${b.name}`}
+                ></iframe>
+                <p class="map-link">
+                  <a href={b.googleMapsUri || (googleMapsLinks as any).placeUri || '#'} target="_blank" rel="noopener">View larger map</a>
+                </p>
+              </div>
+            </div>
+          )}
+
+          {(googleMapsLinks as any).writeAReviewUri && (
+            <div class="detail-card">
+              <h3>Leave a Review</h3>
+              <p class="sidebar-text">Had a good experience? Leave a review on Google to help others.</p>
+              <a href={(googleMapsLinks as any).writeAReviewUri} class="btn btn-primary" target="_blank" rel="noopener">Write a Review</a>
+            </div>
+          )}
+
+          <div class="detail-card">
+            <h3>Google Links</h3>
+            <ul class="sidebar-links">
+              {(googleMapsLinks as any).placeUri && <li><a href={(googleMapsLinks as any).placeUri} target="_blank" rel="noopener">View on Google Maps</a></li>}
+              {(googleMapsLinks as any).reviewsUri && <li><a href={(googleMapsLinks as any).reviewsUri} target="_blank" rel="noopener">All {b.reviewCount} reviews on Google</a></li>}
+              {(googleMapsLinks as any).photosUri && <li><a href={(googleMapsLinks as any).photosUri} target="_blank" rel="noopener">Photos on Google Maps</a></li>}
+            </ul>
+          </div>
+
+          <div class="detail-card claim-card">
+            <h3>Is This Your Business?</h3>
+            <p>Claim this listing to request updates to your business information and get featured placement on Weedspots.io.</p>
+            <a href={`mailto:hello@weedspots.io?subject=${claimSubject}`} class="btn btn-primary">Claim This Listing</a>
+          </div>
+
+          <div class="detail-card">
+            <h3>More Nearby Listings</h3>
+            <ul class="sidebar-links">
+              {b.city && <li><a href={`/dispensaries/${cSlug}/`}>All listings in {b.city}</a></li>}
+              {b.city && <li><a href={`/top-rated/${cSlug}/`}>Top rated in {b.city}</a></li>}
+              <li><a href={`/category/${meta.slug}/`}>All {meta.display}</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+
+      {relatedInCity.length > 0 && (
+        <div class="related-section">
+          <h2>Other {meta.display} in {b.city}</h2>
+          <div class="listing-grid">
+            {relatedInCity.map(r => (
+              <a href={`/listing/${r.slug}/`} class="listing-card">
+                <h3>{r.name}</h3>
+                <div class="listing-meta">
+                  <span class="rating-num">{Number(r.rating).toFixed(1)}</span>
+                  <span class="stars" aria-label={`${r.rating} out of 5 stars`}><Stars rating={r.rating} /></span>
+                  <span class="review-count">({r.reviewCount})</span>
+                </div>
+                <p class="listing-location">{r.city}{r.county ? `, ${r.county}` : ''}</p>
+              </a>
+            ))}
+          </div>
+          <p class="section-link">
+            <a href={`/dispensaries/${cSlug}/${meta.slug}/`}>View all {meta.display} in {b.city} &rarr;</a>
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>

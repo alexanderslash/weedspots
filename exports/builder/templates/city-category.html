@@ -1,0 +1,65 @@
+<section class="page-header">
+  <div class="container">
+    <h1>{{categoryDisplayName}} in {{cityName}}{{#if stateName}}, {{stateName}}{{/if}}</h1>
+    <p class="page-intro">Browse {{totalListings}} listings in Google's {{categoryDisplayName}} category for {{cityName}}{{#if stateName}}, {{stateName}}{{/if}}. Compare ratings, reviews, hours, and contact details.</p>
+  </div>
+</section>
+
+{{#if sponsoredListings.length}}
+<section class="section">
+  <div class="container">
+    <h2>Featured {{categoryDisplayName}} in {{cityName}}</h2>
+    <div class="listing-grid">
+      {{#each sponsoredListings}}
+      <a href="/listing/{{slug}}/" class="listing-card listing-card--sponsored">
+        <span class="badge-sponsored">Sponsored</span>
+        <h3>{{name}}</h3>
+        <div class="listing-meta">
+          <span class="rating-num">{{rating}}</span>
+          <span class="stars" aria-label="{{rating}} out of 5 stars">{{{starsHtml}}}</span>
+          <span class="review-count">({{reviewCount}})</span>
+        </div>
+        <p class="listing-location">{{shortAddress}}</p>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+{{/if}}
+
+<section class="section">
+  <div class="container">
+    <h2>All {{categoryDisplayName}} in {{cityName}}</h2>
+    <div class="listing-grid">
+      {{#each listings}}
+      <a href="/listing/{{slug}}/" class="listing-card">
+        <h3>{{name}}</h3>
+        <div class="listing-meta">
+          <span class="rating-num">{{rating}}</span>
+          <span class="stars" aria-label="{{rating}} out of 5 stars">{{{starsHtml}}}</span>
+          <span class="review-count">({{reviewCount}})</span>
+        </div>
+        <p class="listing-location">{{shortAddress}}</p>
+      </a>
+      {{/each}}
+    </div>
+
+    {{#if hasPagination}}
+    <nav class="pagination" aria-label="Pagination">
+      {{#if prevPage}}
+      <a href="{{prevPage}}" class="pagination-link">&larr; Previous</a>
+      {{/if}}
+      {{#each pages}}
+      {{#if isCurrent}}
+      <span class="pagination-link pagination-current" aria-current="page">{{num}}</span>
+      {{else}}
+      <a href="{{url}}" class="pagination-link">{{num}}</a>
+      {{/if}}
+      {{/each}}
+      {{#if nextPage}}
+      <a href="{{nextPage}}" class="pagination-link">Next &rarr;</a>
+      {{/if}}
+    </nav>
+    {{/if}}
+  </div>
+</section>

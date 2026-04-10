@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getAllData } from '../../lib/db';
+import { BASE_URL, categoryMeta, breadcrumbSchema } from '../../lib/utils';
+
+const { categoryCounts } = await getAllData();
+
+const categories = Object.entries(categoryCounts)
+  .map(([db, count]) => ({ ...categoryMeta(db), count }))
+  .sort((a, b) => b.count - a.count);
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Categories' },
+];
+---
+
+<Layout
+  title="All Weed Business Categories | Weedspots.io"
+  metaDescription="Browse all Google business categories currently listed on Weedspots.io, including cannabis stores, smoke shops, vaporizer stores, delivery services, and more."
+  canonicalUrl={`${BASE_URL}/category/`}
+  schemaJson={breadcrumbSchema(breadcrumbs)}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="page-header">
+    <div class="container">
+      <h1>All Categories</h1>
+      <p class="page-intro">Browse all Google business categories currently listed on Weedspots.io.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="category-grid">
+        {categories.map(cat => (
+          <a href={`/category/${cat.slug}/`} class="category-card">
+            <span class="category-icon">{cat.icon}</span>
+            <h3>{cat.display}</h3>
+            <span class="category-count">{cat.count} listings</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

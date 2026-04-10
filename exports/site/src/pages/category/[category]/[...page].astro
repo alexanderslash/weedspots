@@ -1,0 +1,113 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Stars from '../../../components/Stars.astro';
+import Pagination from '../../../components/Pagination.astro';
+import { getAllData } from '../../../lib/db';
+import { BASE_URL, LISTINGS_PER_PAGE, categoryMeta, categorySlug, rankSort, getSponsored, getNonSponsored, breadcrumbSchema } from '../../../lib/utils';
+
+export async function getStaticPaths() {
+  const { businesses, categoryCounts } = await getAllData();
+  const paths = [];
+
+  for (const dbCat of Object.keys(categoryCounts)) {
+    const meta = categoryMeta(dbCat);
+    const catBusinesses = businesses.filter(b => b.category === dbCat).sort(rankSort);
+    if (!catBusinesses.length) continue;
+    const totalPages = Math.ceil(catBusinesses.length / LISTINGS_PER_PAGE);
+
+    for (let page = 1; page <= totalPages; page++) {
+      paths.push({
+        params: { category: meta.slug, page: page === 1 ? undefined : `page/${page}` },
+        props: { dbCat, currentPage: page, totalPages },
+      });
+    }
+  }
+  return paths;
+}
+
+const { category: catParam } = Astro.params;
+const { dbCat, currentPage, totalPages } = Astro.props;
+const { businesses } = await getAllData();
+
+const meta = categoryMeta(dbCat);
+const catBusinesses = businesses.filter(b => b.category === dbCat).sort(rankSort);
+const sponsored = currentPage === 1 ? getSponsored(catBusinesses) : [];
+const nonSponsored = getNonSponsored(catBusinesses);
+const start = (currentPage - 1) * LISTINGS_PER_PAGE;
+const pageListings = nonSponsored.slice(start, start + LISTINGS_PER_PAGE);
+const baseUrl = `/category/${catParam}/`;
+
+const geoLabel = [...new Set(catBusinesses.map(b => b.state).filter(Boolean))].join(', ') || 'the directory';
+const description = `Browse ${catBusinesses.length} businesses labeled by Google as ${meta.display} on Weedspots.io in ${geoLabel}. Compare ratings, reviews, hours, addresses, and map links.`;
+const longDescription = `${meta.display} is one of the live business categories captured from Google Places data in Weedspots.io. This page currently includes ${catBusinesses.length} listings in ${geoLabel}, with business details such as ratings, reviews, opening hours, contact information, and map links.`;
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Categories', url: '/category/' },
+  { name: meta.display },
+];
+---
+
+<Layout
+  title={`${meta.display}${currentPage > 1 ? ` | Page ${currentPage}` : ''} | Weedspots.io`}
+  metaDescription={`${description}${currentPage > 1 ? ` Page ${currentPage}.` : ''}`}
+  canonicalUrl={`${BASE_URL}${currentPage === 1 ? baseUrl : `${baseUrl}page/${currentPage}/`}`}
+  schemaJson={breadcrumbSchema(breadcrumbs)}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="page-header">
+    <div class="container">
+      <h1>{meta.display}</h1>
+      <p class="page-intro">{description}</p>
+    </div>
+  </section>
+
+  {sponsored.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2>Featured {meta.display}</h2>
+        <div class="listing-grid">
+          {sponsored.map(b => (
+            <a href={`/listing/${b.slug}/`} class="listing-card listing-card--sponsored">
+              <span class="badge-sponsored">Sponsored</span>
+              <h3>{b.name}</h3>
+              <div class="listing-meta">
+                <span class="rating-num">{Number(b.rating).toFixed(1)}</span>
+                <span class="stars" aria-label={`${b.rating} out of 5 stars`}><Stars rating={b.rating} /></span>
+                <span class="review-count">({b.reviewCount})</span>
+              </div>
+              <p class="listing-location">{b.city}{b.state ? `, ${b.state}` : ''}</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container">
+      <h2>All {meta.display} (Page {currentPage} of {totalPages})</h2>
+      <div class="listing-grid">
+        {pageListings.map(b => (
+          <a href={`/listing/${b.slug}/`} class="listing-card">
+            <h3>{b.name}</h3>
+            <div class="listing-meta">
+              <span class="rating-num">{Number(b.rating).toFixed(1)}</span>
+              <span class="stars" aria-label={`${b.rating} out of 5 stars`}><Stars rating={b.rating} /></span>
+              <span class="review-count">({b.reviewCount})</span>
+            </div>
+            <p class="listing-location">{b.city}{b.state ? `, ${b.state}` : ''}</p>
+          </a>
+        ))}
+      </div>
+      <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl={baseUrl} />
+    </div>
+  </section>
+
+  <section class="section intro-section">
+    <div class="container content-narrow">
+      <h2>About {meta.display}</h2>
+      <p>{longDescription}</p>
+    </div>
+  </section>
+</Layout>

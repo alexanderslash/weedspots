@@ -1,0 +1,140 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Stars from '../../../components/Stars.astro';
+import Pagination from '../../../components/Pagination.astro';
+import { getAllData } from '../../../lib/db';
+import { BASE_URL, categoryMeta, citySlug, rankSort, getSponsored, breadcrumbSchema } from '../../../lib/utils';
+
+export async function getStaticPaths() {
+  const { cityMap } = await getAllData();
+  return [...cityMap.keys()].map(city => ({
+    params: { city: citySlug(city) },
+    props: { cityName: city },
+  }));
+}
+
+const { city: cityParam } = Astro.params;
+const { cityName } = Astro.props;
+const { businesses, cityMap } = await getAllData();
+const cityBusinesses = cityMap.get(cityName) || [];
+const state = cityBusinesses[0]?.state || '';
+
+const sorted = [...cityBusinesses].sort(rankSort);
+const sponsored = getSponsored(sorted);
+const sponsoredIds = new Set(sponsored.map(b => b.placeId));
+const top10 = sorted.filter(b => !sponsoredIds.has(b.placeId)).slice(0, 10).map((b, i) => ({ ...b, rank: i + 1 }));
+
+const catGroupMap: Record<string, any[]> = {};
+for (const b of sorted) {
+  const cat = b.category || 'Other';
+  if (!catGroupMap[cat]) catGroupMap[cat] = [];
+  catGroupMap[cat].push(b);
+}
+const categoryGroups = Object.entries(catGroupMap).map(([cat, listings]) => {
+  const meta = categoryMeta(cat);
+  return { meta, listings: listings.slice(0, 6), hasMore: listings.length > 6 };
+});
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: cityName },
+];
+---
+
+<Layout
+  title={`${cityName}${state ? `, ${state}` : ''} Cannabis Stores, Smoke Shops & Weed Services | Weedspots.io`}
+  metaDescription={`Browse ${cityBusinesses.length} weed-related businesses in ${cityName}${state ? `, ${state}` : ''}. Compare ratings, reviews, hours, and contact details.`}
+  canonicalUrl={`${BASE_URL}/dispensaries/${cityParam}/`}
+  schemaJson={breadcrumbSchema(breadcrumbs)}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="page-header">
+    <div class="container">
+      <h1>Weed Businesses in {cityName}{state ? `, ${state}` : ''}</h1>
+      <p class="page-intro">Browse {cityBusinesses.length} weed-related businesses in {cityName}{state ? `, ${state}` : ''}. Compare ratings, reviews, hours, addresses, and contact details.</p>
+    </div>
+  </section>
+
+  {sponsored.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2>Featured Listings in {cityName}</h2>
+        <div class="listing-grid">
+          {sponsored.map(b => {
+            const meta = categoryMeta(b.category);
+            return (
+              <a href={`/listing/${b.slug}/`} class="listing-card listing-card--sponsored">
+                <span class="badge-sponsored">Sponsored</span>
+                <h3>{b.name}</h3>
+                <div class="listing-meta">
+                  <span class="rating-num">{Number(b.rating).toFixed(1)}</span>
+                  <span class="stars" aria-label={`${b.rating} out of 5 stars`}><Stars rating={b.rating} /></span>
+                  <span class="review-count">({b.reviewCount})</span>
+                </div>
+                <p class="listing-location">{b.shortAddress}</p>
+                <span class="listing-category badge">{meta.display}</span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="container">
+      <h2>Top Rated Weed Businesses in {cityName}</h2>
+      <div class="listing-grid">
+        {top10.map(b => {
+          const meta = categoryMeta(b.category);
+          return (
+            <a href={`/listing/${b.slug}/`} class="listing-card">
+              <span class="rank-badge">#{b.rank}</span>
+              <h3>{b.name}</h3>
+              <div class="listing-meta">
+                <span class="rating-num">{Number(b.rating).toFixed(1)}</span>
+                <span class="stars" aria-label={`${b.rating} out of 5 stars`}><Stars rating={b.rating} /></span>
+                <span class="review-count">({b.reviewCount})</span>
+              </div>
+              <p class="listing-location">{b.shortAddress}</p>
+              <span class="listing-category badge">{meta.display}</span>
+            </a>
+          );
+        })}
+      </div>
+      <p class="section-link"><a href={`/top-rated/${cityParam}/`}>View full top-rated list for {cityName} &rarr;</a></p>
+    </div>
+  </section>
+
+  {categoryGroups.map((group, idx) => (
+    <section class={`section${idx % 2 === 1 ? ' section-alt' : ''}`}>
+      <div class="container">
+        <h2>{group.meta.display} in {cityName}</h2>
+        <div class="listing-grid">
+          {group.listings.map(b => (
+            <a href={`/listing/${b.slug}/`} class="listing-card">
+              <h3>{b.name}</h3>
+              <div class="listing-meta">
+                <span class="rating-num">{Number(b.rating).toFixed(1)}</span>
+                <span class="stars" aria-label={`${b.rating} out of 5 stars`}><Stars rating={b.rating} /></span>
+                <span class="review-count">({b.reviewCount})</span>
+              </div>
+              <p class="listing-location">{b.shortAddress}</p>
+            </a>
+          ))}
+        </div>
+        {group.hasMore && (
+          <p class="section-link"><a href={`/dispensaries/${cityParam}/${group.meta.slug}/`}>View all {group.meta.display} in {cityName} &rarr;</a></p>
+        )}
+      </div>
+    </section>
+  ))}
+
+  <section class="section intro-section">
+    <div class="container content-narrow">
+      <h2>About Weed Businesses in {cityName}</h2>
+      <p>This page lists {cityBusinesses.length} weed-related businesses in {cityName}{state ? `, ${state}` : ''}, including cannabis stores, smoke shops, vaporizer stores, wellness businesses, and delivery services where available.</p>
+      <p>Each listing includes Google-sourced ratings, reviews, hours, contact details, and map links so you can compare businesses quickly and find the right option near you.</p>
+    </div>
+  </section>
+</Layout>

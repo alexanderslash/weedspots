@@ -1,0 +1,12 @@
+---
+interface Props { rating: number; }
+const { rating } = Astro.props;
+const r = rating || 0;
+const full = Math.floor(r);
+const partial = r - full;
+const empty = 5 - full - (partial > 0 ? 1 : 0);
+const pct = Math.round(partial * 100);
+---
+{Array.from({ length: full }).map(() => <span class="star-full">&#9733;</span>)}
+{partial > 0 && <span class="star-partial" style={`--fill:${pct}%`}>&#9733;</span>}
+{Array.from({ length: empty }).map(() => <span class="star-empty">&#9733;</span>)}

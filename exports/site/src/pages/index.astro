@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Stars from '../components/Stars.astro';
+import { getAllData } from '../lib/db';
+import { BASE_URL, categoryMeta, citySlug, rankSort } from '../lib/utils';
+
+const { businesses, cityMap, categoryCounts } = await getAllData();
+
+const topRated = businesses
+  .filter(b => b.rating >= 4 && b.reviewCount >= 3)
+  .sort(rankSort)
+  .slice(0, 12);
+
+const recentlyAdded = [...businesses]
+  .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+  .slice(0, 8);
+
+const categories = Object.entries(categoryCounts)
+  .map(([db, count]) => ({ ...categoryMeta(db), count }))
+  .sort((a, b) => b.count - a.count);
+
+const cities = [...cityMap.entries()]
+  .map(([name, list]) => ({ name, slug: citySlug(name), count: list.length }))
+  .sort((a, b) => b.count - a.count);
+---
+
+<Layout
+  title="Weedspots.io | Find Cannabis Stores, Smoke Shops & Weed Services"
+  metaDescription={`Browse ${businesses.length} weed-related businesses across ${cities.length} cities on Weedspots.io. Ratings, reviews, store types, hours, and contact details sourced from Google.`}
+  canonicalUrl={`${BASE_URL}/`}
+>
+  <section class="hero">
+    <div class="container">
+      <h1>Find Cannabis Stores, Smoke Shops &amp; Weed Services</h1>
+      <p class="hero-sub">Browse {businesses.length} verified weed-related businesses across {cities.length} cities on Weedspots.io.</p>
+      <div class="hero-search-wrap">
+        <form class="hero-search" action="/search/" method="get">
+          <input type="search" name="q" id="hero-search-input" placeholder="Search by business name, city, or category..." aria-label="Search weed businesses" autocomplete="off">
+          <button type="submit">Search</button>
+        </form>
+        <div id="hero-search-results" class="hero-search-dropdown"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Browse by Category</h2>
+      <div class="category-grid">
+        {categories.map(cat => (
+          <a href={`/category/${cat.slug}/`} class="category-card">
+            <span class="category-icon">{cat.icon}</span>
+            <h3>{cat.display}</h3>
+            <span class="category-count">{cat.count} listings</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Top Rated Weed Businesses</h2>
+      <div class="listing-grid">
+        {topRated.map(b => {
+          const meta = categoryMeta(b.category);
+          return (
+            <a href={`/listing/${b.slug}/`} class={`listing-card${b.isSponsored ? ' listing-card--sponsored' : ''}`}>
+              {b.isSponsored && <span class="badge-sponsored">Sponsored</span>}
+              <h3>{b.name}</h3>
+              <div class="listing-meta">
+                <span class="rating-num">{Number(b.rating).toFixed(1)}</span>
+                <span class="stars" aria-label={`${b.rating} out of 5 stars`}><Stars rating={b.rating} /></span>
+                <span class="review-count">({b.reviewCount})</span>
+              </div>
+              <p class="listing-location">{b.city}{b.state ? `, ${b.state}` : ''}</p>
+              <span class="listing-category badge">{meta.display}</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2>Browse by City</h2>
+      <div class="city-grid">
+        {cities.map(city => (
+          <a href={`/dispensaries/${city.slug}/`} class="city-card">
+            <h3>{city.name}</h3>
+            <span class="city-count">{city.count} listings</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <h2>Recently Added</h2>
+      <div class="listing-grid">
+        {recentlyAdded.map(b => (
+          <a href={`/listing/${b.slug}/`} class="listing-card">
+            <h3>{b.name}</h3>
+            <div class="listing-meta">
+              <span class="rating-num">{Number(b.rating).toFixed(1)}</span>
+              <span class="stars" aria-label={`${b.rating} out of 5 stars`}><Stars rating={b.rating} /></span>
+              <span class="review-count">({b.reviewCount})</span>
+            </div>
+            <p class="listing-location">{b.city}{b.state ? `, ${b.state}` : ''}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section intro-section">
+    <div class="container content-narrow">
+      <h2>About Weedspots.io</h2>
+      <p>Weedspots.io is a directory of cannabis stores, smoke shops, vaporizer stores, delivery services, and related weed businesses. Listings are sourced from Google Places and organized by city and category so you can quickly compare businesses near you.</p>
+      <p>Each listing includes ratings, reviews, opening hours, contact details, website links, and map data. Use search to find a specific business, or browse by city and category to discover top-rated weed businesses.</p>
+    </div>
+  </section>
+
+  <script defer src="/assets/search.js"></script>
+</Layout>

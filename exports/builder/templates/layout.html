@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <meta name="description" content="{{metaDescription}}">
+  <link rel="canonical" href="{{canonicalUrl}}">
+  <link rel="alternate" hreflang="en-US" href="{{canonicalUrl}}">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{metaDescription}}">
+  <meta property="og:url" content="{{canonicalUrl}}">
+  <meta property="og:image" content="{{baseUrl}}/assets/og-default.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="Weedspots.io">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/assets/style.min.css">
+  {{#if schemaMarkup}}{{{schemaMarkup}}}{{/if}}
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <img src="/assets/logo.png" alt="Weedspots.io" class="logo-img" width="151" height="86">
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/dispensaries/new-york/">New York</a></li>
+          <li><a href="/dispensaries/buffalo/">Buffalo</a></li>
+          <li><a href="/dispensaries/albany/">Albany</a></li>
+          <li><a href="/category/">Categories</a></li>
+          <li><a href="/search/">Search</a></li>
+        </ul>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  {{#if breadcrumbs}}
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <div class="container">
+      <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+        {{#each breadcrumbs}}
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+          {{#if @last}}
+          <span itemprop="name">{{name}}</span>
+          {{else}}
+          <a itemprop="item" href="{{url}}"><span itemprop="name">{{name}}</span></a>
+          {{/if}}
+          <meta itemprop="position" content="{{position}}">
+        </li>
+        {{/each}}
+      </ol>
+    </div>
+  </nav>
+  {{/if}}
+
+  <main id="main-content">
+    {{{body}}}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Weedspots.io</h3>
+          <p>A directory of cannabis stores, smoke shops, delivery services, and other weed-related businesses sourced from Google Places data.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Popular Cities</h4>
+          <ul>
+            <li><a href="/dispensaries/new-york/">New York</a></li>
+            <li><a href="/dispensaries/buffalo/">Buffalo</a></li>
+            <li><a href="/dispensaries/rochester/">Rochester</a></li>
+            <li><a href="/dispensaries/albany/">Albany</a></li>
+            <li><a href="/dispensaries/syracuse/">Syracuse</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Categories</h4>
+          <ul>
+            <li><a href="/category/cannabis-store/">Cannabis store</a></li>
+            <li><a href="/category/tobacco-shop/">Tobacco Shop</a></li>
+            <li><a href="/category/smoke-shop/">Smoke shop</a></li>
+            <li><a href="/category/vaporizer-store/">Vaporizer Store</a></li>
+            <li><a href="/category/">All Categories</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="/search/">Search</a></li>
+            <li><a href="/sitemap-index.xml">Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; {{year}} Weedspots.io. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script defer>
+  (function(){
+    var t=document.querySelector('.nav-toggle'),n=document.querySelector('.main-nav');
+    if(t&&n){t.addEventListener('click',function(){
+      var x=t.getAttribute('aria-expanded')==='true';
+      t.setAttribute('aria-expanded',!x);n.classList.toggle('open');
+    });}
+  })();
+  </script>
+</body>
+</html>

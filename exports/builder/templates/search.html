@@ -1,0 +1,44 @@
+<section class="page-header">
+  <div class="container">
+    <h1>Search Weed Businesses</h1>
+    <p class="page-intro">Search {{totalListings}} weed-related businesses by name, city, address, or category.</p>
+  </div>
+</section>
+
+<section class="section section-search">
+  <div class="container">
+    <form class="search-form" action="/search/" method="get" id="search-form">
+      <div class="search-input-wrap">
+        <input type="search" name="q" id="search-input" placeholder="Search by name, city, address, or category..." aria-label="Search weed businesses" autocomplete="off">
+        <button type="submit">Search</button>
+      </div>
+    </form>
+
+    <div id="search-results" class="search-results">
+      <noscript>
+        <div class="notice">
+          <p>JavaScript is required for search functionality. Please enable JavaScript in your browser, or <a href="/category/">browse by category</a> instead.</p>
+        </div>
+      </noscript>
+    </div>
+
+    <div id="search-status" class="search-status" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <h2>Or Browse by Category</h2>
+    <div class="category-grid">
+      {{#each categories}}
+      <a href="/category/{{slug}}/" class="category-card">
+        <span class="category-icon">{{{icon}}}</span>
+        <h3>{{displayName}}</h3>
+        <span class="category-count">{{count}} listings</span>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+
+<script defer src="/assets/search.js"></script>

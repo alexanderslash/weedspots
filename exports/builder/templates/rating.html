@@ -1,0 +1,43 @@
+<section class="page-header">
+  <div class="container">
+    <h1>{{starCount}}-Star Weed Businesses</h1>
+    <p class="page-intro">Browse {{totalListings}} weed-related businesses with a {{starCount}}-star rating or higher, sorted by review count.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="listing-grid">
+      {{#each listings}}
+      <a href="/listing/{{slug}}/" class="listing-card">
+        <h3>{{name}}</h3>
+        <div class="listing-meta">
+          <span class="rating-num">{{rating}}</span>
+          <span class="stars" aria-label="{{rating}} out of 5 stars">{{{starsHtml}}}</span>
+          <span class="review-count">({{reviewCount}})</span>
+        </div>
+        <p class="listing-location">{{city}}{{#if state}}, {{state}}{{/if}}</p>
+        <span class="listing-category badge">{{categoryDisplay}}</span>
+      </a>
+      {{/each}}
+    </div>
+
+    {{#if hasPagination}}
+    <nav class="pagination" aria-label="Pagination">
+      {{#if prevPage}}
+      <a href="{{prevPage}}" class="pagination-link">&larr; Previous</a>
+      {{/if}}
+      {{#each pages}}
+      {{#if isCurrent}}
+      <span class="pagination-link pagination-current" aria-current="page">{{num}}</span>
+      {{else}}
+      <a href="{{url}}" class="pagination-link">{{num}}</a>
+      {{/if}}
+      {{/each}}
+      {{#if nextPage}}
+      <a href="{{nextPage}}" class="pagination-link">Next &rarr;</a>
+      {{/if}}
+    </nav>
+    {{/if}}
+  </div>
+</section>

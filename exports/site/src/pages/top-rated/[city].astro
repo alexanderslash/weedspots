@@ -1,0 +1,91 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Stars from '../../components/Stars.astro';
+import { getAllData } from '../../lib/db';
+import { BASE_URL, YEAR, BUILD_DATE, categoryMeta, citySlug, rankSort, truncate, breadcrumbSchema, itemListSchema } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const { cityMap } = await getAllData();
+  return [...cityMap.keys()].map(cityName => ({
+    params: { city: citySlug(cityName) },
+    props: { cityName },
+  }));
+}
+
+const { city: cityParam } = Astro.params;
+const { cityName } = Astro.props;
+const { cityMap } = await getAllData();
+const cityBusinesses = cityMap.get(cityName) || [];
+const state = cityBusinesses[0]?.state || '';
+
+const listings = [...cityBusinesses].sort(rankSort).slice(0, 10).map((b, i) => {
+  const meta = categoryMeta(b.category);
+  const topReview = (b.reviews || []).find((r: any) => r.text && r.text.length > 20);
+  return {
+    ...b,
+    rank: i + 1,
+    categoryDisplay: meta.display,
+    topReview: topReview ? { text: truncate(topReview.text!, 200), author: topReview.author } : null,
+  };
+});
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Top Rated', url: '/top-rated/' },
+  { name: cityName },
+];
+---
+
+<Layout
+  title={`Top Rated Weed Businesses in ${cityName}${state ? `, ${state}` : ''} (${YEAR}) | Weedspots.io`}
+  metaDescription={`The highest-rated weed-related businesses in ${cityName}${state ? `, ${state}` : ''}, ranked by customer reviews and rating. Updated ${BUILD_DATE}.`}
+  canonicalUrl={`${BASE_URL}/top-rated/${cityParam}/`}
+  schemaJson={[breadcrumbSchema(breadcrumbs), itemListSchema(`Top Rated Weed Businesses in ${cityName}`, listings)]}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="page-header">
+    <div class="container">
+      <h1>Top Rated Weed Businesses in {cityName}{state ? `, ${state}` : ''} ({YEAR})</h1>
+      <p class="page-intro">The highest-rated weed-related businesses in {cityName}{state ? `, ${state}` : ''}, ranked by customer reviews and overall rating. Updated {BUILD_DATE}.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <ol class="top10-list">
+        {listings.map(b => (
+          <li class="top10-item">
+            <div class="top10-rank">#{b.rank}</div>
+            <div class="top10-content">
+              <h2><a href={`/listing/${b.slug}/`}>{b.name}</a></h2>
+              <div class="listing-meta">
+                <span class="rating-num">{Number(b.rating).toFixed(1)}</span>
+                <span class="stars" aria-label={`${b.rating} out of 5 stars`}><Stars rating={b.rating} /></span>
+                <span class="review-count">({b.reviewCount})</span>
+              </div>
+              <p class="listing-location">{b.formattedAddress}</p>
+              <span class="listing-category badge">{b.categoryDisplay}</span>
+              {b.topReview && (
+                <blockquote class="top10-review">
+                  <p>"{b.topReview.text}"</p>
+                  <cite>&mdash; {b.topReview.author}</cite>
+                </blockquote>
+              )}
+              <div class="top10-actions">
+                {b.phone && <a href={`tel:${b.phone}`} class="btn btn-sm">Call</a>}
+                <a href={`/listing/${b.slug}/`} class="btn btn-sm btn-outline">View Profile</a>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section intro-section">
+    <div class="container content-narrow">
+      <h2>How We Rank Listings in {cityName}</h2>
+      <p>Our top-rated list is based on customer ratings and review volume. Sponsored listings do not influence rankings on this page. Businesses are ranked by average Google rating, with review count used as a tiebreaker. This list is regenerated with every site build.</p>
+    </div>
+  </section>
+</Layout>

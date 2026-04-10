@@ -1,0 +1,84 @@
+---
+import Layout from '../../../../layouts/Layout.astro';
+import Stars from '../../../../components/Stars.astro';
+import Pagination from '../../../../components/Pagination.astro';
+import { getAllData } from '../../../../lib/db';
+import { BASE_URL, LISTINGS_PER_PAGE, categoryMeta, breadcrumbSchema } from '../../../../lib/utils';
+
+export async function getStaticPaths() {
+  const { businesses } = await getAllData();
+  const paths = [];
+
+  for (const starCount of [5, 4]) {
+    const threshold = starCount === 5 ? 4.5 : 3.5;
+    const filtered = businesses.filter(b => (b.rating || 0) >= threshold)
+      .sort((a, b) => (b.reviewCount || 0) - (a.reviewCount || 0));
+    if (!filtered.length) continue;
+
+    const label = `${starCount}-star`;
+    const totalPages = Math.ceil(filtered.length / LISTINGS_PER_PAGE);
+
+    for (let page = 1; page <= totalPages; page++) {
+      paths.push({
+        params: { stars: label, page: page === 1 ? undefined : `page/${page}` },
+        props: { starCount, threshold, currentPage: page, totalPages },
+      });
+    }
+  }
+  return paths;
+}
+
+const { stars: starsParam } = Astro.params;
+const { starCount, threshold, currentPage, totalPages } = Astro.props;
+const { businesses } = await getAllData();
+
+const filtered = businesses.filter(b => (b.rating || 0) >= threshold)
+  .sort((a, b) => (b.reviewCount || 0) - (a.reviewCount || 0));
+const start = (currentPage - 1) * LISTINGS_PER_PAGE;
+const pageListings = filtered.slice(start, start + LISTINGS_PER_PAGE);
+const baseUrl = `/dispensaries/rating/${starsParam}/`;
+
+const breadcrumbs = [
+  { name: 'Home', url: '/' },
+  { name: 'Categories', url: '/category/' },
+  { name: `${starCount}-Star` },
+];
+---
+
+<Layout
+  title={`${starCount}-Star Weed Businesses${currentPage > 1 ? ` | Page ${currentPage}` : ''} | Weedspots.io`}
+  metaDescription={`Browse ${filtered.length} weed-related businesses with a ${starCount}-star rating or higher, sorted by review count.`}
+  canonicalUrl={`${BASE_URL}${currentPage === 1 ? baseUrl : `${baseUrl}page/${currentPage}/`}`}
+  schemaJson={breadcrumbSchema(breadcrumbs)}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="page-header">
+    <div class="container">
+      <h1>{starCount}-Star Weed Businesses</h1>
+      <p class="page-intro">Browse {filtered.length} weed-related businesses with a {starCount}-star rating or higher, sorted by review count.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="listing-grid">
+        {pageListings.map(b => {
+          const m = categoryMeta(b.category);
+          return (
+            <a href={`/listing/${b.slug}/`} class="listing-card">
+              <h3>{b.name}</h3>
+              <div class="listing-meta">
+                <span class="rating-num">{Number(b.rating).toFixed(1)}</span>
+                <span class="stars" aria-label={`${b.rating} out of 5 stars`}><Stars rating={b.rating} /></span>
+                <span class="review-count">({b.reviewCount})</span>
+              </div>
+              <p class="listing-location">{b.city}{b.state ? `, ${b.state}` : ''}</p>
+              <span class="listing-category badge">{m.display}</span>
+            </a>
+          );
+        })}
+      </div>
+      <Pagination currentPage={currentPage} totalPages={totalPages} baseUrl={baseUrl} />
+    </div>
+  </section>
+</Layout>

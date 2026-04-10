@@ -1,0 +1,20 @@
+<section class="page-header">
+  <div class="container">
+    <h1>All Categories</h1>
+    <p class="page-intro">Browse all Google business categories currently listed on Weedspots.io.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="category-grid">
+      {{#each categories}}
+      <a href="/category/{{slug}}/" class="category-card">
+        <span class="category-icon">{{{icon}}}</span>
+        <h3>{{displayName}}</h3>
+        <span class="category-count">{{count}} listings</span>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>

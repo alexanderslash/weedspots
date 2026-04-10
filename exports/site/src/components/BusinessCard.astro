@@ -1,0 +1,47 @@
+---
+import Stars from './Stars.astro';
+import { categoryMeta, citySlug, websiteDisplay } from '../lib/utils';
+
+interface Props {
+  business: any;
+  showSponsored?: boolean;
+}
+const { business: b, showSponsored = false } = Astro.props;
+const meta = categoryMeta(b.category);
+const cSlug = citySlug(b.city || '');
+---
+
+<article class={`listing-card${b.isSponsored && showSponsored ? ' sponsored' : ''}`}>
+  {b.isSponsored && showSponsored && <span class="sponsored-badge">Sponsored</span>}
+  <div class="card-body">
+    <h3 class="card-title">
+      <a href={`/listing/${b.slug}/`}>{b.name}</a>
+    </h3>
+    {b.rating && (
+      <div class="card-rating">
+        <Stars rating={b.rating} />
+        <span class="rating-value">{Number(b.rating).toFixed(1)}</span>
+        <span class="review-count">({b.reviewCount || 0})</span>
+      </div>
+    )}
+    <div class="card-meta">
+      {b.city && (
+        <a href={`/dispensaries/${cSlug}/`} class="card-city">{b.city}</a>
+      )}
+      <a href={`/category/${meta.slug}/`} class="card-category">{meta.icon} {meta.display}</a>
+    </div>
+    {b.shortAddress && <p class="card-address">{b.shortAddress}</p>}
+    {b.phone && <p class="card-phone"><a href={`tel:${b.phone}`}>{b.phone}</a></p>}
+    {b.website && (
+      <p class="card-website">
+        <a href={b.website} rel="noopener noreferrer nofollow" target="_blank">{websiteDisplay(b.website)}</a>
+      </p>
+    )}
+  </div>
+  <div class="card-actions">
+    <a href={`/listing/${b.slug}/`} class="btn btn-primary">View Details</a>
+    {b.googleMapsUri && (
+      <a href={b.googleMapsUri} rel="noopener noreferrer nofollow" target="_blank" class="btn btn-secondary">Maps</a>
+    )}
+  </div>
+</article>

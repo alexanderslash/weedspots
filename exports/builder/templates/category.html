@@ -1,0 +1,72 @@
+<section class="page-header">
+  <div class="container">
+    <h1>{{categoryDisplayName}}</h1>
+    <p class="page-intro">{{categoryDescription}}</p>
+  </div>
+</section>
+
+{{#if sponsoredListings.length}}
+<section class="section">
+  <div class="container">
+    <h2>Featured {{categoryDisplayName}}</h2>
+    <div class="listing-grid">
+      {{#each sponsoredListings}}
+      <a href="/listing/{{slug}}/" class="listing-card listing-card--sponsored">
+        <span class="badge-sponsored">Sponsored</span>
+        <h3>{{name}}</h3>
+        <div class="listing-meta">
+          <span class="rating-num">{{rating}}</span>
+          <span class="stars" aria-label="{{rating}} out of 5 stars">{{{starsHtml}}}</span>
+          <span class="review-count">({{reviewCount}})</span>
+        </div>
+        <p class="listing-location">{{city}}{{#if state}}, {{state}}{{/if}}</p>
+      </a>
+      {{/each}}
+    </div>
+  </div>
+</section>
+{{/if}}
+
+<section class="section">
+  <div class="container">
+    <h2>All {{categoryDisplayName}} (Page {{currentPage}} of {{totalPages}})</h2>
+    <div class="listing-grid">
+      {{#each listings}}
+      <a href="/listing/{{slug}}/" class="listing-card">
+        <h3>{{name}}</h3>
+        <div class="listing-meta">
+          <span class="rating-num">{{rating}}</span>
+          <span class="stars" aria-label="{{rating}} out of 5 stars">{{{starsHtml}}}</span>
+          <span class="review-count">({{reviewCount}})</span>
+        </div>
+        <p class="listing-location">{{city}}{{#if state}}, {{state}}{{/if}}</p>
+      </a>
+      {{/each}}
+    </div>
+
+    {{#if hasPagination}}
+    <nav class="pagination" aria-label="Pagination">
+      {{#if prevPage}}
+      <a href="{{prevPage}}" class="pagination-link">&larr; Previous</a>
+      {{/if}}
+      {{#each pages}}
+      {{#if isCurrent}}
+      <span class="pagination-link pagination-current" aria-current="page">{{num}}</span>
+      {{else}}
+      <a href="{{url}}" class="pagination-link">{{num}}</a>
+      {{/if}}
+      {{/each}}
+      {{#if nextPage}}
+      <a href="{{nextPage}}" class="pagination-link">Next &rarr;</a>
+      {{/if}}
+    </nav>
+    {{/if}}
+  </div>
+</section>
+
+<section class="section intro-section">
+  <div class="container content-narrow">
+    <h2>About {{categoryDisplayName}}</h2>
+    <p>{{categoryLongDescription}}</p>
+  </div>
+</section>
