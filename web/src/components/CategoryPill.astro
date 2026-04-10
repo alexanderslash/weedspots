@@ -2,9 +2,67 @@
 import type { CategoryAggregate } from '../lib/types';
 interface Props { category: CategoryAggregate }
 const { category } = Astro.props;
+
+// Monochrome SVG icon per category (slug-based match with sensible fallback).
+// Kept inline so we don't ship a sprite sheet for ~dozen icons.
+type IconId = 'leaf' | 'shop' | 'vape' | 'delivery' | 'beaker' | 'pipe';
+function iconFor(slug: string): IconId {
+  const s = slug.toLowerCase();
+  if (s.includes('delivery')) return 'delivery';
+  if (s.includes('vape') || s.includes('vapor')) return 'vape';
+  if (s.includes('tobacco') || s.includes('cigar')) return 'pipe';
+  if (s.includes('smoke') || s.includes('pipe') || s.includes('head')) return 'pipe';
+  if (s.includes('grow') || s.includes('hydro')) return 'beaker';
+  if (s.includes('cannabis') || s.includes('marijuana') || s.includes('dispensary')) return 'leaf';
+  return 'shop';
+}
+const icon = iconFor(category.slug);
 ---
 <a href={`/category/${category.slug}/`}
-   class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ink-50 border border-ink-200 hover:border-brand-400 hover:bg-brand-50 transition">
-  <span class="font-medium text-ink-800">{category.display}</span>
+   class="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ink-50 ring-1 ring-black/5 dark:ring-white/10 hover:ring-brand-500/40 hover:bg-brand-500/5 dark:hover:bg-brand-400/10 active:scale-[0.97] transition-[transform,background-color,box-shadow] duration-150 ease-out focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500">
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="text-ink-500 group-hover:text-brand-600 transition-colors duration-150" aria-hidden="true">
+    {icon === 'leaf' && (
+      <>
+        <path d="M12 2c1 4 4 6 8 6-1 5-5 9-10 9-1-4-4-6-8-6 1-5 5-9 10-9Z" />
+        <path d="M12 2c0 8-4 13-10 15" />
+      </>
+    )}
+    {icon === 'shop' && (
+      <>
+        <path d="M3 9l1.5-5h15L21 9" />
+        <path d="M4 9v11h16V9" />
+        <path d="M9 20v-6h6v6" />
+      </>
+    )}
+    {icon === 'vape' && (
+      <>
+        <rect x="3" y="10" width="14" height="4" rx="1" />
+        <path d="M17 11h3v2h-3" />
+        <path d="M5 7v3M9 7v3" />
+      </>
+    )}
+    {icon === 'delivery' && (
+      <>
+        <path d="M3 7h11v8H3z" />
+        <path d="M14 10h4l3 3v2h-7" />
+        <circle cx="7" cy="17" r="2" />
+        <circle cx="17" cy="17" r="2" />
+      </>
+    )}
+    {icon === 'beaker' && (
+      <>
+        <path d="M9 3h6" />
+        <path d="M10 3v6l-5 9a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-9V3" />
+        <path d="M7 15h10" />
+      </>
+    )}
+    {icon === 'pipe' && (
+      <>
+        <path d="M3 14c0-2 2-4 4-4h6a4 4 0 1 1 0 8H7a4 4 0 0 1-4-4Z" />
+        <path d="M19 10V6" />
+      </>
+    )}
+  </svg>
+  <span class="font-medium text-ink-800 group-hover:text-brand-700 dark:group-hover:text-brand-300 transition-colors duration-150">{category.display}</span>
   <span class="text-xs text-ink-500">({category.count})</span>
 </a>

@@ -5,14 +5,14 @@ const { data } = Astro.props;
 ---
 {data.hasPagination && (
   <nav class="flex items-center justify-center gap-2 mt-10" aria-label="Pagination">
-    {data.prevPage && <a href={data.prevPage} class="px-3 py-2 rounded-md border border-ink-200 hover:bg-ink-100">← Prev</a>}
+    {data.prevPage && <a href={data.prevPage} class="inline-flex items-center px-3 py-2 rounded-full ring-1 ring-black/5 dark:ring-white/10 hover:bg-ink-100 hover:ring-brand-500/30 active:scale-[0.97] transition-[transform,background-color,box-shadow] duration-150 ease-out">← Prev</a>}
     {data.pages.map(p => (
       p.isCurrent ? (
-        <span class="px-3 py-2 rounded-md bg-brand-500 text-white font-semibold">{p.num}</span>
+        <span class="inline-flex items-center min-w-[40px] justify-center px-3 py-2 rounded-full bg-brand-500 text-white font-semibold">{p.num}</span>
       ) : (
-        <a href={p.url} class="px-3 py-2 rounded-md border border-ink-200 hover:bg-ink-100">{p.num}</a>
+        <a href={p.url} class="inline-flex items-center min-w-[40px] justify-center px-3 py-2 rounded-full ring-1 ring-black/5 dark:ring-white/10 hover:bg-ink-100 hover:ring-brand-500/30 active:scale-[0.97] transition-[transform,background-color,box-shadow] duration-150 ease-out">{p.num}</a>
       )
     ))}
-    {data.nextPage && <a href={data.nextPage} class="px-3 py-2 rounded-md border border-ink-200 hover:bg-ink-100">Next →</a>}
+    {data.nextPage && <a href={data.nextPage} class="inline-flex items-center px-3 py-2 rounded-full ring-1 ring-black/5 dark:ring-white/10 hover:bg-ink-100 hover:ring-brand-500/30 active:scale-[0.97] transition-[transform,background-color,box-shadow] duration-150 ease-out">Next →</a>}
   </nav>
 )}

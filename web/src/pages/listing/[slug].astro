@@ -15,13 +15,6 @@ export async function getStaticPaths() {
 interface Props { business: Business }
 const { business: b } = Astro.props;
 
-function gradientFor(placeId: string): string {
-  const hash = [...placeId].reduce((a, c) => a + c.charCodeAt(0), 0);
-  const h = 80 + (hash % 80);
-  return `linear-gradient(135deg, hsl(${h}, 60%, 88%), hsl(${h}, 50%, 72%))`;
-}
-const coverStyle = b.coverPhoto ? '' : `background-image: ${gradientFor(b.placeId)}`;
-
 const siteUrl = import.meta.env.SITE_URL || 'https://weedspots.io';
 const canonical = `${siteUrl}/listing/${b.slug}/`;
 const title = `${b.name} — ${b.category} in ${b.city}, ${b.state} | weedspots`;
@@ -47,15 +40,24 @@ const schemas = [
   </div>
 
   <section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-    <div class="aspect-[21/9] w-full rounded-xl overflow-hidden bg-ink-100 relative" style={coverStyle}>
-      {b.coverPhoto && <img src={b.coverPhoto} alt={b.name} class="w-full h-full object-cover" />}
+    <div class="aspect-[21/9] w-full rounded-2xl overflow-hidden bg-ink-100 ring-1 ring-black/5 dark:ring-white/10 relative">
+      {b.coverPhoto ? (
+        <img src={b.coverPhoto} alt={b.name} class="w-full h-full object-cover" />
+      ) : (
+        <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-brand-50 to-ink-100 dark:from-ink-100 dark:to-ink-200" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="80" height="80" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" class="text-brand-500/60 dark:text-brand-400/50">
+            <path d="M12 2c1 4 4 6 8 6-1 5-5 9-10 9-1-4-4-6-8-6 1-5 5-9 10-9Z" />
+            <path d="M12 2c0 8-4 13-10 15" />
+          </svg>
+        </div>
+      )}
     </div>
   </section>
 
   <section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-3 gap-10">
     <div class="lg:col-span-2">
-      <h1 class="text-3xl md:text-4xl font-semibold tracking-tight text-ink-900">{b.name}</h1>
-      <div class="mt-2 text-ink-600">{b.category} · {b.city}, {b.state}</div>
+      <h1 class="text-3xl md:text-5xl font-semibold text-ink-900" style="letter-spacing:-0.03em;line-height:1.08;">{b.name}</h1>
+      <div class="mt-3 text-ink-500">{b.category} · {b.city}, {b.state}</div>
       <div class="mt-3"><Rating value={b.rating || 0} count={b.reviewCount || 0} /></div>
 
       {b.editorialSummary && (
@@ -87,17 +89,17 @@ const schemas = [
     </div>
 
     <aside class="space-y-4">
-      <div class="bg-ink-50 rounded-lg border border-ink-100 p-5">
-        <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Contact</div>
+      <div class="bg-ink-50 rounded-2xl ring-1 ring-black/5 dark:ring-white/10 shadow-card p-5">
+        <div class="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-500 mb-2">Contact</div>
         <div class="text-ink-800">{b.formattedAddress}</div>
-        {b.phone && <div class="mt-2"><a href={`tel:${b.phone}`} class="text-brand-600">{b.phone}</a></div>}
-        {b.website && <div class="mt-2"><a href={b.website} rel="nofollow noopener" class="text-brand-600 break-all">{b.website}</a></div>}
-        {b.googleMapsUri && <div class="mt-4"><a href={b.googleMapsUri} rel="nofollow noopener" class="inline-block bg-brand-500 text-white rounded-md px-4 py-2 font-medium">Open in Google Maps</a></div>}
+        {b.phone && <div class="mt-2"><a href={`tel:${b.phone}`} class="text-brand-600 hover:text-brand-700 transition-colors duration-150">{b.phone}</a></div>}
+        {b.website && <div class="mt-2"><a href={b.website} rel="nofollow noopener" class="text-brand-600 hover:text-brand-700 break-all transition-colors duration-150">{b.website}</a></div>}
+        {b.googleMapsUri && <div class="mt-4"><a href={b.googleMapsUri} rel="nofollow noopener" class="inline-flex items-center bg-brand-500 hover:bg-brand-600 text-white rounded-full px-4 py-2 font-medium active:scale-[0.97] transition-[transform,background-color] duration-150 ease-out">Open in Google Maps</a></div>}
       </div>
 
       {b.openingHours && b.openingHours.weekdayDescriptions.length > 0 && (
-        <div class="bg-ink-50 rounded-lg border border-ink-100 p-5">
-          <div class="text-xs uppercase tracking-wider text-ink-500 mb-2">Hours</div>
+        <div class="bg-ink-50 rounded-2xl ring-1 ring-black/5 dark:ring-white/10 shadow-card p-5">
+          <div class="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-500 mb-2">Hours</div>
           <ul class="text-sm text-ink-700 space-y-1">
             {b.openingHours.weekdayDescriptions.map(d => <li>{d}</li>)}
           </ul>

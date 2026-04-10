@@ -4,8 +4,8 @@ interface Props { city: CityAggregate }
 const { city } = Astro.props;
 ---
 <a href={`/${city.stateCitySlug}/`}
-   class="block bg-ink-50 rounded-lg border border-ink-100 p-5 hover:shadow-card-hover transition">
-  <div class="text-lg font-semibold text-ink-900">{city.cityName}</div>
+   class="group block bg-ink-50 rounded-2xl ring-1 ring-black/5 dark:ring-white/10 p-5 hover:shadow-card-hover hover:-translate-y-0.5 hover:ring-brand-500/30 active:scale-[0.99] transition-[transform,box-shadow] duration-200 ease-[var(--ease-out-strong)] focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500">
+  <div class="text-lg font-semibold text-ink-900 group-hover:text-brand-600 transition-colors duration-150">{city.cityName}</div>
   <div class="text-sm text-ink-500">{city.state}</div>
   <div class="mt-2 text-sm text-brand-600 font-medium">{city.count.toLocaleString()} listings</div>
 </a>

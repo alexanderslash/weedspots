@@ -3,29 +3,29 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Brand */
-  --color-brand-50:  #f1fdf4;
-  --color-brand-100: #defbe6;
-  --color-brand-200: #b6f4c6;
-  --color-brand-300: #7fe79b;
-  --color-brand-400: #3ecf6b;
-  --color-brand-500: #16b84b;
-  --color-brand-600: #0e9a3c;
-  --color-brand-700: #0d7b32;
-  --color-brand-800: #0f622c;
-  --color-brand-900: #0f5027;
+  /* Brand — emerald, cooler and fresher than the old forest green */
+  --color-brand-50:  #ecfdf5;
+  --color-brand-100: #d1fae5;
+  --color-brand-200: #a7f3d0;
+  --color-brand-300: #6ee7b7;
+  --color-brand-400: #34d399;
+  --color-brand-500: #10b981;
+  --color-brand-600: #059669;
+  --color-brand-700: #047857;
+  --color-brand-800: #065f46;
+  --color-brand-900: #064e3b;
 
-  /* Warm-gray neutrals */
-  --color-ink-50:  #fafaf9;
-  --color-ink-100: #f5f5f4;
-  --color-ink-200: #e7e5e4;
-  --color-ink-300: #d6d3d1;
-  --color-ink-400: #a8a29e;
-  --color-ink-500: #78716c;
-  --color-ink-600: #57534e;
-  --color-ink-700: #44403c;
-  --color-ink-800: #292524;
-  --color-ink-900: #1c1917;
+  /* Neutrals — zinc in light mode (overridden to cool slate in .dark below). */
+  --color-ink-50:  #fafafa;
+  --color-ink-100: #f4f4f5;
+  --color-ink-200: #e4e4e7;
+  --color-ink-300: #d4d4d8;
+  --color-ink-400: #a1a1aa;
+  --color-ink-500: #71717a;
+  --color-ink-600: #52525b;
+  --color-ink-700: #3f3f46;
+  --color-ink-800: #27272a;
+  --color-ink-900: #18181b;
 
   /* Accent */
   --color-gold-500: #f5a623;
@@ -40,28 +40,31 @@
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
+  --radius-2xl: 1.25rem;
   --radius-full: 9999px;
 
-  /* Shadow */
+  /* Shadow — only used in light mode; dark mode relies on ring + bg step. */
   --shadow-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 4px 12px rgb(0 0 0 / 0.05);
   --shadow-card-hover: 0 2px 4px rgb(0 0 0 / 0.06), 0 12px 24px rgb(0 0 0 / 0.08);
+
+  /* Easing — stronger curves than the default Tailwind `ease`. */
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-strong: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-/* ─── Dark theme: invert the warm-gray ink scale ──────────────────────────── */
-/* Every `bg-ink-*`, `text-ink-*`, `border-ink-*` utility re-themes via these
-   overridden custom properties. Explicit `.dark` class wins over the media
-   query fallback below, so user preference beats system preference. */
+/* ─── Dark theme: cool slate scale (not an inversion of light) ────────────── */
+/* Explicit `.dark` class wins so user preference beats system preference. */
 .dark {
-  --color-ink-50:  #1c1917;
-  --color-ink-100: #292524;
-  --color-ink-200: #44403c;
-  --color-ink-300: #57534e;
-  --color-ink-400: #78716c;
-  --color-ink-500: #a8a29e;
-  --color-ink-600: #d6d3d1;
-  --color-ink-700: #e7e5e4;
-  --color-ink-800: #f5f5f4;
-  --color-ink-900: #fafaf9;
+  --color-ink-50:  #0b1220;
+  --color-ink-100: #111827;
+  --color-ink-200: #1f2937;
+  --color-ink-300: #374151;
+  --color-ink-400: #6b7280;
+  --color-ink-500: #9ca3af;
+  --color-ink-600: #d1d5db;
+  --color-ink-700: #e5e7eb;
+  --color-ink-800: #f3f4f6;
+  --color-ink-900: #f9fafb;
   color-scheme: dark;
 }
 .light { color-scheme: light; }
@@ -74,10 +77,33 @@ html {
 body { -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 a:hover { color: var(--color-brand-600); }
+.dark a:hover { color: var(--color-brand-400); }
 
-/* ─── Theme toggle: show the icon matching the currently-rendered theme ───── */
-/* Keyed on .light/.dark (not data-theme-mode) so that the initial "system"
-   mode still shows the correct icon based on the resolved OS preference. */
-.theme-icon { display: none; }
-html.light .theme-icon-light,
-html.dark  .theme-icon-dark { display: inline-block; }
+/* ─── Motion defaults ────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ─── Theme toggle ─────────────────────────────────────────────────────────
+   Three-state cycle: system → light → dark → system. Keyed on
+   data-theme-mode (not .light/.dark) so that "system" reliably shows the
+   monitor icon, independent of which theme the OS happens to resolve to.
+   A short fade+scale masks the swap. */
+.theme-icon {
+  display: none;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 160ms var(--ease-out-strong),
+              transform 160ms var(--ease-out-strong);
+}
+html[data-theme-mode="system"] .theme-icon-system,
+html[data-theme-mode="light"]  .theme-icon-light,
+html[data-theme-mode="dark"]   .theme-icon-dark {
+  display: inline-block;
+  opacity: 1;
+  transform: scale(1);
+}

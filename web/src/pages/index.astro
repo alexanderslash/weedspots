@@ -18,30 +18,52 @@ const siteUrl = import.meta.env.SITE_URL || 'https://weedspots.io';
   description="Browse dispensaries, smoke shops, delivery services, and cannabis stores in cities across the US."
   canonical={`${siteUrl}/`}
 >
-  <section class="bg-gradient-to-b from-brand-50 to-ink-50">
-    <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
-      <h1 class="text-4xl md:text-5xl font-semibold tracking-tight text-ink-900">Find cannabis dispensaries near you</h1>
-      <p class="mt-4 text-lg text-ink-600 max-w-2xl mx-auto">Dispensaries, smoke shops, delivery services, and more across the United States.</p>
-      <div class="mt-8 flex justify-center"><SearchBox /></div>
+  <section class="relative overflow-hidden bg-ink-50">
+    <div
+      class="pointer-events-none absolute inset-0"
+      style="background: radial-gradient(ellipse 70% 55% at 50% -10%, rgb(16 185 129 / 0.18) 0%, transparent 65%);"
+      aria-hidden="true"
+    ></div>
+    <div
+      class="pointer-events-none absolute inset-x-0 bottom-0 h-px"
+      style="background: linear-gradient(90deg, transparent, rgb(0 0 0 / 0.08), transparent);"
+      aria-hidden="true"
+    ></div>
+    <div class="relative mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-20 md:py-28 text-center">
+      <div class="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-600 mb-4">Cannabis directory</div>
+      <h1 class="text-4xl md:text-6xl font-semibold text-ink-900" style="letter-spacing:-0.035em;line-height:1.05;">
+        Find cannabis dispensaries<br class="hidden sm:block" /> near you
+      </h1>
+      <p class="mt-5 text-lg text-ink-500 max-w-2xl mx-auto">Dispensaries, smoke shops, delivery services, and more across the United States.</p>
+      <div class="mt-10 flex justify-center"><SearchBox /></div>
     </div>
   </section>
 
   <section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-16">
-    <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-8">Browse by city</h2>
+    <div class="mb-8">
+      <div class="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-500 mb-2">Locations</div>
+      <h2 class="text-2xl md:text-3xl font-semibold text-ink-900" style="letter-spacing:-0.02em;">Browse by city</h2>
+    </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
       {topCities.map(c => <CityTile city={c} />)}
     </div>
   </section>
 
   <section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-16">
-    <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-8">Browse by category</h2>
+    <div class="mb-8">
+      <div class="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-500 mb-2">Explore</div>
+      <h2 class="text-2xl md:text-3xl font-semibold text-ink-900" style="letter-spacing:-0.02em;">Browse by category</h2>
+    </div>
     <div class="flex flex-wrap gap-3">
       {topCategories.map(c => <CategoryPill category={c} />)}
     </div>
   </section>
 
   <section class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-20">
-    <h2 class="text-2xl md:text-3xl font-semibold tracking-tight mb-8">Featured</h2>
+    <div class="mb-8">
+      <div class="text-[11px] font-semibold uppercase tracking-[0.12em] text-ink-500 mb-2">Highlighted</div>
+      <h2 class="text-2xl md:text-3xl font-semibold text-ink-900" style="letter-spacing:-0.02em;">Featured</h2>
+    </div>
     <BusinessGrid businesses={featured} />
   </section>
 </Layout>

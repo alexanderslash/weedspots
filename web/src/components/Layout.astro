@@ -37,28 +37,36 @@ const fullOg = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
       // Apply saved theme before paint to prevent FOUC. Modes: 'light' | 'dark' | 'system'.
       (function () {
         var root = document.documentElement;
+        var mq = window.matchMedia('(prefers-color-scheme: dark)');
         var pref = null;
         try { pref = localStorage.getItem('theme'); } catch (e) {}
-        var mode = pref === 'light' || pref === 'dark' ? pref : 'system';
-        var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var isDark = mode === 'dark' || (mode === 'system' && systemDark);
-        root.classList.toggle('dark', isDark);
-        root.classList.toggle('light', !isDark);
-        root.setAttribute('data-theme-mode', mode);
+        var mode = pref === 'light' || pref === 'dark' || pref === 'system' ? pref : 'system';
+
+        function apply(m) {
+          var isDark = m === 'dark' || (m === 'system' && mq.matches);
+          root.classList.toggle('dark', isDark);
+          root.classList.toggle('light', !isDark);
+          root.setAttribute('data-theme-mode', m);
+        }
+        apply(mode);
+
         window.__weedspotsTheme = {
           cycle: function () {
-            // Flip to the opposite of the currently-rendered theme. The
-            // initial "system" mode becomes an explicit light/dark choice
-            // after the first click and is persisted to localStorage.
-            var next = root.classList.contains('dark') ? 'light' : 'dark';
-            try { localStorage.setItem('theme', next); } catch (e) {}
-            root.classList.toggle('dark', next === 'dark');
-            root.classList.toggle('light', next === 'light');
-            root.setAttribute('data-theme-mode', next);
+            // Three-state cycle: system → light → dark → system.
+            var current = root.getAttribute('data-theme-mode') || 'system';
+            var next = current === 'system' ? 'light'
+                     : current === 'light'  ? 'dark'
+                                            : 'system';
+            try {
+              if (next === 'system') localStorage.removeItem('theme');
+              else localStorage.setItem('theme', next);
+            } catch (e) {}
+            apply(next);
           },
         };
+
         try {
-          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function (e) {
+          mq.addEventListener('change', function (e) {
             if ((root.getAttribute('data-theme-mode') || 'system') === 'system') {
               root.classList.toggle('dark', e.matches);
               root.classList.toggle('light', !e.matches);
