@@ -1,0 +1,97 @@
+---
+import Layout from '../../../components/Layout.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import BusinessGrid from '../../../components/BusinessGrid.astro';
+import Pagination from '../../../components/Pagination.astro';
+import SchemaJsonLd from '../../../components/SchemaJsonLd.astro';
+import { getAllData } from '../../../lib/data';
+import { categorySlug } from '../../../lib/slugs';
+import { getSponsored, getNonSponsored } from '../../../lib/ranking';
+import { paginate, paginationData } from '../../../lib/pagination';
+import { breadcrumbSchema } from '../../../lib/schema-org';
+import { LISTINGS_PER_PAGE, MIN_CITY_CATEGORY } from '../../../lib/constants';
+import type { Business, CityAggregate } from '../../../lib/types';
+
+export async function getStaticPaths() {
+  const { cities, byStateCity } = getAllData();
+  const paths: Array<{
+    params: { stateCity: string; category: string; page: string | undefined };
+    props: { city: CityAggregate; categoryDisplay: string; pageItems: Business[]; currentPage: number; totalPages: number };
+  }> = [];
+
+  for (const city of cities) {
+    const cityBusinesses = byStateCity.get(city.stateCitySlug) || [];
+    const byCat = new Map<string, Business[]>();
+    for (const b of cityBusinesses) {
+      const cat = b.category;
+      if (!byCat.has(cat)) byCat.set(cat, []);
+      byCat.get(cat)!.push(b);
+    }
+
+    for (const [cat, list] of byCat.entries()) {
+      if (list.length < MIN_CITY_CATEGORY) continue;
+      const sponsored = getSponsored(list);
+      const nonSponsored = getNonSponsored(list);
+      const ordered = [...sponsored, ...nonSponsored];
+      const pages = paginate(ordered, LISTINGS_PER_PAGE);
+
+      pages.forEach((pageItems, i) => {
+        paths.push({
+          params: {
+            stateCity: city.stateCitySlug,
+            category: categorySlug(cat),
+            page: i === 0 ? undefined : `page/${i + 1}`,
+          },
+          props: {
+            city,
+            categoryDisplay: cat,
+            pageItems,
+            currentPage: i + 1,
+            totalPages: pages.length,
+          },
+        });
+      });
+    }
+  }
+  return paths;
+}
+
+interface Props {
+  city: CityAggregate;
+  categoryDisplay: string;
+  pageItems: Business[];
+  currentPage: number;
+  totalPages: number;
+}
+const { city, categoryDisplay, pageItems, currentPage, totalPages } = Astro.props;
+const catSlug = categorySlug(categoryDisplay);
+
+const { byStateCity } = getAllData();
+const allForCity = byStateCity.get(city.stateCitySlug) || [];
+const sponsoredIds = new Set(getSponsored(allForCity.filter(b => b.category === categoryDisplay)).map(b => b.placeId));
+
+const siteUrl = import.meta.env.SITE_URL || 'https://weedspots.io';
+const baseUrl = `/${city.stateCitySlug}/${catSlug}/`;
+const canonical = `${siteUrl}${currentPage === 1 ? baseUrl : `${baseUrl}page/${currentPage}/`}`;
+const title = `${categoryDisplay} in ${city.cityName}, ${city.state}${currentPage > 1 ? ` — Page ${currentPage}` : ''} | weedspots`;
+const description = `Browse ${categoryDisplay.toLowerCase()} businesses in ${city.cityName}, ${city.state}.`;
+
+const crumbs = [
+  { name: 'Home', url: '/' },
+  { name: `${city.cityName}, ${city.state}`, url: `/${city.stateCitySlug}/` },
+  { name: categoryDisplay },
+];
+const pag = paginationData(currentPage, totalPages, baseUrl);
+---
+<Layout title={title} description={description} canonical={canonical}>
+  <SchemaJsonLd slot="head" json={breadcrumbSchema(crumbs)} />
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 py-6">
+    <Breadcrumbs crumbs={crumbs} />
+    <h1 class="mt-4 text-3xl md:text-4xl font-semibold tracking-tight">{categoryDisplay} in {city.cityName}, {city.state}</h1>
+    <p class="mt-2 text-ink-600">Page {currentPage} of {totalPages}</p>
+  </div>
+  <div class="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-16">
+    <BusinessGrid businesses={pageItems} sponsoredIds={sponsoredIds} />
+    <Pagination data={pag} />
+  </div>
+</Layout>
