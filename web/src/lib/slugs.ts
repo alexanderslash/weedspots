@@ -21,7 +21,7 @@ export function categorySlug(label: string): string {
 }
 
 export function stateCitySlug(state: string, city: string): string {
-  const s = (state || '').toLowerCase().trim();
+  const s = citySlug(state);
   const c = citySlug(city);
   const slug = s && c ? `${s}-${c}` : c;
   if (RESERVED_ROOT.has(slug)) {

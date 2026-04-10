@@ -41,4 +41,10 @@ describe('stateCitySlug', () => {
     // Force a synthetic collision:
     expect(() => stateCitySlug('', 'category')).toThrow(/Reserved slug collision/);
   });
+  it('slugifies multi-word states', () => {
+    expect(stateCitySlug('New York', 'New York')).toBe('new-york-new-york');
+  });
+  it('slugifies New Jersey', () => {
+    expect(stateCitySlug('New Jersey', 'Bayonne')).toBe('new-jersey-bayonne');
+  });
 });

@@ -1,6 +1,6 @@
 [
   {
-    "stateCitySlug": "new york-new-york",
+    "stateCitySlug": "new-york-new-york",
     "cityName": "New York",
     "state": "New York",
     "count": 175,
@@ -25,7 +25,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-brooklyn",
+    "stateCitySlug": "new-york-brooklyn",
     "cityName": "Brooklyn",
     "state": "New York",
     "count": 150,
@@ -48,7 +48,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-queens",
+    "stateCitySlug": "new-york-queens",
     "cityName": "Queens",
     "state": "New York",
     "count": 105,
@@ -69,7 +69,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-rochester",
+    "stateCitySlug": "new-york-rochester",
     "cityName": "Rochester",
     "state": "New York",
     "count": 57,
@@ -89,7 +89,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-the-bronx",
+    "stateCitySlug": "new-york-the-bronx",
     "cityName": "The Bronx",
     "state": "New York",
     "count": 45,
@@ -109,7 +109,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-buffalo",
+    "stateCitySlug": "new-york-buffalo",
     "cityName": "Buffalo",
     "state": "New York",
     "count": 44,
@@ -127,7 +127,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-staten-island",
+    "stateCitySlug": "new-york-staten-island",
     "cityName": "Staten Island",
     "state": "New York",
     "count": 38,
@@ -148,7 +148,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-dunkirk",
+    "stateCitySlug": "new-york-dunkirk",
     "cityName": "Dunkirk",
     "state": "New York",
     "count": 38,
@@ -161,7 +161,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-albany",
+    "stateCitySlug": "new-york-albany",
     "cityName": "Albany",
     "state": "New York",
     "count": 33,
@@ -178,7 +178,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-akwesasne",
+    "stateCitySlug": "new-york-akwesasne",
     "cityName": "Akwesasne",
     "state": "New York",
     "count": 30,
@@ -203,7 +203,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-mastic",
+    "stateCitySlug": "new-york-mastic",
     "cityName": "Mastic",
     "state": "New York",
     "count": 23,
@@ -216,7 +216,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-salamanca",
+    "stateCitySlug": "new-york-salamanca",
     "cityName": "Salamanca",
     "state": "New York",
     "count": 23,
@@ -228,7 +228,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-yonkers",
+    "stateCitySlug": "new-york-yonkers",
     "cityName": "Yonkers",
     "state": "New York",
     "count": 22,
@@ -244,7 +244,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-syracuse",
+    "stateCitySlug": "new-york-syracuse",
     "cityName": "Syracuse",
     "state": "New York",
     "count": 18,
@@ -258,7 +258,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-schenectady",
+    "stateCitySlug": "new-york-schenectady",
     "cityName": "Schenectady",
     "state": "New York",
     "count": 15,
@@ -270,7 +270,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-utica",
+    "stateCitySlug": "new-york-utica",
     "cityName": "Utica",
     "state": "New York",
     "count": 14,
@@ -284,7 +284,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-niagara-falls",
+    "stateCitySlug": "new-york-niagara-falls",
     "cityName": "Niagara Falls",
     "state": "New York",
     "count": 14,
@@ -297,7 +297,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-rome",
+    "stateCitySlug": "new-york-rome",
     "cityName": "Rome",
     "state": "New York",
     "count": 14,
@@ -309,7 +309,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-white-plains",
+    "stateCitySlug": "new-york-white-plains",
     "cityName": "White Plains",
     "state": "New York",
     "count": 13,
@@ -321,7 +321,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-jamestown",
+    "stateCitySlug": "new-york-jamestown",
     "cityName": "Jamestown",
     "state": "New York",
     "count": 13,
@@ -335,7 +335,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-ithaca",
+    "stateCitySlug": "new-york-ithaca",
     "cityName": "Ithaca",
     "state": "New York",
     "count": 13,
@@ -348,7 +348,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-watertown",
+    "stateCitySlug": "new-york-watertown",
     "cityName": "Watertown",
     "state": "New York",
     "count": 13,
@@ -362,7 +362,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-binghamton",
+    "stateCitySlug": "new-york-binghamton",
     "cityName": "Binghamton",
     "state": "New York",
     "count": 12,
@@ -376,7 +376,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-troy",
+    "stateCitySlug": "new-york-troy",
     "cityName": "Troy",
     "state": "New York",
     "count": 12,
@@ -390,7 +390,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-lewiston",
+    "stateCitySlug": "new-york-lewiston",
     "cityName": "Lewiston",
     "state": "New York",
     "count": 12,
@@ -402,7 +402,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-newburgh",
+    "stateCitySlug": "new-york-newburgh",
     "cityName": "Newburgh",
     "state": "New York",
     "count": 11,
@@ -412,7 +412,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-kingston",
+    "stateCitySlug": "new-york-kingston",
     "cityName": "Kingston",
     "state": "New York",
     "count": 11,
@@ -425,7 +425,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-southampton",
+    "stateCitySlug": "new-york-southampton",
     "cityName": "Southampton",
     "state": "New York",
     "count": 11,
@@ -436,7 +436,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-middletown",
+    "stateCitySlug": "new-york-middletown",
     "cityName": "Middletown",
     "state": "New York",
     "count": 11,
@@ -459,7 +459,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-cortland",
+    "stateCitySlug": "new-york-cortland",
     "cityName": "Cortland",
     "state": "New York",
     "count": 9,
@@ -473,7 +473,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-canandaigua",
+    "stateCitySlug": "new-york-canandaigua",
     "cityName": "Canandaigua",
     "state": "New York",
     "count": 8,
@@ -485,7 +485,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-poughkeepsie",
+    "stateCitySlug": "new-york-poughkeepsie",
     "cityName": "Poughkeepsie",
     "state": "New York",
     "count": 8,
@@ -498,7 +498,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-oneonta",
+    "stateCitySlug": "new-york-oneonta",
     "cityName": "Oneonta",
     "state": "New York",
     "count": 8,
@@ -511,7 +511,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-patchogue",
+    "stateCitySlug": "new-york-patchogue",
     "cityName": "Patchogue",
     "state": "New York",
     "count": 8,
@@ -524,7 +524,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-kill-buck",
+    "stateCitySlug": "new-york-kill-buck",
     "cityName": "Kill Buck",
     "state": "New York",
     "count": 7,
@@ -533,7 +533,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-corning",
+    "stateCitySlug": "new-york-corning",
     "cityName": "Corning",
     "state": "New York",
     "count": 7,
@@ -545,7 +545,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-oswego",
+    "stateCitySlug": "new-york-oswego",
     "cityName": "Oswego",
     "state": "New York",
     "count": 7,
@@ -557,7 +557,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-gowanda",
+    "stateCitySlug": "new-york-gowanda",
     "cityName": "Gowanda",
     "state": "New York",
     "count": 7,
@@ -566,7 +566,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-basom",
+    "stateCitySlug": "new-york-basom",
     "cityName": "Basom",
     "state": "New York",
     "count": 7,
@@ -575,7 +575,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-new-hartford",
+    "stateCitySlug": "new-york-new-hartford",
     "cityName": "New Hartford",
     "state": "New York",
     "count": 7,
@@ -587,7 +587,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-elmira",
+    "stateCitySlug": "new-york-elmira",
     "cityName": "Elmira",
     "state": "New York",
     "count": 7,
@@ -600,7 +600,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-hudson",
+    "stateCitySlug": "new-york-hudson",
     "cityName": "Hudson",
     "state": "New York",
     "count": 7,
@@ -613,7 +613,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-saratoga-springs",
+    "stateCitySlug": "new-york-saratoga-springs",
     "cityName": "Saratoga Springs",
     "state": "New York",
     "count": 7,
@@ -627,7 +627,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-huntington",
+    "stateCitySlug": "new-york-huntington",
     "cityName": "Huntington",
     "state": "New York",
     "count": 7,
@@ -640,7 +640,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-amsterdam",
+    "stateCitySlug": "new-york-amsterdam",
     "cityName": "Amsterdam",
     "state": "New York",
     "count": 7,
@@ -652,7 +652,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-elizabeth",
+    "stateCitySlug": "new-jersey-elizabeth",
     "cityName": "Elizabeth",
     "state": "New Jersey",
     "count": 6,
@@ -662,7 +662,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-mount-vernon",
+    "stateCitySlug": "new-york-mount-vernon",
     "cityName": "Mount Vernon",
     "state": "New York",
     "count": 6,
@@ -674,7 +674,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-riverhead",
+    "stateCitySlug": "new-york-riverhead",
     "cityName": "Riverhead",
     "state": "New York",
     "count": 6,
@@ -686,7 +686,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-jersey-city",
+    "stateCitySlug": "new-jersey-jersey-city",
     "cityName": "Jersey City",
     "state": "New Jersey",
     "count": 6,
@@ -695,7 +695,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-fort-covington",
+    "stateCitySlug": "new-york-fort-covington",
     "cityName": "Fort Covington",
     "state": "New York",
     "count": 6,
@@ -704,7 +704,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-plattsburgh",
+    "stateCitySlug": "new-york-plattsburgh",
     "cityName": "Plattsburgh",
     "state": "New York",
     "count": 6,
@@ -716,7 +716,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-medford",
+    "stateCitySlug": "new-york-medford",
     "cityName": "Medford",
     "state": "New York",
     "count": 6,
@@ -727,7 +727,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-huntington-station",
+    "stateCitySlug": "new-york-huntington-station",
     "cityName": "Huntington Station",
     "state": "New York",
     "count": 6,
@@ -739,7 +739,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-norwich",
+    "stateCitySlug": "new-york-norwich",
     "cityName": "Norwich",
     "state": "New York",
     "count": 6,
@@ -760,7 +760,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-latham",
+    "stateCitySlug": "new-york-latham",
     "cityName": "Latham",
     "state": "New York",
     "count": 5,
@@ -771,7 +771,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-wappingers-falls",
+    "stateCitySlug": "new-york-wappingers-falls",
     "cityName": "Wappingers Falls",
     "state": "New York",
     "count": 5,
@@ -782,7 +782,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-fort-lee",
+    "stateCitySlug": "new-jersey-fort-lee",
     "cityName": "Fort Lee",
     "state": "New Jersey",
     "count": 5,
@@ -792,7 +792,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-geneva",
+    "stateCitySlug": "new-york-geneva",
     "cityName": "Geneva",
     "state": "New York",
     "count": 5,
@@ -803,7 +803,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-olean",
+    "stateCitySlug": "new-york-olean",
     "cityName": "Olean",
     "state": "New York",
     "count": 5,
@@ -815,7 +815,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-peekskill",
+    "stateCitySlug": "new-york-peekskill",
     "cityName": "Peekskill",
     "state": "New York",
     "count": 5,
@@ -827,7 +827,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-little-falls",
+    "stateCitySlug": "new-york-little-falls",
     "cityName": "Little Falls",
     "state": "New York",
     "count": 5,
@@ -839,7 +839,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-east-meadow",
+    "stateCitySlug": "new-york-east-meadow",
     "cityName": "East Meadow",
     "state": "New York",
     "count": 5,
@@ -850,7 +850,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-batavia",
+    "stateCitySlug": "new-york-batavia",
     "cityName": "Batavia",
     "state": "New York",
     "count": 5,
@@ -863,7 +863,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-hempstead",
+    "stateCitySlug": "new-york-hempstead",
     "cityName": "Hempstead",
     "state": "New York",
     "count": 5,
@@ -875,7 +875,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-depew",
+    "stateCitySlug": "new-york-depew",
     "cityName": "Depew",
     "state": "New York",
     "count": 4,
@@ -893,7 +893,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-lake-ronkonkoma",
+    "stateCitySlug": "new-york-lake-ronkonkoma",
     "cityName": "Lake Ronkonkoma",
     "state": "New York",
     "count": 4,
@@ -904,7 +904,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-steamburg",
+    "stateCitySlug": "new-york-steamburg",
     "cityName": "Steamburg",
     "state": "New York",
     "count": 4,
@@ -913,7 +913,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-beacon",
+    "stateCitySlug": "new-york-beacon",
     "cityName": "Beacon",
     "state": "New York",
     "count": 4,
@@ -923,7 +923,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-horseheads",
+    "stateCitySlug": "new-york-horseheads",
     "cityName": "Horseheads",
     "state": "New York",
     "count": 4,
@@ -934,7 +934,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-rensselaer",
+    "stateCitySlug": "new-york-rensselaer",
     "cityName": "Rensselaer",
     "state": "New York",
     "count": 4,
@@ -944,7 +944,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-auburn",
+    "stateCitySlug": "new-york-auburn",
     "cityName": "Auburn",
     "state": "New York",
     "count": 4,
@@ -954,7 +954,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-cheektowaga",
+    "stateCitySlug": "new-york-cheektowaga",
     "cityName": "Cheektowaga",
     "state": "New York",
     "count": 4,
@@ -964,7 +964,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-shirley",
+    "stateCitySlug": "new-york-shirley",
     "cityName": "Shirley",
     "state": "New York",
     "count": 4,
@@ -984,7 +984,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-sanborn",
+    "stateCitySlug": "new-york-sanborn",
     "cityName": "Sanborn",
     "state": "New York",
     "count": 4,
@@ -994,7 +994,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-westbury",
+    "stateCitySlug": "new-york-westbury",
     "cityName": "Westbury",
     "state": "New York",
     "count": 4,
@@ -1005,7 +1005,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-new-rochelle",
+    "stateCitySlug": "new-york-new-rochelle",
     "cityName": "New Rochelle",
     "state": "New York",
     "count": 4,
@@ -1015,7 +1015,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-farmingdale",
+    "stateCitySlug": "new-york-farmingdale",
     "cityName": "Farmingdale",
     "state": "New York",
     "count": 3,
@@ -1042,7 +1042,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-cortlandt-manor",
+    "stateCitySlug": "new-york-cortlandt-manor",
     "cityName": "Cortlandt Manor",
     "state": "New York",
     "count": 3,
@@ -1053,7 +1053,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-east-syracuse",
+    "stateCitySlug": "new-york-east-syracuse",
     "cityName": "East Syracuse",
     "state": "New York",
     "count": 3,
@@ -1062,7 +1062,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-vestal",
+    "stateCitySlug": "new-york-vestal",
     "cityName": "Vestal",
     "state": "New York",
     "count": 3,
@@ -1072,7 +1072,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-east-rochester",
+    "stateCitySlug": "new-york-east-rochester",
     "cityName": "East Rochester",
     "state": "New York",
     "count": 3,
@@ -1082,7 +1082,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-merrick",
+    "stateCitySlug": "new-york-merrick",
     "cityName": "Merrick",
     "state": "New York",
     "count": 3,
@@ -1093,7 +1093,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-glens-falls",
+    "stateCitySlug": "new-york-glens-falls",
     "cityName": "Glens Falls",
     "state": "New York",
     "count": 3,
@@ -1103,7 +1103,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-monticello",
+    "stateCitySlug": "new-york-monticello",
     "cityName": "Monticello",
     "state": "New York",
     "count": 3,
@@ -1114,7 +1114,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-edgewater",
+    "stateCitySlug": "new-jersey-edgewater",
     "cityName": "Edgewater",
     "state": "New Jersey",
     "count": 3,
@@ -1133,7 +1133,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-warrensburg",
+    "stateCitySlug": "new-york-warrensburg",
     "cityName": "Warrensburg",
     "state": "New York",
     "count": 3,
@@ -1144,7 +1144,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-castleton-on-hudson",
+    "stateCitySlug": "new-york-castleton-on-hudson",
     "cityName": "Castleton-on-Hudson",
     "state": "New York",
     "count": 3,
@@ -1154,7 +1154,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-oceanside",
+    "stateCitySlug": "new-york-oceanside",
     "cityName": "Oceanside",
     "state": "New York",
     "count": 3,
@@ -1164,7 +1164,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-lowville",
+    "stateCitySlug": "new-york-lowville",
     "cityName": "Lowville",
     "state": "New York",
     "count": 3,
@@ -1175,7 +1175,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-ogdensburg",
+    "stateCitySlug": "new-york-ogdensburg",
     "cityName": "Ogdensburg",
     "state": "New York",
     "count": 3,
@@ -1185,7 +1185,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-freeport",
+    "stateCitySlug": "new-york-freeport",
     "cityName": "Freeport",
     "state": "New York",
     "count": 3,
@@ -1196,7 +1196,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-allegany",
+    "stateCitySlug": "new-york-allegany",
     "cityName": "Allegany",
     "state": "New York",
     "count": 3,
@@ -1207,7 +1207,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-johnson-city",
+    "stateCitySlug": "new-york-johnson-city",
     "cityName": "Johnson City",
     "state": "New York",
     "count": 3,
@@ -1217,7 +1217,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-victor",
+    "stateCitySlug": "new-york-victor",
     "cityName": "Victor",
     "state": "New York",
     "count": 3,
@@ -1226,7 +1226,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-elmont",
+    "stateCitySlug": "new-york-elmont",
     "cityName": "Elmont",
     "state": "New York",
     "count": 3,
@@ -1237,7 +1237,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-new-hampton",
+    "stateCitySlug": "new-york-new-hampton",
     "cityName": "New Hampton",
     "state": "New York",
     "count": 3,
@@ -1246,7 +1246,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-nanuet",
+    "stateCitySlug": "new-york-nanuet",
     "cityName": "Nanuet",
     "state": "New York",
     "count": 3,
@@ -1256,7 +1256,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-north-tonawanda",
+    "stateCitySlug": "new-york-north-tonawanda",
     "cityName": "North Tonawanda",
     "state": "New York",
     "count": 3,
@@ -1265,7 +1265,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-mineola",
+    "stateCitySlug": "new-york-mineola",
     "cityName": "Mineola",
     "state": "New York",
     "count": 3,
@@ -1276,7 +1276,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-potsdam",
+    "stateCitySlug": "new-york-potsdam",
     "cityName": "Potsdam",
     "state": "New York",
     "count": 3,
@@ -1287,7 +1287,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-bethpage",
+    "stateCitySlug": "new-york-bethpage",
     "cityName": "Bethpage",
     "state": "New York",
     "count": 3,
@@ -1307,7 +1307,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-farmingville",
+    "stateCitySlug": "new-york-farmingville",
     "cityName": "Farmingville",
     "state": "New York",
     "count": 2,
@@ -1317,7 +1317,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-west-milford",
+    "stateCitySlug": "new-jersey-west-milford",
     "cityName": "West Milford",
     "state": "New Jersey",
     "count": 2,
@@ -1326,7 +1326,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-spring-valley",
+    "stateCitySlug": "new-york-spring-valley",
     "cityName": "Spring Valley",
     "state": "New York",
     "count": 2,
@@ -1335,7 +1335,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-lawtons",
+    "stateCitySlug": "new-york-lawtons",
     "cityName": "Lawtons",
     "state": "New York",
     "count": 2,
@@ -1344,7 +1344,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-scarsdale",
+    "stateCitySlug": "new-york-scarsdale",
     "cityName": "Scarsdale",
     "state": "New York",
     "count": 2,
@@ -1354,7 +1354,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-nyack",
+    "stateCitySlug": "new-york-nyack",
     "cityName": "Nyack",
     "state": "New York",
     "count": 2,
@@ -1363,7 +1363,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-rochelle-park",
+    "stateCitySlug": "new-jersey-rochelle-park",
     "cityName": "Rochelle Park",
     "state": "New Jersey",
     "count": 2,
@@ -1373,7 +1373,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-lake-george",
+    "stateCitySlug": "new-york-lake-george",
     "cityName": "Lake George",
     "state": "New York",
     "count": 2,
@@ -1383,7 +1383,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-greenwich",
+    "stateCitySlug": "new-york-greenwich",
     "cityName": "Greenwich",
     "state": "New York",
     "count": 2,
@@ -1392,7 +1392,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-yorkville",
+    "stateCitySlug": "new-york-yorkville",
     "cityName": "Yorkville",
     "state": "New York",
     "count": 2,
@@ -1402,7 +1402,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-johnstown",
+    "stateCitySlug": "new-york-johnstown",
     "cityName": "Johnstown",
     "state": "New York",
     "count": 2,
@@ -1412,7 +1412,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-south-glens-falls",
+    "stateCitySlug": "new-york-south-glens-falls",
     "cityName": "South Glens Falls",
     "state": "New York",
     "count": 2,
@@ -1421,7 +1421,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-menands",
+    "stateCitySlug": "new-york-menands",
     "cityName": "Menands",
     "state": "New York",
     "count": 2,
@@ -1430,7 +1430,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-lake-placid",
+    "stateCitySlug": "new-york-lake-placid",
     "cityName": "Lake Placid",
     "state": "New York",
     "count": 2,
@@ -1440,7 +1440,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-blasdell",
+    "stateCitySlug": "new-york-blasdell",
     "cityName": "Blasdell",
     "state": "New York",
     "count": 2,
@@ -1450,7 +1450,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-cliffside-park",
+    "stateCitySlug": "new-jersey-cliffside-park",
     "cityName": "Cliffside Park",
     "state": "New Jersey",
     "count": 2,
@@ -1460,7 +1460,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-airmont",
+    "stateCitySlug": "new-york-airmont",
     "cityName": "Airmont",
     "state": "New York",
     "count": 2,
@@ -1470,7 +1470,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-east-northport",
+    "stateCitySlug": "new-york-east-northport",
     "cityName": "East Northport",
     "state": "New York",
     "count": 2,
@@ -1489,7 +1489,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-arlington",
+    "stateCitySlug": "new-york-arlington",
     "cityName": "Arlington",
     "state": "New York",
     "count": 2,
@@ -1499,7 +1499,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-deer-park",
+    "stateCitySlug": "new-york-deer-park",
     "cityName": "Deer Park",
     "state": "New York",
     "count": 2,
@@ -1508,7 +1508,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-lancaster",
+    "stateCitySlug": "new-york-lancaster",
     "cityName": "Lancaster",
     "state": "New York",
     "count": 2,
@@ -1517,7 +1517,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-bellmore",
+    "stateCitySlug": "new-york-bellmore",
     "cityName": "Bellmore",
     "state": "New York",
     "count": 2,
@@ -1527,7 +1527,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-fulton",
+    "stateCitySlug": "new-york-fulton",
     "cityName": "Fulton",
     "state": "New York",
     "count": 2,
@@ -1536,7 +1536,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-new-paltz",
+    "stateCitySlug": "new-york-new-paltz",
     "cityName": "New Paltz",
     "state": "New York",
     "count": 2,
@@ -1545,7 +1545,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-herkimer",
+    "stateCitySlug": "new-york-herkimer",
     "cityName": "Herkimer",
     "state": "New York",
     "count": 2,
@@ -1554,7 +1554,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-port-jervis",
+    "stateCitySlug": "new-york-port-jervis",
     "cityName": "Port Jervis",
     "state": "New York",
     "count": 2,
@@ -1581,7 +1581,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-tupper-lake",
+    "stateCitySlug": "new-york-tupper-lake",
     "cityName": "Tupper Lake",
     "state": "New York",
     "count": 2,
@@ -1591,7 +1591,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-margaretville",
+    "stateCitySlug": "new-york-margaretville",
     "cityName": "Margaretville",
     "state": "New York",
     "count": 2,
@@ -1601,7 +1601,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-schuylerville",
+    "stateCitySlug": "new-york-schuylerville",
     "cityName": "Schuylerville",
     "state": "New York",
     "count": 2,
@@ -1611,7 +1611,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-coram",
+    "stateCitySlug": "new-york-coram",
     "cityName": "Coram",
     "state": "New York",
     "count": 2,
@@ -1621,7 +1621,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-cuba",
+    "stateCitySlug": "new-york-cuba",
     "cityName": "Cuba",
     "state": "New York",
     "count": 2,
@@ -1631,7 +1631,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-hancock",
+    "stateCitySlug": "new-york-hancock",
     "cityName": "Hancock",
     "state": "New York",
     "count": 2,
@@ -1650,7 +1650,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-ticonderoga",
+    "stateCitySlug": "new-york-ticonderoga",
     "cityName": "Ticonderoga",
     "state": "New York",
     "count": 2,
@@ -1660,7 +1660,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-alfred",
+    "stateCitySlug": "new-york-alfred",
     "cityName": "Alfred",
     "state": "New York",
     "count": 2,
@@ -1670,7 +1670,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-wellsville",
+    "stateCitySlug": "new-york-wellsville",
     "cityName": "Wellsville",
     "state": "New York",
     "count": 2,
@@ -1680,7 +1680,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-new-hyde-park",
+    "stateCitySlug": "new-york-new-hyde-park",
     "cityName": "New Hyde Park",
     "state": "New York",
     "count": 2,
@@ -1690,7 +1690,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-catskill",
+    "stateCitySlug": "new-york-catskill",
     "cityName": "Catskill",
     "state": "New York",
     "count": 2,
@@ -1736,7 +1736,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-ballston-spa",
+    "stateCitySlug": "new-york-ballston-spa",
     "cityName": "Ballston Spa",
     "state": "New York",
     "count": 2,
@@ -1745,7 +1745,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-north-bergen",
+    "stateCitySlug": "new-jersey-north-bergen",
     "cityName": "North Bergen",
     "state": "New Jersey",
     "count": 2,
@@ -1754,7 +1754,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-liverpool",
+    "stateCitySlug": "new-york-liverpool",
     "cityName": "Liverpool",
     "state": "New York",
     "count": 2,
@@ -1763,7 +1763,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-watkins-glen",
+    "stateCitySlug": "new-york-watkins-glen",
     "cityName": "Watkins Glen",
     "state": "New York",
     "count": 2,
@@ -1773,7 +1773,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-fishkill",
+    "stateCitySlug": "new-york-fishkill",
     "cityName": "Fishkill",
     "state": "New York",
     "count": 2,
@@ -1782,7 +1782,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-colonie",
+    "stateCitySlug": "new-york-colonie",
     "cityName": "Colonie",
     "state": "New York",
     "count": 2,
@@ -1800,7 +1800,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-seneca-falls",
+    "stateCitySlug": "new-york-seneca-falls",
     "cityName": "Seneca Falls",
     "state": "New York",
     "count": 2,
@@ -1809,7 +1809,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-hornell",
+    "stateCitySlug": "new-york-hornell",
     "cityName": "Hornell",
     "state": "New York",
     "count": 2,
@@ -1819,7 +1819,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-hamburg",
+    "stateCitySlug": "new-york-hamburg",
     "cityName": "Hamburg",
     "state": "New York",
     "count": 2,
@@ -1828,7 +1828,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-kenmore",
+    "stateCitySlug": "new-york-kenmore",
     "cityName": "Kenmore",
     "state": "New York",
     "count": 2,
@@ -1837,7 +1837,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-bohemia",
+    "stateCitySlug": "new-york-bohemia",
     "cityName": "Bohemia",
     "state": "New York",
     "count": 2,
@@ -1856,7 +1856,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-rocky-point",
+    "stateCitySlug": "new-york-rocky-point",
     "cityName": "Rocky Point",
     "state": "New York",
     "count": 2,
@@ -1866,7 +1866,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-central-square",
+    "stateCitySlug": "new-york-central-square",
     "cityName": "Central Square",
     "state": "New York",
     "count": 2,
@@ -1875,7 +1875,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-dansville",
+    "stateCitySlug": "new-york-dansville",
     "cityName": "Dansville",
     "state": "New York",
     "count": 2,
@@ -1885,7 +1885,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-blue-point",
+    "stateCitySlug": "new-york-blue-point",
     "cityName": "Blue Point",
     "state": "New York",
     "count": 2,
@@ -1895,7 +1895,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-pulaski",
+    "stateCitySlug": "new-york-pulaski",
     "cityName": "Pulaski",
     "state": "New York",
     "count": 2,
@@ -1905,7 +1905,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-islip",
+    "stateCitySlug": "new-york-islip",
     "cityName": "Islip",
     "state": "New York",
     "count": 2,
@@ -1915,7 +1915,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-islip-terrace",
+    "stateCitySlug": "new-york-islip-terrace",
     "cityName": "Islip Terrace",
     "state": "New York",
     "count": 2,
@@ -1934,7 +1934,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-verona",
+    "stateCitySlug": "new-york-verona",
     "cityName": "Verona",
     "state": "New York",
     "count": 2,
@@ -1943,7 +1943,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-selden",
+    "stateCitySlug": "new-york-selden",
     "cityName": "Selden",
     "state": "New York",
     "count": 2,
@@ -1962,7 +1962,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-brooklawn",
+    "stateCitySlug": "new-jersey-brooklawn",
     "cityName": "Brooklawn",
     "state": "New Jersey",
     "count": 1,
@@ -1971,7 +1971,7 @@
     }
   },
   {
-    "stateCitySlug": "rhode island-exeter",
+    "stateCitySlug": "rhode-island-exeter",
     "cityName": "Exeter",
     "state": "Rhode Island",
     "count": 1,
@@ -1980,7 +1980,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-newark",
+    "stateCitySlug": "new-jersey-newark",
     "cityName": "Newark",
     "state": "New Jersey",
     "count": 1,
@@ -1998,7 +1998,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-rahway",
+    "stateCitySlug": "new-jersey-rahway",
     "cityName": "Rahway",
     "state": "New Jersey",
     "count": 1,
@@ -2016,7 +2016,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-paramus",
+    "stateCitySlug": "new-jersey-paramus",
     "cityName": "Paramus",
     "state": "New Jersey",
     "count": 1,
@@ -2025,7 +2025,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-union",
+    "stateCitySlug": "new-jersey-union",
     "cityName": "Union",
     "state": "New Jersey",
     "count": 1,
@@ -2034,7 +2034,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-setauket-east-setauket",
+    "stateCitySlug": "new-york-setauket-east-setauket",
     "cityName": "Setauket- East Setauket",
     "state": "New York",
     "count": 1,
@@ -2043,7 +2043,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-little-falls-township",
+    "stateCitySlug": "new-jersey-little-falls-township",
     "cityName": "Little Falls Township",
     "state": "New Jersey",
     "count": 1,
@@ -2052,7 +2052,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-merchantville",
+    "stateCitySlug": "new-jersey-merchantville",
     "cityName": "Merchantville",
     "state": "New Jersey",
     "count": 1,
@@ -2061,7 +2061,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-atlantic-city",
+    "stateCitySlug": "new-jersey-atlantic-city",
     "cityName": "Atlantic City",
     "state": "New Jersey",
     "count": 1,
@@ -2079,7 +2079,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-clay",
+    "stateCitySlug": "new-york-clay",
     "cityName": "Clay",
     "state": "New York",
     "count": 1,
@@ -2097,7 +2097,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-coxsackie",
+    "stateCitySlug": "new-york-coxsackie",
     "cityName": "Coxsackie",
     "state": "New York",
     "count": 1,
@@ -2106,7 +2106,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-eastchester",
+    "stateCitySlug": "new-york-eastchester",
     "cityName": "Eastchester",
     "state": "New York",
     "count": 1,
@@ -2124,7 +2124,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-levittown",
+    "stateCitySlug": "new-york-levittown",
     "cityName": "Levittown",
     "state": "New York",
     "count": 1,
@@ -2133,7 +2133,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-thiells",
+    "stateCitySlug": "new-york-thiells",
     "cityName": "Thiells",
     "state": "New York",
     "count": 1,
@@ -2142,7 +2142,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-glens-falls-north",
+    "stateCitySlug": "new-york-glens-falls-north",
     "cityName": "Glens Falls North",
     "state": "New York",
     "count": 1,
@@ -2151,7 +2151,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-brockport",
+    "stateCitySlug": "new-york-brockport",
     "cityName": "Brockport",
     "state": "New York",
     "count": 1,
@@ -2160,7 +2160,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-webster",
+    "stateCitySlug": "new-york-webster",
     "cityName": "Webster",
     "state": "New York",
     "count": 1,
@@ -2169,7 +2169,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-irving",
+    "stateCitySlug": "new-york-irving",
     "cityName": "Irving",
     "state": "New York",
     "count": 1,
@@ -2178,7 +2178,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-pound-ridge",
+    "stateCitySlug": "new-york-pound-ridge",
     "cityName": "Pound Ridge",
     "state": "New York",
     "count": 1,
@@ -2187,7 +2187,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-long-beach",
+    "stateCitySlug": "new-york-long-beach",
     "cityName": "Long Beach",
     "state": "New York",
     "count": 1,
@@ -2196,7 +2196,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-piermont",
+    "stateCitySlug": "new-york-piermont",
     "cityName": "Piermont",
     "state": "New York",
     "count": 1,
@@ -2214,7 +2214,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-mount-kisco",
+    "stateCitySlug": "new-york-mount-kisco",
     "cityName": "Mount Kisco",
     "state": "New York",
     "count": 1,
@@ -2223,7 +2223,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-unadilla",
+    "stateCitySlug": "new-york-unadilla",
     "cityName": "Unadilla",
     "state": "New York",
     "count": 1,
@@ -2241,7 +2241,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-haverstraw",
+    "stateCitySlug": "new-york-haverstraw",
     "cityName": "Haverstraw",
     "state": "New York",
     "count": 1,
@@ -2250,7 +2250,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-ossining",
+    "stateCitySlug": "new-york-ossining",
     "cityName": "Ossining",
     "state": "New York",
     "count": 1,
@@ -2259,7 +2259,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-mahopac",
+    "stateCitySlug": "new-york-mahopac",
     "cityName": "Mahopac",
     "state": "New York",
     "count": 1,
@@ -2268,7 +2268,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-greenfield-center",
+    "stateCitySlug": "new-york-greenfield-center",
     "cityName": "Greenfield Center",
     "state": "New York",
     "count": 1,
@@ -2277,7 +2277,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-sleepy-hollow",
+    "stateCitySlug": "new-york-sleepy-hollow",
     "cityName": "Sleepy Hollow",
     "state": "New York",
     "count": 1,
@@ -2286,7 +2286,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-ellenville",
+    "stateCitySlug": "new-york-ellenville",
     "cityName": "Ellenville",
     "state": "New York",
     "count": 1,
@@ -2295,7 +2295,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-warwick",
+    "stateCitySlug": "new-york-warwick",
     "cityName": "Warwick",
     "state": "New York",
     "count": 1,
@@ -2304,7 +2304,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-moriches",
+    "stateCitySlug": "new-york-moriches",
     "cityName": "Moriches",
     "state": "New York",
     "count": 1,
@@ -2313,7 +2313,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-water-mill",
+    "stateCitySlug": "new-york-water-mill",
     "cityName": "Water Mill",
     "state": "New York",
     "count": 1,
@@ -2322,7 +2322,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-hastings-on-hudson",
+    "stateCitySlug": "new-york-hastings-on-hudson",
     "cityName": "Hastings-on-Hudson",
     "state": "New York",
     "count": 1,
@@ -2331,7 +2331,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-great-neck",
+    "stateCitySlug": "new-york-great-neck",
     "cityName": "Great Neck",
     "state": "New York",
     "count": 1,
@@ -2340,7 +2340,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-manlius",
+    "stateCitySlug": "new-york-manlius",
     "cityName": "Manlius",
     "state": "New York",
     "count": 1,
@@ -2349,7 +2349,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-wellsburg",
+    "stateCitySlug": "new-york-wellsburg",
     "cityName": "Wellsburg",
     "state": "New York",
     "count": 1,
@@ -2358,7 +2358,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-remsen",
+    "stateCitySlug": "new-york-remsen",
     "cityName": "Remsen",
     "state": "New York",
     "count": 1,
@@ -2367,7 +2367,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-sea-cliff",
+    "stateCitySlug": "new-york-sea-cliff",
     "cityName": "Sea Cliff",
     "state": "New York",
     "count": 1,
@@ -2376,7 +2376,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-woodstock",
+    "stateCitySlug": "new-york-woodstock",
     "cityName": "Woodstock",
     "state": "New York",
     "count": 1,
@@ -2385,7 +2385,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-mount-vision",
+    "stateCitySlug": "new-york-mount-vision",
     "cityName": "Mount Vision",
     "state": "New York",
     "count": 1,
@@ -2403,7 +2403,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-rush",
+    "stateCitySlug": "new-york-rush",
     "cityName": "Rush",
     "state": "New York",
     "count": 1,
@@ -2412,7 +2412,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-keeseville",
+    "stateCitySlug": "new-york-keeseville",
     "cityName": "Keeseville",
     "state": "New York",
     "count": 1,
@@ -2421,7 +2421,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-honeoye-falls",
+    "stateCitySlug": "new-york-honeoye-falls",
     "cityName": "Honeoye Falls",
     "state": "New York",
     "count": 1,
@@ -2430,7 +2430,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-tenafly",
+    "stateCitySlug": "new-jersey-tenafly",
     "cityName": "Tenafly",
     "state": "New Jersey",
     "count": 1,
@@ -2439,7 +2439,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-holland-patent",
+    "stateCitySlug": "new-york-holland-patent",
     "cityName": "Holland Patent",
     "state": "New York",
     "count": 1,
@@ -2448,7 +2448,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-skaneateles",
+    "stateCitySlug": "new-york-skaneateles",
     "cityName": "Skaneateles",
     "state": "New York",
     "count": 1,
@@ -2457,7 +2457,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-ellicottville",
+    "stateCitySlug": "new-york-ellicottville",
     "cityName": "Ellicottville",
     "state": "New York",
     "count": 1,
@@ -2466,7 +2466,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-spencerport",
+    "stateCitySlug": "new-york-spencerport",
     "cityName": "Spencerport",
     "state": "New York",
     "count": 1,
@@ -2484,7 +2484,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-elmsford",
+    "stateCitySlug": "new-york-elmsford",
     "cityName": "Elmsford",
     "state": "New York",
     "count": 1,
@@ -2493,7 +2493,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-jeffersonville",
+    "stateCitySlug": "new-york-jeffersonville",
     "cityName": "Jeffersonville",
     "state": "New York",
     "count": 1,
@@ -2502,7 +2502,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-bellerose",
+    "stateCitySlug": "new-york-bellerose",
     "cityName": "Bellerose",
     "state": "New York",
     "count": 1,
@@ -2511,7 +2511,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-deposit",
+    "stateCitySlug": "new-york-deposit",
     "cityName": "Deposit",
     "state": "New York",
     "count": 1,
@@ -2520,7 +2520,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-babylon",
+    "stateCitySlug": "new-york-babylon",
     "cityName": "Babylon",
     "state": "New York",
     "count": 1,
@@ -2529,7 +2529,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-glen-rock",
+    "stateCitySlug": "new-jersey-glen-rock",
     "cityName": "Glen Rock",
     "state": "New Jersey",
     "count": 1,
@@ -2538,7 +2538,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-holbrook",
+    "stateCitySlug": "new-york-holbrook",
     "cityName": "Holbrook",
     "state": "New York",
     "count": 1,
@@ -2547,7 +2547,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-hicksville",
+    "stateCitySlug": "new-york-hicksville",
     "cityName": "Hicksville",
     "state": "New York",
     "count": 1,
@@ -2556,7 +2556,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-angola",
+    "stateCitySlug": "new-york-angola",
     "cityName": "Angola",
     "state": "New York",
     "count": 1,
@@ -2565,7 +2565,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-manchester",
+    "stateCitySlug": "new-york-manchester",
     "cityName": "Manchester",
     "state": "New York",
     "count": 1,
@@ -2583,7 +2583,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-orchard-park",
+    "stateCitySlug": "new-york-orchard-park",
     "cityName": "Orchard Park",
     "state": "New York",
     "count": 1,
@@ -2592,7 +2592,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-plainview",
+    "stateCitySlug": "new-york-plainview",
     "cityName": "Plainview",
     "state": "New York",
     "count": 1,
@@ -2601,7 +2601,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-woodbridge-township",
+    "stateCitySlug": "new-jersey-woodbridge-township",
     "cityName": "Woodbridge Township",
     "state": "New Jersey",
     "count": 1,
@@ -2610,7 +2610,7 @@
     }
   },
   {
-    "stateCitySlug": "rhode island-warwick",
+    "stateCitySlug": "rhode-island-warwick",
     "cityName": "Warwick",
     "state": "Rhode Island",
     "count": 1,
@@ -2619,7 +2619,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-neptune-township",
+    "stateCitySlug": "new-jersey-neptune-township",
     "cityName": "Neptune Township",
     "state": "New Jersey",
     "count": 1,
@@ -2646,7 +2646,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-lodi",
+    "stateCitySlug": "new-jersey-lodi",
     "cityName": "Lodi",
     "state": "New Jersey",
     "count": 1,
@@ -2655,7 +2655,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-maplewood",
+    "stateCitySlug": "new-jersey-maplewood",
     "cityName": "Maplewood",
     "state": "New Jersey",
     "count": 1,
@@ -2673,7 +2673,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-carle-place",
+    "stateCitySlug": "new-york-carle-place",
     "cityName": "Carle Place",
     "state": "New York",
     "count": 1,
@@ -2718,7 +2718,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-hackensack",
+    "stateCitySlug": "new-jersey-hackensack",
     "cityName": "Hackensack",
     "state": "New Jersey",
     "count": 1,
@@ -2727,7 +2727,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-haledon",
+    "stateCitySlug": "new-jersey-haledon",
     "cityName": "Haledon",
     "state": "New Jersey",
     "count": 1,
@@ -2736,7 +2736,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-elmwood-park",
+    "stateCitySlug": "new-jersey-elmwood-park",
     "cityName": "Elmwood Park",
     "state": "New Jersey",
     "count": 1,
@@ -2754,7 +2754,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-bardonia",
+    "stateCitySlug": "new-york-bardonia",
     "cityName": "Bardonia",
     "state": "New York",
     "count": 1,
@@ -2763,7 +2763,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-waterford",
+    "stateCitySlug": "new-york-waterford",
     "cityName": "Waterford",
     "state": "New York",
     "count": 1,
@@ -2772,7 +2772,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-lackawanna",
+    "stateCitySlug": "new-york-lackawanna",
     "cityName": "Lackawanna",
     "state": "New York",
     "count": 1,
@@ -2781,7 +2781,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-north-syracuse",
+    "stateCitySlug": "new-york-north-syracuse",
     "cityName": "North Syracuse",
     "state": "New York",
     "count": 1,
@@ -2799,7 +2799,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-penfield",
+    "stateCitySlug": "new-york-penfield",
     "cityName": "Penfield",
     "state": "New York",
     "count": 1,
@@ -2808,7 +2808,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-west-seneca",
+    "stateCitySlug": "new-york-west-seneca",
     "cityName": "West Seneca",
     "state": "New York",
     "count": 1,
@@ -2826,7 +2826,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-calverton",
+    "stateCitySlug": "new-york-calverton",
     "cityName": "Calverton",
     "state": "New York",
     "count": 1,
@@ -2853,7 +2853,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-port-jefferson-station",
+    "stateCitySlug": "new-york-port-jefferson-station",
     "cityName": "Port Jefferson Station",
     "state": "New York",
     "count": 1,
@@ -2862,7 +2862,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-tarrytown",
+    "stateCitySlug": "new-york-tarrytown",
     "cityName": "Tarrytown",
     "state": "New York",
     "count": 1,
@@ -2880,7 +2880,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-port-jefferson",
+    "stateCitySlug": "new-york-port-jefferson",
     "cityName": "Port Jefferson",
     "state": "New York",
     "count": 1,
@@ -2889,7 +2889,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-dryden",
+    "stateCitySlug": "new-york-dryden",
     "cityName": "Dryden",
     "state": "New York",
     "count": 1,
@@ -2898,7 +2898,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-west-glens-falls",
+    "stateCitySlug": "new-york-west-glens-falls",
     "cityName": "West Glens Falls",
     "state": "New York",
     "count": 1,
@@ -2907,7 +2907,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-west-hempstead",
+    "stateCitySlug": "new-york-west-hempstead",
     "cityName": "West Hempstead",
     "state": "New York",
     "count": 1,
@@ -2916,7 +2916,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-tonawanda-town",
+    "stateCitySlug": "new-york-tonawanda-town",
     "cityName": "Tonawanda Town",
     "state": "New York",
     "count": 1,
@@ -2925,7 +2925,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-hudson-falls",
+    "stateCitySlug": "new-york-hudson-falls",
     "cityName": "Hudson Falls",
     "state": "New York",
     "count": 1,
@@ -2934,7 +2934,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-macedon",
+    "stateCitySlug": "new-york-macedon",
     "cityName": "Macedon",
     "state": "New York",
     "count": 1,
@@ -2943,7 +2943,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-centereach",
+    "stateCitySlug": "new-york-centereach",
     "cityName": "Centereach",
     "state": "New York",
     "count": 1,
@@ -2952,7 +2952,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-cohoes",
+    "stateCitySlug": "new-york-cohoes",
     "cityName": "Cohoes",
     "state": "New York",
     "count": 1,
@@ -2961,7 +2961,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-mount-sinai",
+    "stateCitySlug": "new-york-mount-sinai",
     "cityName": "Mount Sinai",
     "state": "New York",
     "count": 1,
@@ -2970,7 +2970,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-rock-hill",
+    "stateCitySlug": "new-york-rock-hill",
     "cityName": "Rock Hill",
     "state": "New York",
     "count": 1,
@@ -2988,7 +2988,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-fredonia",
+    "stateCitySlug": "new-york-fredonia",
     "cityName": "Fredonia",
     "state": "New York",
     "count": 1,
@@ -2997,7 +2997,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-garden-city",
+    "stateCitySlug": "new-york-garden-city",
     "cityName": "Garden City",
     "state": "New York",
     "count": 1,
@@ -3015,7 +3015,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-perrysburg",
+    "stateCitySlug": "new-york-perrysburg",
     "cityName": "Perrysburg",
     "state": "New York",
     "count": 1,
@@ -3024,7 +3024,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-alabama",
+    "stateCitySlug": "new-york-alabama",
     "cityName": "Alabama",
     "state": "New York",
     "count": 1,
@@ -3033,7 +3033,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-scotchtown",
+    "stateCitySlug": "new-york-scotchtown",
     "cityName": "Scotchtown",
     "state": "New York",
     "count": 1,
@@ -3042,7 +3042,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-cedarhurst",
+    "stateCitySlug": "new-york-cedarhurst",
     "cityName": "Cedarhurst",
     "state": "New York",
     "count": 1,
@@ -3060,7 +3060,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-white-lake",
+    "stateCitySlug": "new-york-white-lake",
     "cityName": "White Lake",
     "state": "New York",
     "count": 1,
@@ -3069,7 +3069,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-massena",
+    "stateCitySlug": "new-york-massena",
     "cityName": "Massena",
     "state": "New York",
     "count": 1,
@@ -3078,7 +3078,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-bedford-hills",
+    "stateCitySlug": "new-york-bedford-hills",
     "cityName": "Bedford Hills",
     "state": "New York",
     "count": 1,
@@ -3096,7 +3096,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-chittenango",
+    "stateCitySlug": "new-york-chittenango",
     "cityName": "Chittenango",
     "state": "New York",
     "count": 1,
@@ -3105,7 +3105,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-wolcott",
+    "stateCitySlug": "new-york-wolcott",
     "cityName": "Wolcott",
     "state": "New York",
     "count": 1,
@@ -3114,7 +3114,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-red-hook",
+    "stateCitySlug": "new-york-red-hook",
     "cityName": "Red Hook",
     "state": "New York",
     "count": 1,
@@ -3132,7 +3132,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-alfred-station",
+    "stateCitySlug": "new-york-alfred-station",
     "cityName": "Alfred Station",
     "state": "New York",
     "count": 1,
@@ -3150,7 +3150,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-beaver-dams",
+    "stateCitySlug": "new-york-beaver-dams",
     "cityName": "Beaver Dams",
     "state": "New York",
     "count": 1,
@@ -3159,7 +3159,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-bellport",
+    "stateCitySlug": "new-york-bellport",
     "cityName": "Bellport",
     "state": "New York",
     "count": 1,
@@ -3168,7 +3168,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-homer",
+    "stateCitySlug": "new-york-homer",
     "cityName": "Homer",
     "state": "New York",
     "count": 1,
@@ -3177,7 +3177,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-east-aurora",
+    "stateCitySlug": "new-york-east-aurora",
     "cityName": "East Aurora",
     "state": "New York",
     "count": 1,
@@ -3186,7 +3186,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-woodbury",
+    "stateCitySlug": "new-york-woodbury",
     "cityName": "Woodbury",
     "state": "New York",
     "count": 1,
@@ -3195,7 +3195,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-carthage",
+    "stateCitySlug": "new-york-carthage",
     "cityName": "Carthage",
     "state": "New York",
     "count": 1,
@@ -3204,7 +3204,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-liberty",
+    "stateCitySlug": "new-york-liberty",
     "cityName": "Liberty",
     "state": "New York",
     "count": 1,
@@ -3213,7 +3213,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-commack",
+    "stateCitySlug": "new-york-commack",
     "cityName": "Commack",
     "state": "New York",
     "count": 1,
@@ -3222,7 +3222,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-malone",
+    "stateCitySlug": "new-york-malone",
     "cityName": "Malone",
     "state": "New York",
     "count": 1,
@@ -3231,7 +3231,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-harrison",
+    "stateCitySlug": "new-york-harrison",
     "cityName": "Harrison",
     "state": "New York",
     "count": 1,
@@ -3249,7 +3249,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-springville",
+    "stateCitySlug": "new-york-springville",
     "cityName": "Springville",
     "state": "New York",
     "count": 1,
@@ -3258,7 +3258,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-uniondale",
+    "stateCitySlug": "new-york-uniondale",
     "cityName": "Uniondale",
     "state": "New York",
     "count": 1,
@@ -3267,7 +3267,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-canton",
+    "stateCitySlug": "new-york-canton",
     "cityName": "Canton",
     "state": "New York",
     "count": 1,
@@ -3276,7 +3276,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-baldwin",
+    "stateCitySlug": "new-york-baldwin",
     "cityName": "Baldwin",
     "state": "New York",
     "count": 1,
@@ -3285,7 +3285,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-holtsville",
+    "stateCitySlug": "new-york-holtsville",
     "cityName": "Holtsville",
     "state": "New York",
     "count": 1,
@@ -3294,7 +3294,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-leicester",
+    "stateCitySlug": "new-york-leicester",
     "cityName": "Leicester",
     "state": "New York",
     "count": 1,
@@ -3330,7 +3330,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-mastic-beach",
+    "stateCitySlug": "new-york-mastic-beach",
     "cityName": "Mastic Beach",
     "state": "New York",
     "count": 1,
@@ -3339,7 +3339,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-randolph",
+    "stateCitySlug": "new-york-randolph",
     "cityName": "Randolph",
     "state": "New York",
     "count": 1,
@@ -3357,7 +3357,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-scotia",
+    "stateCitySlug": "new-york-scotia",
     "cityName": "Scotia",
     "state": "New York",
     "count": 1,
@@ -3366,7 +3366,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-newark",
+    "stateCitySlug": "new-york-newark",
     "cityName": "Newark",
     "state": "New York",
     "count": 1,
@@ -3375,7 +3375,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-hemlock",
+    "stateCitySlug": "new-york-hemlock",
     "cityName": "Hemlock",
     "state": "New York",
     "count": 1,
@@ -3384,7 +3384,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-whitehall",
+    "stateCitySlug": "new-york-whitehall",
     "cityName": "Whitehall",
     "state": "New York",
     "count": 1,
@@ -3393,7 +3393,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-penn-yan",
+    "stateCitySlug": "new-york-penn-yan",
     "cityName": "Penn Yan",
     "state": "New York",
     "count": 1,
@@ -3402,7 +3402,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-lima",
+    "stateCitySlug": "new-york-lima",
     "cityName": "Lima",
     "state": "New York",
     "count": 1,
@@ -3411,7 +3411,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-cayuta",
+    "stateCitySlug": "new-york-cayuta",
     "cityName": "Cayuta",
     "state": "New York",
     "count": 1,
@@ -3420,7 +3420,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-windsor",
+    "stateCitySlug": "new-york-windsor",
     "cityName": "Windsor",
     "state": "New York",
     "count": 1,
@@ -3429,7 +3429,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-limestone",
+    "stateCitySlug": "new-york-limestone",
     "cityName": "Limestone",
     "state": "New York",
     "count": 1,
@@ -3438,7 +3438,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-pelham-manor",
+    "stateCitySlug": "new-york-pelham-manor",
     "cityName": "Pelham Manor",
     "state": "New York",
     "count": 1,
@@ -3447,7 +3447,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-middle-island",
+    "stateCitySlug": "new-york-middle-island",
     "cityName": "Middle Island",
     "state": "New York",
     "count": 1,
@@ -3456,7 +3456,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-union-springs",
+    "stateCitySlug": "new-york-union-springs",
     "cityName": "Union Springs",
     "state": "New York",
     "count": 1,
@@ -3465,7 +3465,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-saranac-lake",
+    "stateCitySlug": "new-york-saranac-lake",
     "cityName": "Saranac Lake",
     "state": "New York",
     "count": 1,
@@ -3474,7 +3474,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-wurtsboro",
+    "stateCitySlug": "new-york-wurtsboro",
     "cityName": "Wurtsboro",
     "state": "New York",
     "count": 1,
@@ -3483,7 +3483,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-wantagh",
+    "stateCitySlug": "new-york-wantagh",
     "cityName": "Wantagh",
     "state": "New York",
     "count": 1,
@@ -3492,7 +3492,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-central-islip",
+    "stateCitySlug": "new-york-central-islip",
     "cityName": "Central Islip",
     "state": "New York",
     "count": 1,
@@ -3501,7 +3501,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-harriman",
+    "stateCitySlug": "new-york-harriman",
     "cityName": "Harriman",
     "state": "New York",
     "count": 1,
@@ -3510,7 +3510,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-stone-ridge",
+    "stateCitySlug": "new-york-stone-ridge",
     "cityName": "Stone Ridge",
     "state": "New York",
     "count": 1,
@@ -3519,7 +3519,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-franklin-square",
+    "stateCitySlug": "new-york-franklin-square",
     "cityName": "Franklin Square",
     "state": "New York",
     "count": 1,
@@ -3528,7 +3528,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-solvay",
+    "stateCitySlug": "new-york-solvay",
     "cityName": "Solvay",
     "state": "New York",
     "count": 1,
@@ -3537,7 +3537,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-new-city",
+    "stateCitySlug": "new-york-new-city",
     "cityName": "New City",
     "state": "New York",
     "count": 1,
@@ -3546,7 +3546,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-sherrill",
+    "stateCitySlug": "new-york-sherrill",
     "cityName": "Sherrill",
     "state": "New York",
     "count": 1,
@@ -3555,7 +3555,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-ronkonkoma",
+    "stateCitySlug": "new-york-ronkonkoma",
     "cityName": "Ronkonkoma",
     "state": "New York",
     "count": 1,
@@ -3564,7 +3564,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-lyons-falls",
+    "stateCitySlug": "new-york-lyons-falls",
     "cityName": "Lyons Falls",
     "state": "New York",
     "count": 1,
@@ -3573,7 +3573,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-oakland",
+    "stateCitySlug": "new-jersey-oakland",
     "cityName": "Oakland",
     "state": "New Jersey",
     "count": 1,
@@ -3582,7 +3582,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-south-farmingdale",
+    "stateCitySlug": "new-york-south-farmingdale",
     "cityName": "South Farmingdale",
     "state": "New York",
     "count": 1,
@@ -3591,7 +3591,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-bath",
+    "stateCitySlug": "new-york-bath",
     "cityName": "Bath",
     "state": "New York",
     "count": 1,
@@ -3600,7 +3600,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-pittsford",
+    "stateCitySlug": "new-york-pittsford",
     "cityName": "Pittsford",
     "state": "New York",
     "count": 1,
@@ -3618,7 +3618,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-sherburne",
+    "stateCitySlug": "new-york-sherburne",
     "cityName": "Sherburne",
     "state": "New York",
     "count": 1,
@@ -3627,7 +3627,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-akron",
+    "stateCitySlug": "new-york-akron",
     "cityName": "Akron",
     "state": "New York",
     "count": 1,
@@ -3636,7 +3636,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-avon",
+    "stateCitySlug": "new-york-avon",
     "cityName": "Avon",
     "state": "New York",
     "count": 1,
@@ -3645,7 +3645,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-palisades-park",
+    "stateCitySlug": "new-jersey-palisades-park",
     "cityName": "Palisades Park",
     "state": "New Jersey",
     "count": 1,
@@ -3654,7 +3654,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-bayonne",
+    "stateCitySlug": "new-jersey-bayonne",
     "cityName": "Bayonne",
     "state": "New Jersey",
     "count": 1,
@@ -3663,7 +3663,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-englewood",
+    "stateCitySlug": "new-jersey-englewood",
     "cityName": "Englewood",
     "state": "New Jersey",
     "count": 1,
@@ -3672,7 +3672,7 @@
     }
   },
   {
-    "stateCitySlug": "new jersey-northvale",
+    "stateCitySlug": "new-jersey-northvale",
     "cityName": "Northvale",
     "state": "New Jersey",
     "count": 1,
@@ -3681,7 +3681,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-west-nyack",
+    "stateCitySlug": "new-york-west-nyack",
     "cityName": "West Nyack",
     "state": "New York",
     "count": 1,
@@ -3690,7 +3690,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-manhasset",
+    "stateCitySlug": "new-york-manhasset",
     "cityName": "Manhasset",
     "state": "New York",
     "count": 1,
@@ -3699,7 +3699,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-west-babylon",
+    "stateCitySlug": "new-york-west-babylon",
     "cityName": "West Babylon",
     "state": "New York",
     "count": 1,
@@ -3708,7 +3708,7 @@
     }
   },
   {
-    "stateCitySlug": "new york-geneseo",
+    "stateCitySlug": "new-york-geneseo",
     "cityName": "Geneseo",
     "state": "New York",
     "count": 1,
